@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <title>为树莓派制作 Arch Linux SD 卡</title>
+        <link rel="stylesheet" href="./theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">hystars </a></h1>
+                <nav><ul>
+                    <li><a href="./pages/about.html">About</a></li>
+                    <li><a href="./category/python.html">Python</a></li>
+                    <li class="active"><a href="./category/rpi.html">RPi</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./sd-card-creation-for-rpi.html" rel="bookmark"
+           title="Permalink to 为树莓派制作 Arch Linux SD 卡">为树莓派制作 Arch Linux SD 卡</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-08T18:27:00+08:00">
+                Published: 2015-04-08
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-08T22:47:00+08:00">
+                Updated: 2015-04-08
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/whypro.html">whypro</a>
+        </address>
+<p>In <a href="./category/rpi.html">RPi</a>. </p>
+<p>tags: <a href="./tag/shu-mei-pai.html">树莓派</a> <a href="./tag/arch-linux.html">Arch Linux</a> </p>
+</footer><!-- /.post-info -->      <p>将下面的 <strong>sdX</strong> 替换成你的 SD 卡的设备名。</p>
+<ol class="arabic">
+<li><p class="first">使用 fdisk 为 SD 卡分区：</p>
+<pre class="literal-block">
+fdisk /dev/sdX
+</pre>
+</li>
+<li><p class="first">根据 fdisk 的提示删除旧分区。然后创建一个新分区：</p>
+<blockquote>
+<ol class="arabic simple">
+<li>输入 <strong>o</strong>。这将清除驱动器上的所有分区。</li>
+<li>输入 <strong>p</strong> 列出分区。列表中应该没有任何分区了。</li>
+<li>输入 <strong>n</strong>，然后 <strong>p</strong> 设置为主分区，<strong>1</strong> 设置为驱动器第一个分区，按<strong>回车</strong>不更改起始扇区的默认值，输入 <strong>+100M</strong> 设置结束扇区。</li>
+<li>输入 <strong>t</strong>，然后 <strong>c</strong> 将第一个分区设为 W95 FAT32 (LBA) 格式。</li>
+<li>输入 <strong>n</strong>，然后 <strong>p</strong> 设置为主分区，<strong>2</strong> 设置为驱动器第二个分区，按<strong>回车</strong>不更改起始扇区和结束扇区的默认值。</li>
+<li>输入 <strong>w</strong> 保存分区表退出。</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">创建并挂载 FAT 文件系统：</p>
+<pre class="literal-block">
+mkfs.vfat /dev/sdX1
+mkdir boot
+mount /dev/sdX1 boot
+</pre>
+</li>
+<li><p class="first">创建并挂载 ext4 文件系统：</p>
+<pre class="literal-block">
+mkfs.ext4 /dev/sdX2
+mkdir root
+mount /dev/sdX2 root
+</pre>
+</li>
+<li><p class="first">下载并解压 root 文件系统（用 root 身份，而不是 sudo）：</p>
+<pre class="literal-block">
+wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
+sync
+</pre>
+</li>
+<li><p class="first">将 boot 文件移动至第一个分区：</p>
+<pre class="literal-block">
+mv root/boot/* boot
+</pre>
+</li>
+<li><p class="first">卸载这两个分区：</p>
+<pre class="literal-block">
+umount boot root
+</pre>
+</li>
+<li><p class="first">将 SD 卡插入树莓派，连接至以太网，提供 5V 电源。</p>
+</li>
+<li><p class="first">使用串口终端或者 SSH 访问路由器提供的树莓派 IP 地址，默认 root 密码为 'root'。</p>
+</li>
+</ol>
+<p><em>该文为译文，原文地址：</em><a class="reference external" href="http://archlinuxarm.org/platforms/armv6/raspberry-pi">http://archlinuxarm.org/platforms/armv6/raspberry-pi</a></p>
+
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'hystars';
+        var disqus_identifier = 'sd-card-creation-for-rpi.html';
+        var disqus_url = './sd-card-creation-for-rpi.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//hystars.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com/whypro">github</a></li>
+                            <li><a href="http://my.oschina.net/apoptosis">OSChina</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'hystars';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

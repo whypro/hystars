@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <title>hystars - 树莓派</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="../">hystars </a></h1>
+                <nav><ul>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../category/python.html">Python</a></li>
+                    <li><a href="../category/rpi.html">RPi</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../shu-mei-pai-raspberry-pi-zhe-teng-xi-lie-xi-tong-an-zhuang-ji-yi-xie-bi-yao-de-pei-zhi.html">树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-04-08T22:48:00+08:00">
+                Published: 2015-04-08
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-08T23:40:00+08:00">
+                Updated: 2015-04-08
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/whypro.html">whypro</a>
+        </address>
+<p>In <a href="../category/rpi.html">RPi</a>. </p>
+<p>tags: <a href="../tag/shu-mei-pai.html">树莓派</a> </p>
+</footer><!-- /.post-info --><p>入手树莓派将近一个月了，很折腾，许多资源不好找，也很乱。简单整理一下自己用到的东西，方便以后自己或别人继续折腾。</p>
+<img alt="raspberry-pi-0.jpg" class="align-center" src="/images/raspberry-pi-0.jpg" />
+<ol class="arabic simple" start="0">
+<li>操作系统下载</li>
+</ol>
+<p>树莓派官方 <strong>Raspbian</strong> 系统下载：<a class="reference external" href="http://www.raspberrypi.org/downloads">http://www.raspberrypi.org/downloads</a></p>
+<p>或直接下载 <a class="reference external" href="http://downloads.raspberrypi.org/raspbian_latest.torrent">http://downloads.raspberrypi.org/raspbian_latest.torrent</a> 最新版的 BT 种子。</p>
+<p>还有一个选择是由国人制作的超级精简版，更低内存占用：<a class="reference external" href="http://pan.baidu.com/share/link?shareid=167943&amp;uk=1412008571">http://pan.baidu.com/share/link?shareid=167943&amp;uk=1412008571</a></p>
+<ol class="arabic simple">
+<li>系统安装</li>
+</ol>
+<p>所谓“安装系统”其实不如说是“恢复”下载到的系统镜像到内存卡上，这个过程也没什么难度，就是看内存卡的速度，慢慢等而已。需要注意的是，市面上部分 4G 的内存卡，实际大小才 3.6G 多，会提示空间不足，所以还是直接购买 8G 吧，也差不了几块钱。</p>
+<p>在 Windows 下可以使用 <strong>Win32 Disk Imager</strong> 进行镜像恢复，非常方便，也是树莓派官方推荐的方法。官方下载地址：<a class="reference external" href="http://sourceforge.net/projects/win32diskimager/">http://sourceforge.net/projects/win32diskimager/</a></p>
+<img alt="raspberry-pi-1.gif" class="align-center" src="/images/raspberry-pi-1.gif" />
+<ol class="arabic simple" start="2">
+<li>通过 SSH 远程访问</li>
+</ol>
+<p>老实说，我一直把树莓派定位为“<em>一个扔在某个角落就可以自己跑得很欢的小电脑</em>”，加上那仅有的两个 USB 口，一个插了 USB 无限网卡，另一个再拖个键盘或鼠标啥的，实在很不方便，那么最好还是能远程访问吧。</p>
+<p>好在树莓派默认是有开启 SSH 的，但是我们系统刚安装，IP 还没设置，怎么找到它的 IP 地址呢？这时候就推荐使用另一个神器 <strong>PortScan</strong> 来找出我们的机器：</p>
+<img alt="raspberry-pi-2.gif" class="align-center" src="/images/raspberry-pi-2.gif" />
+<p>打开 PortScan 选择扫描范围，可以很方便的找出局域网中的其它机器，一般家庭中也没太多机器，找出树莓派是很容易的，如果是在公司，有很多机器的话，那么可以忽略那些有机器名的，然后剩下的一个一个尝试吧…</p>
+<p>PortScan 下载地址：<a class="reference external" href="http://abel.oss.aliyuncs.com/file/PortScan.zip">http://abel.oss.aliyuncs.com/file/PortScan.zip</a></p>
+<ol class="arabic simple" start="3">
+<li>ROOT 账号设置</li>
+</ol>
+<p>如果你安装的是官方的 Raspbian 系统，那么默认的登录帐号为 <strong>pi</strong> 密码是 <strong>raspberry</strong></p>
+<p>为了方便折腾，建议第一时间启用 ROOT 账号吧~ 这个也很简单的，只需要执行一下两句命令即可：</p>
+<pre class="literal-block">
+# 设置 root 账号的密码，会让你输入两次新密码
+sudo passwd root
+
+# 启用 root 账号登录
+sudo passwd --unlock root
+</pre>
+<p>执行完之后，用 <strong>reboot</strong> 命令重启就可以用 root 登录啦。</p>
+<ol class="arabic simple" start="4">
+<li>扩展可用空间</li>
+</ol>
+<p>第一次用 root 登录，会自动弹出树莓派的高级设置面板（以后也可以通过 <strong>raspi-config</strong> 命令进入）：</p>
+<img alt="raspberry-pi-3.gif" class="align-center" src="/images/raspberry-pi-3.gif" />
+<p>选择第一项 <strong>Expand Filesystem</strong> 扩展 SD 卡上可用的空间，不然以后会有很多大软件，不能安装（提示空间不足，例如 mysql）。</p>
+<p>扩展之后可以通过 <strong>df -h</strong> 命令看到效果~</p>
+<ol class="arabic simple" start="5">
+<li>更换软件源（apt-get sources）</li>
+</ol>
+<p>树莓派的服务器实在太太太太太太慢了！会导致你安装一个几M的东西都要等大半天！肿么办！</p>
+<p>好在树莓派官方有提供一个镜像列表：<a class="reference external" href="http://www.raspbian.org/RaspbianMirrors">http://www.raspbian.org/RaspbianMirrors</a></p>
+<p>在里面找到了几个国内的镜像，经过几番尝试，觉得来自中科大的速度非常不错~ 咱们就换成中科大的吧，镜像主页：<a class="reference external" href="https://lug.ustc.edu.cn/wiki/mirrors/help/raspbian">https://lug.ustc.edu.cn/wiki/mirrors/help/raspbian</a></p>
+<p>根据教程，咱们来编辑 <strong>/etc/apt/sources.list</strong> 文件。这里推荐用 <strong>nano</strong> 命令编辑，舍得去弄什么 VIM 啦。命令如下：</p>
+<pre class="literal-block">
+nano /etc/apt/sources.list
+</pre>
+<p>进入编辑界面，删除原有的内容，粘贴中科大提供的内容，结果如下：</p>
+<img alt="raspberry-pi-4.gif" class="align-center" src="/images/raspberry-pi-4.gif" />
+<p>然后使用 <strong>Ctrl+O</strong> 保存文件，<strong>Ctrl+X</strong> 退出编辑器。</p>
+<p>然后执行 <strong>apt-get update</strong> 命令更新软件列表。</p>
+<ol class="arabic simple" start="6">
+<li>设置静态 IP 地址</li>
+</ol>
+<p>回到刚刚第二点提到的，不知道 IP 地址的问题，咱们要给树莓派设置一个静态 IP，省得 IP 变换又要重新找机器。还是用 nano 来编辑网络接口文件：</p>
+<pre class="literal-block">
+nano /etc/network/interfaces
+</pre>
+<p>如果你要设置的是<strong>有线</strong>网卡的 IP 地址，那么把 <strong>eth0</strong> 的 <strong>dhcp</strong> 改成 <strong>static</strong> 然后在下一行追加 IP 信息，结果大概如下：</p>
+<pre class="literal-block">
+iface eth0 inet static
+address 192.168.1.200   # 设定的静态IP地址
+netmask 255.255.255.0   # 网络掩码
+gateway 192.168.1.1     # 网关
+</pre>
+<p>如果你要设置的是无线网卡的，那么除了把 <strong>wlan0</strong> 的 <strong>dhcp</strong> 改成 <strong>static</strong> 之外，还需要填写无线网的名称和密码，编辑后的结果大概如下：</p>
+<pre class="literal-block">
+iface wlan0 inet static
+    wpa-ssid Your_Wifi_SSID
+    wpa-psk Your_Wifi_Password
+address 192.168.1.200 # 设定的静态IP地址
+netmask 255.255.255.0 # 网络掩码
+gateway 192.168.1.1   # 网关
+network 192.168.1.1   # 网络地址
+# wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+</pre>
+<p>▲ 注意注释掉最后一行</p>
+<p>搞定之后，咱们用 <strong>poweroff</strong> 命令关掉树莓派，等到机器上的绿灯不闪了，把电源拔掉，再把网线拔掉，重新连接电源，稍等一会，看看是不是就通过无线网络的 IP 地址可以访问了。</p>
+<p>#. 最后
+至此，要折腾树莓派的几个准备工作都完成了，有了这些，以后折腾也更佳方便。</p>
+<p>由于我当初手贱没有购买面驱动的 USB 网卡，买的是一个要自己编译驱动的，所以我折腾的东西还有很多，下次专门再来说说无线网卡驱动的事吧。</p>
+<p><em>原文地址：</em><a class="reference external" href="http://www.cnblogs.com/abel/p/3441175.html">http://www.cnblogs.com/abel/p/3441175.html</a></p>
+<p>There are <a href="../shu-mei-pai-raspberry-pi-zhe-teng-xi-lie-xi-tong-an-zhuang-ji-yi-xie-bi-yao-de-pei-zhi.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="../sd-card-creation-for-rpi.html" rel="bookmark"
+                           title="Permalink to 为树莓派制作 Arch Linux SD 卡">为树莓派制作 Arch Linux SD 卡</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-08T18:27:00+08:00">
+                Published: 2015-04-08
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-08T22:47:00+08:00">
+                Updated: 2015-04-08
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/whypro.html">whypro</a>
+        </address>
+<p>In <a href="../category/rpi.html">RPi</a>. </p>
+<p>tags: <a href="../tag/shu-mei-pai.html">树莓派</a> <a href="../tag/arch-linux.html">Arch Linux</a> </p>
+</footer><!-- /.post-info -->                <p>将下面的 <strong>sdX</strong> 替换成你的 SD 卡的设备名。</p>
+<ol class="arabic">
+<li><p class="first">使用 fdisk 为 SD 卡分区：</p>
+<pre class="literal-block">
+fdisk /dev/sdX
+</pre>
+</li>
+<li><p class="first">根据 fdisk 的提示删除旧分区。然后创建一个新分区：</p>
+<blockquote>
+<ol class="arabic simple">
+<li>输入 <strong>o</strong>。这将清除驱动器上的所有分区。</li>
+<li>输入 <strong>p</strong> 列出分区。列表中应该没有任何分区了。</li>
+<li>输入 <strong>n</strong>，然后 <strong>p</strong> 设置为主分区，<strong>1</strong> 设置为驱动器第一个分区，按<strong>回车</strong>不更改起始扇区的默认值，输入 <strong>+100M</strong> 设置结束扇区。</li>
+<li>输入 <strong>t</strong>，然后 <strong>c</strong> 将第一个分区设为 W95 FAT32 (LBA) 格式。</li>
+<li>输入 <strong>n</strong>，然后 <strong>p ...</strong></li></ol></blockquote></li></ol>
+                <a class="readmore" href="../sd-card-creation-for-rpi.html">read more</a>
+<p>There are <a href="../sd-card-creation-for-rpi.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+    Page 1 / 1
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com/whypro">github</a></li>
+                            <li><a href="http://my.oschina.net/apoptosis">OSChina</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'hystars';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
