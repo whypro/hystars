@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = u'whypro'
-SITENAME = u'hystars'
+AUTHOR = 'whypro'
+SITENAME = 'hystars'
 SITEURL = ''
+SITESUBTITLE = ''
 
 PATH = 'content'
 
