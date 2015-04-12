@@ -47,3 +47,7 @@ USE_FOLDER_AS_CATEGORY = True
 DISQUS_SITENAME = 'hystars'
 
 STATIC_PATHS = ['images']
+
+PLUGIN_PATHS = ['/home/whypro/tools/pelican-plugins']
+PLUGINS = ['better_figures_and_images']
+RESPONSIVE_IMAGES = True
