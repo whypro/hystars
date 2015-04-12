@@ -16,7 +16,8 @@
                 <nav><ul>
                     <li><a href="./pages/about.html">About</a></li>
                     <li><a href="./category/python.html">Python</a></li>
-                    <li class="active"><a href="./category/rpi.html">RPi</a></li>
+                    <li><a href="./category/she-ying.html">摄影</a></li>
+                    <li class="active"><a href="./category/shu-mei-pai.html">树莓派</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
@@ -40,10 +41,10 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="./author/whypro.html">whypro</a>
         </address>
-<p>In <a href="./category/rpi.html">RPi</a>. </p>
+<p>In <a href="./category/shu-mei-pai.html">树莓派</a>. </p>
 <p>tags: <a href="./tag/shu-mei-pai.html">树莓派</a> </p>
 </footer><!-- /.post-info -->      <p>入手树莓派将近一个月了，很折腾，许多资源不好找，也很乱。简单整理一下自己用到的东西，方便以后自己或别人继续折腾。</p>
-<img alt="raspberry-pi-0.jpg" class="align-center" src="./images/raspberry-pi-0.jpg" />
+<img alt="raspberry-pi-0.jpg" class="align-center" src="./images/raspberry-pi-0.jpg" style="width: 440px; height: auto; max-width: 100%;"/>
 <ol class="arabic simple" start="0">
 <li>操作系统下载</li>
 </ol>
@@ -55,13 +56,13 @@
 </ol>
 <p>所谓“安装系统”其实不如说是“恢复”下载到的系统镜像到内存卡上，这个过程也没什么难度，就是看内存卡的速度，慢慢等而已。需要注意的是，市面上部分 4G 的内存卡，实际大小才 3.6G 多，会提示空间不足，所以还是直接购买 8G 吧，也差不了几块钱。</p>
 <p>在 Windows 下可以使用 <strong>Win32 Disk Imager</strong> 进行镜像恢复，非常方便，也是树莓派官方推荐的方法。官方下载地址：<a class="reference external" href="http://sourceforge.net/projects/win32diskimager/">http://sourceforge.net/projects/win32diskimager/</a></p>
-<img alt="raspberry-pi-1.gif" class="align-center" src="./images/raspberry-pi-1.gif" />
+<img alt="raspberry-pi-1.gif" class="align-center" src="./images/raspberry-pi-1.gif" style="width: 431px; height: auto; max-width: 100%;"/>
 <ol class="arabic simple" start="2">
 <li>通过 SSH 远程访问</li>
 </ol>
 <p>老实说，我一直把树莓派定位为“<em>一个扔在某个角落就可以自己跑得很欢的小电脑</em>”，加上那仅有的两个 USB 口，一个插了 USB 无限网卡，另一个再拖个键盘或鼠标啥的，实在很不方便，那么最好还是能远程访问吧。</p>
 <p>好在树莓派默认是有开启 SSH 的，但是我们系统刚安装，IP 还没设置，怎么找到它的 IP 地址呢？这时候就推荐使用另一个神器 <strong>PortScan</strong> 来找出我们的机器：</p>
-<img alt="raspberry-pi-2.gif" class="align-center" src="./images/raspberry-pi-2.gif" />
+<img alt="raspberry-pi-2.gif" class="align-center" src="./images/raspberry-pi-2.gif" style="width: 574px; height: auto; max-width: 100%;"/>
 <p>打开 PortScan 选择扫描范围，可以很方便的找出局域网中的其它机器，一般家庭中也没太多机器，找出树莓派是很容易的，如果是在公司，有很多机器的话，那么可以忽略那些有机器名的，然后剩下的一个一个尝试吧…</p>
 <p>PortScan 下载地址：<a class="reference external" href="http://abel.oss.aliyuncs.com/file/PortScan.zip">http://abel.oss.aliyuncs.com/file/PortScan.zip</a></p>
 <ol class="arabic simple" start="3">
@@ -81,7 +82,7 @@ sudo passwd --unlock root
 <li>扩展可用空间</li>
 </ol>
 <p>第一次用 root 登录，会自动弹出树莓派的高级设置面板（以后也可以通过 <strong>raspi-config</strong> 命令进入）：</p>
-<img alt="raspberry-pi-3.gif" class="align-center" src="./images/raspberry-pi-3.gif" />
+<img alt="raspberry-pi-3.gif" class="align-center" src="./images/raspberry-pi-3.gif" style="width: 675px; height: auto; max-width: 100%;"/>
 <p>选择第一项 <strong>Expand Filesystem</strong> 扩展 SD 卡上可用的空间，不然以后会有很多大软件，不能安装（提示空间不足，例如 mysql）。</p>
 <p>扩展之后可以通过 <strong>df -h</strong> 命令看到效果~</p>
 <ol class="arabic simple" start="5">
@@ -95,7 +96,7 @@ sudo passwd --unlock root
 nano /etc/apt/sources.list
 </pre>
 <p>进入编辑界面，删除原有的内容，粘贴中科大提供的内容，结果如下：</p>
-<img alt="raspberry-pi-4.gif" class="align-center" src="./images/raspberry-pi-4.gif" />
+<img alt="raspberry-pi-4.gif" class="align-center" src="./images/raspberry-pi-4.gif" style="width: 675px; height: auto; max-width: 100%;"/>
 <p>然后使用 <strong>Ctrl+O</strong> 保存文件，<strong>Ctrl+X</strong> 退出编辑器。</p>
 <p>然后执行 <strong>apt-get update</strong> 命令更新软件列表。</p>
 <ol class="arabic simple" start="6">

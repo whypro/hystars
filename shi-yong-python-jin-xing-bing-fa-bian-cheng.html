@@ -16,7 +16,8 @@
                 <nav><ul>
                     <li><a href="./pages/about.html">About</a></li>
                     <li class="active"><a href="./category/python.html">Python</a></li>
-                    <li><a href="./category/rpi.html">RPi</a></li>
+                    <li><a href="./category/she-ying.html">摄影</a></li>
+                    <li><a href="./category/shu-mei-pai.html">树莓派</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
@@ -53,15 +54,15 @@
 <p>使用thread模块的例子</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">thread</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+    <span class="sd">"""thread worker function"""</span>
+    <span class="k">print</span> <span class="s">'Worker'</span>
 <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
 </pre></div>
 <p>使用threading模块的例子</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+    <span class="sd">"""thread worker function"""</span>
+    <span class="k">print</span> <span class="s">'Worker'</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
@@ -71,8 +72,8 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-        <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+        <span class="sd">"""thread worker function"""</span>
+        <span class="k">print</span> <span class="s">'Worker'</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">worker</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -85,8 +86,8 @@
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
 
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+    <span class="sd">"""thread worker function"""</span>
+    <span class="k">print</span> <span class="s">'Worker'</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
@@ -219,7 +220,7 @@
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">eventlet</span>
 <span class="kn">from</span> <span class="nn">eventlet.green</span> <span class="kn">import</span> <span class="n">urllib2</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://www.google.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.example.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.python.org&#39;</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://www.google.com'</span><span class="p">,</span> <span class="s">'http://www.example.com'</span><span class="p">,</span> <span class="s">'http://www.python.org'</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -227,7 +228,7 @@
 <span class="n">pool</span> <span class="o">=</span> <span class="n">eventlet</span><span class="o">.</span><span class="n">GreenPool</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="n">fetch</span><span class="p">,</span> <span class="n">urls</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;got body&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"got body"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
 </pre></div>
 <p>执行结果如下</p>
 <pre class="literal-block">
@@ -244,7 +245,7 @@
 <dd><p class="first">gevent和eventlet类似，关于它们的差异大家可以参考<a class="reference external" href="http://blog.gevent.org/2010/02/27/why-gevent/">这篇文章</a></p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">gevent</span>
 <span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">socket</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;www.google.com&#39;</span><span class="p">,</span> <span class="s">&#39;www.example.com&#39;</span><span class="p">,</span> <span class="s">&#39;www.python.org&#39;</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'www.google.com'</span><span class="p">,</span> <span class="s">'www.example.com'</span><span class="p">,</span> <span class="s">'www.python.org'</span><span class="p">]</span>
 <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
 <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -272,7 +273,7 @@
 <div class="section" id="id5">
 <h3>计算密集型</h3>
 <p>对应计算密集型的应用，我们选用著名的<a class="reference external" href="http://en.wikipedia.org/wiki/Monte_Carlo_method">蒙特卡洛算法</a>来计算PI值。基本原理如下</p>
-<img alt="Monte-Carlo-method.png" class="align-center" src="./images/Monte-Carlo-method.png" />
+<img alt="Monte-Carlo-method.png" class="align-center" src="./images/Monte-Carlo-method.png" style="width: 220px; height: auto; max-width: 100%;"/>
 <p>蒙特卡洛算法利用统计学原理来模拟计算圆周率，在一个正方形中，一个随机的点落在1/4圆的区域（红色点）的概率与其面积成正比。也就该概率 p ＝ Pi ＊ R＊R ／4  ： R＊ R ， 其中R是正方形的边长，圆的半径。也就是说该概率是圆周率的1/4, 利用这个结论，只要我们模拟出点落在四分之一圆上的概率就可以知道圆周率了，为了得到这个概率，我们可以通过大量的实验，也就是生成大量的点，看看这个点在哪个区域，然后统计出结果。</p>
 <p>基本算法如下：</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
@@ -302,7 +303,7 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -329,12 +330,12 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;pi = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -342,7 +343,7 @@
 <li><dl class="first docutils">
 <dt>多进程 multiprocess</dt>
 <dd><p class="first">理论上对于计算密集型的任务，使用多进程并发比较合适，在以下的例子中，进程池的规模设置为5，修改进程池的大小可以看到对结果的影响，当进程池设置为1时，和多线程的结果所需的时间类似，因为这时候并不存在并发；当设置为2时，响应时间有了明显的改进，是之前没有并发的一半；然而继续扩大进程池对性能影响并不大，甚至有所下降，也许我的Apple Air的CPU只有两个核？</p>
-<img alt="apple-air-info.png" class="align-center" src="./images/apple-air-info.png" />
+<img alt="apple-air-info.png" class="align-center" src="./images/apple-air-info.png" style="width: 194px; height: auto; max-width: 100%;"/>
 <p>当心，如果你设置一个非常大的进程池，你会遇到 Resource temporarily unavailable的错误，系统并不能支持创建太多的进程，毕竟资源是有限的。</p>
 <div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
 
@@ -359,11 +360,11 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;pi = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -385,7 +386,7 @@
     <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -411,7 +412,7 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -435,11 +436,11 @@
     <span class="n">expr</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;pi = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -452,8 +453,8 @@
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">&#39;tasks&#39;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&#39;amqp&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s">&#39;amqp://guest@localhost//&#39;</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s">&#39;db+sqlite:///results.sqlite&#39;</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">'tasks'</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">'amqp'</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s">'amqp://guest@localhost//'</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s">'db+sqlite:///results.sqlite'</span>
 
 <span class="nd">@app.task</span>
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">tries</span><span class="p">):</span>
@@ -471,7 +472,7 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
@@ -498,7 +499,7 @@
     <span class="n">coros</span> <span class="o">=</span> <span class="p">[</span> <span class="n">asyncoro</span><span class="o">.</span><span class="n">Coro</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">]</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">coros</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -516,7 +517,7 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://www.google.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.example.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.python.org&#39;</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://www.google.com'</span><span class="p">,</span> <span class="s">'http://www.example.com'</span><span class="p">,</span> <span class="s">'http://www.python.org'</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -526,7 +527,7 @@
     <span class="nb">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">urls</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
 
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
 
 <span class="n">testIO</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
