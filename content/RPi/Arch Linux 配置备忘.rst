@@ -2,7 +2,7 @@ Arch Linux 配置备忘
 ###################
 
 :date: 2015-04-11 19:20
-:modified: 2015-04-11 19:20
+:modified: 2015-04-12 22:25
 :tags: Arch Linux
 
 1. 增加用户 ::
@@ -57,3 +57,7 @@ Arch Linux 配置备忘
     # ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 注意: 如果提示 ``ln: failed to create symbolic link '/etc/localtime': File exists``，用 ``ls -l /etc/localtime`` 检查存在的文件并向 ln 添加 -f 选项来覆盖它。
+
+6. 设置登录后欢迎信息 ::
+
+    vi /etc/motd
