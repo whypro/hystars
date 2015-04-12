@@ -272,7 +272,7 @@
 <div class="section" id="id5">
 <h3>计算密集型</h3>
 <p>对应计算密集型的应用，我们选用著名的<a class="reference external" href="http://en.wikipedia.org/wiki/Monte_Carlo_method">蒙特卡洛算法</a>来计算PI值。基本原理如下</p>
-<img alt="Monte-Carlo-method.png" class="align-center" src="/images/Monte-Carlo-method.png" />
+<img alt="Monte-Carlo-method.png" class="align-center" src="./images/Monte-Carlo-method.png" />
 <p>蒙特卡洛算法利用统计学原理来模拟计算圆周率，在一个正方形中，一个随机的点落在1/4圆的区域（红色点）的概率与其面积成正比。也就该概率 p ＝ Pi ＊ R＊R ／4  ： R＊ R ， 其中R是正方形的边长，圆的半径。也就是说该概率是圆周率的1/4, 利用这个结论，只要我们模拟出点落在四分之一圆上的概率就可以知道圆周率了，为了得到这个概率，我们可以通过大量的实验，也就是生成大量的点，看看这个点在哪个区域，然后统计出结果。</p>
 <p>基本算法如下：</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
@@ -342,7 +342,7 @@
 <li><dl class="first docutils">
 <dt>多进程 multiprocess</dt>
 <dd><p class="first">理论上对于计算密集型的任务，使用多进程并发比较合适，在以下的例子中，进程池的规模设置为5，修改进程池的大小可以看到对结果的影响，当进程池设置为1时，和多线程的结果所需的时间类似，因为这时候并不存在并发；当设置为2时，响应时间有了明显的改进，是之前没有并发的一半；然而继续扩大进程池对性能影响并不大，甚至有所下降，也许我的Apple Air的CPU只有两个核？</p>
-<img alt="apple-air-info.png" class="align-center" src="/images/apple-air-info.png" />
+<img alt="apple-air-info.png" class="align-center" src="./images/apple-air-info.png" />
 <p>当心，如果你设置一个非常大的进程池，你会遇到 Resource temporarily unavailable的错误，系统并不能支持创建太多的进程，毕竟资源是有限的。</p>
 <div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
 
