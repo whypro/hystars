@@ -231,7 +231,7 @@ Python下有许多开源的框架来支持分布式的并发，提供有效的�
 
 对应计算密集型的应用，我们选用著名的\ `蒙特卡洛算法 <http://en.wikipedia.org/wiki/Monte_Carlo_method>`_\ 来计算PI值。基本原理如下
 
-.. image:: /images/Monte-Carlo-method.png
+.. image:: {filename}/images/Monte-Carlo-method.png
     :alt: Monte-Carlo-method.png
     :align: center
 
@@ -309,7 +309,7 @@ Python下有许多开源的框架来支持分布式的并发，提供有效的�
 * 多进程 multiprocess
     理论上对于计算密集型的任务，使用多进程并发比较合适，在以下的例子中，进程池的规模设置为5，修改进程池的大小可以看到对结果的影响，当进程池设置为1时，和多线程的结果所需的时间类似，因为这时候并不存在并发；当设置为2时，响应时间有了明显的改进，是之前没有并发的一半；然而继续扩大进程池对性能影响并不大，甚至有所下降，也许我的Apple Air的CPU只有两个核？
 
-    .. image:: /images/apple-air-info.png
+    .. image:: {filename}/images/apple-air-info.png
         :alt: apple-air-info.png
         :align: center
 
