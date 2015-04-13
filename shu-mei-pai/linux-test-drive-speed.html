@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <title>使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="../">hystars </a></h1>
+                <nav><ul>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../python/index.html">Python</a></li>
+                    <li><a href="../she-ying/index.html">摄影</a></li>
+                    <li class="active"><a href="../shu-mei-pai/index.html">树莓派</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="../shu-mei-pai/linux-test-drive-speed.html" rel="bookmark"
+           title="Permalink to 使用 dd 命令测试 USB 和 SSD 硬盘的读写速度">使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-13T21:18:00+08:00">
+                Published: 2015-04-13
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-13T21:18:00+08:00">
+                Updated: 2015-04-13
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/whypro.html">whypro</a>
+        </address>
+<p>In <a href="../shu-mei-pai/index.html">树莓派</a>. </p>
+
+</footer><!-- /.post-info -->      <div class="section" id="id1">
+<h2>磁盘驱动器速度</h2>
+<p>磁盘驱动器的速度是以一个单位时间内读写数据量的多少来衡量的。dd 命令是一个简单的命令行工具，它可用对磁盘进行任意数据块的读取和写入，同时可以度量读取写入的速度。</p>
+<p>在这篇文章中，我们将会使用 dd 命令来测试 USB 和 SSD 磁盘的读取和写入速度。</p>
+<p>数据传输速度不但取决于驱动盘本身，而且还与连接的接口有关。比如， USB 2.0 端口的最大传输速度是 35 兆字节/秒，所以如果您把一个支持高速传输的 USB 3.0 驱动盘插入 USB 2.0 端口的话，它实际的传输速度将是 2.0 端口的下限。</p>
+<p>这对于 SSD 也是一样的。 SSD 连接的 SATA 端口有不同的类型。平均是 375 兆字节/秒的 SATA 2.0 端口理论上最大传输速度是 3 Gbit/秒，而 SATA 3.0 是这个速度的两倍。</p>
+<div class="section" id="id2">
+<h3>测试方法</h3>
+<p>挂载上驱动盘，从终端进入此盘目录下。然后使用 dd 命令，首先写入固定大小块的一个文件，接着读取这个文件。</p>
+<p>dd 命令通用语法格式如下：</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>path/to/input_file <span class="nv">of</span><span class="o">=</span>/path/to/output_file <span class="nv">bs</span><span class="o">=</span>block_size <span class="nv">count</span><span class="o">=</span>number_of_blocks
+</pre></div>
+<p>当写入到驱动盘的时候，我们简单的从无穷无用字节的源 /dev/zero 读取，当从驱动盘读取的时候，我们读取的是刚才的文件，并把输出结果发送到无用的 /dev/null。在整个操作过程中， dd 命令会跟踪数据传输的速度并且报告出结果。</p>
+</div>
+<div class="section" id="id3">
+<h3>固态硬盘</h3>
+<p>我们使用的是一块“三星 Evo 120G” 的固态硬盘。它性价比很高，很适合刚开始用固态硬盘的用户，也是我的第一块固态硬盘，并且也是市场上效果最好的固态硬盘之一。</p>
+<p>这次实验中，我们把硬盘接在 SATA 2.0 端口上。</p>
+<div class="section" id="id4">
+<h4>写入速度</h4>
+<p>首先让我们写入固态硬盘</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>1024
+</pre></div>
+<pre class="literal-block">
+1024+0 records in
+1024+0 records out
+1073741824 bytes (1.1 GB) copied, 4.82364 s, 223 MB/s
+</pre>
+<p>1M 的大小实际上是相当大的。你可以尝试用更小的尺寸如 64K 甚至是 4K 的。</p>
+</div>
+<div class="section" id="id5">
+<h4>读取速度</h4>
+<p>现在读回这个文件。但是，得首先清除内存的缓存，以确保这个文件确实是从驱动盘读取的。</p>
+<p>运行下面的命令来清除内存缓存</p>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
+</pre></div>
+<p>现在读取此文件</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>4k
+</pre></div>
+<pre class="literal-block">
+165118+0 records in
+165118+0 records out
+676323328 bytes (676 MB) copied, 3.0114 s, 225 MB/s
+</pre>
+<p>在 Arch Linux 的维基页上有一整页的关于不同的厂商，如英特尔、三星、Sandisk 等提供的各类固态硬盘 读/写速度的信息。点击如下的 url 可以查看相关信息。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/SSD_Benchmarking">https://wiki.archlinux.org/index.php/SSD_Benchmarking</a></p>
+</div>
+</div>
+<div class="section" id="usb">
+<h3>USB</h3>
+<p>此次实验我们会测量普通的 USB/随身笔的读写速度。驱动盘都是接入标准的 USB 2.0 端口的。首先用的是一个 4GB 大小的 sony USB 驱动盘，随后用的是一个 16GB 大小的 strontium 驱动盘。</p>
+<p>首先把驱动盘插入端口，并挂载上，使其可读。然后从命令行下面进入挂载的文件目录下。</p>
+<div class="section" id="sony-4gb">
+<h4>Sony 4GB - 写入</h4>
+<p>这个实验中，用 dd 命令向驱动盘写入一个有 10000 块，每块 8K 字节的文件。</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>8k <span class="nv">count</span><span class="o">=</span>10000
+</pre></div>
+<pre class="literal-block">
+10000+0 records in
+10000+0 records out
+81920000 bytes (82 MB) copied, 11.0626 s, 7.4 MB/s
+</pre>
+<p>因此，写入速度约为7.5兆字节/秒。这是一个很低的数字。</p>
+</div>
+<div class="section" id="id6">
+<h4>Sony 4GB - 读取</h4>
+<p>把相同的文件读取回来，测试速度。首先运行如下命令清除内存缓存。</p>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
+</pre></div>
+<p>现在就可以使用 dd 命令来读取文件了。</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>8k
+</pre></div>
+<pre class="literal-block">
+8000+0 records in
+8000+0 records out
+65536000 bytes (66 MB) copied, 2.65218 s, 24.7 MB/s
+</pre>
+<p>读取速度出来大约是25兆字节/秒，这大致跟廉价 USB 驱动盘的标准相匹配吧。</p>
+<p>USB2.0 理论上最大信号传输速率为480兆比特/秒，最小为60兆字节/秒。然而，由于各种限制实际传输速率大约280兆比特/秒和35兆字节/秒之间。除了这个，实际的速度还取决于驱动盘本身的质量好坏以及其他的因素。</p>
+<p>上面实验中， USB 驱动盘插入USB 2.0 端口，读取的速度达到了 24.7兆字节/秒，这是很不错的读速度。但写入速度就不敢恭维了。</p>
+<p>下面让我们用 16GB 的 Strontium 驱动盘来做相同的实验。虽然 Strontium 的 USB 驱动盘很稳定，但它也是一款很便宜的品牌。</p>
+</div>
+<div class="section" id="strontium-16gb">
+<h4>Strontium 16gb 盘写入速度</h4>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>64k <span class="nv">count</span><span class="o">=</span>1000
+</pre></div>
+<pre class="literal-block">
+1000+0 records in
+1000+0 records out
+65536000 bytes (66 MB) copied, 8.3834 s, 7.8 MB/s
+</pre>
+</div>
+<div class="section" id="id7">
+<h4>Strontium 16gb 盘读取速度</h4>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
+dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>8k
+</pre></div>
+<pre class="literal-block">
+8000+0 records in
+8000+0 records out
+65536000 bytes (66 MB) copied, 2.90366 s, 22.6 MB/s
+</pre>
+<p>它的读取速度就要比 Sony 的低了。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>参考资料</h2>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/USB">http://en.wikipedia.org/wiki/USB</a></p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/SSD_Benchmarking">https://wiki.archlinux.org/index.php/SSD_Benchmarking</a></p>
+<p><em>来源：binarytides</em> <em>原文：</em><a class="reference external" href="http://www.binarytides.com/linux-test-drive-speed/">http://www.binarytides.com/linux-test-drive-speed/</a></p>
+<p><em>译文：</em><a class="reference external" href="http://lctt.github.io/">LCTT</a> <a class="reference external" href="http://linux.cn/article-3696-1.html">http://linux.cn/article-3696-1.html</a> <em>译者：runningwater</em></p>
+</div>
+
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'hystars';
+        var disqus_identifier = 'shu-mei-pai/linux-test-drive-speed.html';
+        var disqus_url = '../shu-mei-pai/linux-test-drive-speed.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//hystars.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://github.com/whypro">github</a></li>
+                            <li><a href="http://my.oschina.net/apoptosis">oschina</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'hystars';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

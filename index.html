@@ -23,7 +23,148 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./she-ying/pai-zhao-shi-nian-ni-yong-cuo-liao-yan-jie-mi-zheng-que-qu-jing-xi-guan.html">拍照十年你用错了眼，揭秘正确取景习惯</a></h1>
+                    <h1 class="entry-title"><a href="./shu-mei-pai/linux-test-drive-speed.html">使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-04-13T21:18:00+08:00">
+                Published: 2015-04-13
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-13T21:18:00+08:00">
+                Updated: 2015-04-13
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/whypro.html">whypro</a>
+        </address>
+<p>In <a href="./shu-mei-pai/index.html">树莓派</a>. </p>
+
+</footer><!-- /.post-info --><div class="section" id="id1">
+<h2>磁盘驱动器速度</h2>
+<p>磁盘驱动器的速度是以一个单位时间内读写数据量的多少来衡量的。dd 命令是一个简单的命令行工具，它可用对磁盘进行任意数据块的读取和写入，同时可以度量读取写入的速度。</p>
+<p>在这篇文章中，我们将会使用 dd 命令来测试 USB 和 SSD 磁盘的读取和写入速度。</p>
+<p>数据传输速度不但取决于驱动盘本身，而且还与连接的接口有关。比如， USB 2.0 端口的最大传输速度是 35 兆字节/秒，所以如果您把一个支持高速传输的 USB 3.0 驱动盘插入 USB 2.0 端口的话，它实际的传输速度将是 2.0 端口的下限。</p>
+<p>这对于 SSD 也是一样的。 SSD 连接的 SATA 端口有不同的类型。平均是 375 兆字节/秒的 SATA 2.0 端口理论上最大传输速度是 3 Gbit/秒，而 SATA 3.0 是这个速度的两倍。</p>
+<div class="section" id="id2">
+<h3>测试方法</h3>
+<p>挂载上驱动盘，从终端进入此盘目录下。然后使用 dd 命令，首先写入固定大小块的一个文件，接着读取这个文件。</p>
+<p>dd 命令通用语法格式如下：</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>path/to/input_file <span class="nv">of</span><span class="o">=</span>/path/to/output_file <span class="nv">bs</span><span class="o">=</span>block_size <span class="nv">count</span><span class="o">=</span>number_of_blocks
+</pre></div>
+<p>当写入到驱动盘的时候，我们简单的从无穷无用字节的源 /dev/zero 读取，当从驱动盘读取的时候，我们读取的是刚才的文件，并把输出结果发送到无用的 /dev/null。在整个操作过程中， dd 命令会跟踪数据传输的速度并且报告出结果。</p>
+</div>
+<div class="section" id="id3">
+<h3>固态硬盘</h3>
+<p>我们使用的是一块“三星 Evo 120G” 的固态硬盘。它性价比很高，很适合刚开始用固态硬盘的用户，也是我的第一块固态硬盘，并且也是市场上效果最好的固态硬盘之一。</p>
+<p>这次实验中，我们把硬盘接在 SATA 2.0 端口上。</p>
+<div class="section" id="id4">
+<h4>写入速度</h4>
+<p>首先让我们写入固态硬盘</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>1024
+</pre></div>
+<pre class="literal-block">
+1024+0 records in
+1024+0 records out
+1073741824 bytes (1.1 GB) copied, 4.82364 s, 223 MB/s
+</pre>
+<p>1M 的大小实际上是相当大的。你可以尝试用更小的尺寸如 64K 甚至是 4K 的。</p>
+</div>
+<div class="section" id="id5">
+<h4>读取速度</h4>
+<p>现在读回这个文件。但是，得首先清除内存的缓存，以确保这个文件确实是从驱动盘读取的。</p>
+<p>运行下面的命令来清除内存缓存</p>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
+</pre></div>
+<p>现在读取此文件</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>4k
+</pre></div>
+<pre class="literal-block">
+165118+0 records in
+165118+0 records out
+676323328 bytes (676 MB) copied, 3.0114 s, 225 MB/s
+</pre>
+<p>在 Arch Linux 的维基页上有一整页的关于不同的厂商，如英特尔、三星、Sandisk 等提供的各类固态硬盘 读/写速度的信息。点击如下的 url 可以查看相关信息。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/SSD_Benchmarking">https://wiki.archlinux.org/index.php/SSD_Benchmarking</a></p>
+</div>
+</div>
+<div class="section" id="usb">
+<h3>USB</h3>
+<p>此次实验我们会测量普通的 USB/随身笔的读写速度。驱动盘都是接入标准的 USB 2.0 端口的。首先用的是一个 4GB 大小的 sony USB 驱动盘，随后用的是一个 16GB 大小的 strontium 驱动盘。</p>
+<p>首先把驱动盘插入端口，并挂载上，使其可读。然后从命令行下面进入挂载的文件目录下。</p>
+<div class="section" id="sony-4gb">
+<h4>Sony 4GB - 写入</h4>
+<p>这个实验中，用 dd 命令向驱动盘写入一个有 10000 块，每块 8K 字节的文件。</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>8k <span class="nv">count</span><span class="o">=</span>10000
+</pre></div>
+<pre class="literal-block">
+10000+0 records in
+10000+0 records out
+81920000 bytes (82 MB) copied, 11.0626 s, 7.4 MB/s
+</pre>
+<p>因此，写入速度约为7.5兆字节/秒。这是一个很低的数字。</p>
+</div>
+<div class="section" id="id6">
+<h4>Sony 4GB - 读取</h4>
+<p>把相同的文件读取回来，测试速度。首先运行如下命令清除内存缓存。</p>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
+</pre></div>
+<p>现在就可以使用 dd 命令来读取文件了。</p>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>8k
+</pre></div>
+<pre class="literal-block">
+8000+0 records in
+8000+0 records out
+65536000 bytes (66 MB) copied, 2.65218 s, 24.7 MB/s
+</pre>
+<p>读取速度出来大约是25兆字节/秒，这大致跟廉价 USB 驱动盘的标准相匹配吧。</p>
+<p>USB2.0 理论上最大信号传输速率为480兆比特/秒，最小为60兆字节/秒。然而，由于各种限制实际传输速率大约280兆比特/秒和35兆字节/秒之间。除了这个，实际的速度还取决于驱动盘本身的质量好坏以及其他的因素。</p>
+<p>上面实验中， USB 驱动盘插入USB 2.0 端口，读取的速度达到了 24.7兆字节/秒，这是很不错的读速度。但写入速度就不敢恭维了。</p>
+<p>下面让我们用 16GB 的 Strontium 驱动盘来做相同的实验。虽然 Strontium 的 USB 驱动盘很稳定，但它也是一款很便宜的品牌。</p>
+</div>
+<div class="section" id="strontium-16gb">
+<h4>Strontium 16gb 盘写入速度</h4>
+<div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>64k <span class="nv">count</span><span class="o">=</span>1000
+</pre></div>
+<pre class="literal-block">
+1000+0 records in
+1000+0 records out
+65536000 bytes (66 MB) copied, 8.3834 s, 7.8 MB/s
+</pre>
+</div>
+<div class="section" id="id7">
+<h4>Strontium 16gb 盘读取速度</h4>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
+dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>8k
+</pre></div>
+<pre class="literal-block">
+8000+0 records in
+8000+0 records out
+65536000 bytes (66 MB) copied, 2.90366 s, 22.6 MB/s
+</pre>
+<p>它的读取速度就要比 Sony 的低了。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>参考资料</h2>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/USB">http://en.wikipedia.org/wiki/USB</a></p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/SSD_Benchmarking">https://wiki.archlinux.org/index.php/SSD_Benchmarking</a></p>
+<p><em>来源：binarytides</em> <em>原文：</em><a class="reference external" href="http://www.binarytides.com/linux-test-drive-speed/">http://www.binarytides.com/linux-test-drive-speed/</a></p>
+<p><em>译文：</em><a class="reference external" href="http://lctt.github.io/">LCTT</a> <a class="reference external" href="http://linux.cn/article-3696-1.html">http://linux.cn/article-3696-1.html</a> <em>译者：runningwater</em></p>
+</div>
+<p>There are <a href="./shu-mei-pai/linux-test-drive-speed.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./she-ying/pai-zhao-shi-nian-ni-yong-cuo-liao-yan-jie-mi-zheng-que-qu-jing-xi-guan.html" rel="bookmark"
+                           title="Permalink to 拍照十年你用错了眼，揭秘正确取景习惯">拍照十年你用错了眼，揭秘正确取景习惯</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-04-12T20:11:00+08:00">
                 Published: 2015-04-12
@@ -38,7 +179,7 @@
         </address>
 <p>In <a href="./she-ying/index.html">摄影</a>. </p>
 
-</footer><!-- /.post-info --><div class="section" id="id2">
+</footer><!-- /.post-info -->                <div class="section" id="id2">
 <h2>取景习惯五五开</h2>
 <p>今天我们来说说关于拍摄习惯的问题，笔者接触摄影也有五六年了，小弟自知摄影水平有限，但是对于自己的拍摄习惯还是很有自信，但是最近被身边一些朋友指出我用左眼取景的方式不正确，在之后的几天里，我细心的观察了身边的同事们，发现大家基本的摄影姿势几乎都一样，但是在取景习惯这一点上却无法统一，有人习惯用左眼取景而有人则用右眼取景，那么到底用那只眼取景才是正确的呢？</p>
 <div class="figure align-center" style="width: 640px; height: auto; max-width: 100%;">
@@ -56,60 +197,10 @@
 <p>即便笔者是个坚定的用左眼取景的人，但是不得不承认一个事实，那就是用右眼取景的人有一些天生的优势，首先是视野优势，用右眼取景的朋友左眼可以同时睁着，去查看取景器以外的环境，如果使用左眼取景，右眼则会被握持相机的右手遮挡，相比于左眼取景，右眼取景的视野明显更大一些，当然使用右眼取景的一些人，也会习惯性的闭上左眼，也正是因为这个问题，才会有人用左眼取景，不然左眼取景就真的没有意义了。</p>
 <div class="figure align-center" style="width: 1000px; height: auto; max-width: 100%;">
 <img alt="cesRoSHlyFf1g.jpg" src="./images/cesRoSHlyFf1g.jpg" style="width: 1000px; height: auto; max-width: 100%;"/>
-<p class="caption"><strong>右眼取景视线更宽，可以观察取景器以外的“世界”。</strong></p>
-</div>
-<p>而右眼取景的第二个优势，也是我们左眼用户无法回避的一点，那就是现在市面上大多数单反相机是为右眼取景设计的，也许很多网友不理解，但是笔者可以告诉你一个最简单的理由，现在所有单反相机说明书上的正确手持相机方法都是右眼看取景器。</p>
-<div class="figure align-center" style="width: 640px; height: auto; max-width: 100%;">
-<img alt="ce5OMAHpX6FI6.jpg" src="./images/ce5OMAHpX6FI6.jpg" style="width: 640px; height: auto; max-width: 100%;"/>
-<p class="caption"><strong>不管是官方广告还是官方初级使用教程都是以右眼取景作为拍照的正确姿势</strong></p>
-</div>
-<p>成龙、王力宏的代言广告相信大家都欣赏过，有些网友会觉得厂商花了大价钱请来了明星代言，一定要让明星把脸露出来，不然那钱就白花了，其实这么想没有错，但是在说明书上的正确手持相机方法上也是右眼取景，这些人总不是大明星了吧，所以从厂商的指引中我们可以看到，右眼取景确实是“正确”的拍摄方式。</p>
-</div>
-<div class="section" id="id4">
-<h2>左眼取景有福利</h2>
-<p>刚才说了半天右眼取景的优势，下面笔者也要说说左眼取景的好处，作为一个左眼取景的摄影爱好者来说，我们虽然并非“正统”但是也不是毫无优势可言，早前有一本名为热靴日记的摄影书籍，其中有几页写下了左眼取景的福利，因为之前那本书笔者实在找不到了，所以只好找来同事做模特，翻拍了一个版本。</p>
-<div class="figure align-center" style="width: 1200px; height: auto; max-width: 100%;">
-<img alt="cer8EPDF598Ck.jpg" src="./images/cer8EPDF598Ck.jpg" style="width: 1200px; height: auto; max-width: 100%;"/>
-<p class="caption"><strong>稳定性握法</strong></p>
-</div>
-<p>上面这张图片是单反相机加强稳定性的握法，在使用左眼取景时可以轻松的做到（其实右眼取景也可以使用这种稳定握法，但是违反了人体工程学，因为市面上很少有为左撇子设计的相机，硬来的话会对脖子造成损伤），同理，除了稳定性之后，左眼取景也增加了单反相机的扩展性，比如一个人操作离机引闪这种颇有难度的摄影技巧。</p>
-<div class="figure align-center" style="width: 1200px; height: auto; max-width: 100%;">
-<img alt="ceqPAJqkc0qLM.jpg" src="./images/ceqPAJqkc0qLM.jpg" style="width: 1200px; height: auto; max-width: 100%;"/>
-<p class="caption"><strong>用左眼取景，将相机稳定在肩膀，可独立操作离机引闪。</strong></p>
-</div>
-<p>在本页中笔者举了几个例子，说了一下左眼取景的福利，其实笔者说了这么多也只是想给左眼取景的朋友一起安慰（也是给笔者自己一个安慰），但是无论如何，右眼取景都是“正统”，但是笔者依旧觉得，大家没必要按着说明书上说的去办。</p>
-</div>
-<div class="section" id="id5">
-<h2>区别主眼和辅眼</h2>
-<p>也许大家都知道主手与辅手区别（就是左撇子和右撇子的区别），但是很少有人知道人的眼睛也分为主视眼和辅视眼，每个人不管你视力是好是坏，也不管你眼睛的大小和颜色，都会有一个主视眼，而这个主视眼可能是左眼，也可能是右眼。而我们人的大脑习惯利用主视眼的成像来分析和定位物体，因为主眼所看到的东西会被大脑优先接受，那么为什么会造成主视眼比辅视眼更强大呢？造成这样的原因主要还是用眼习惯问题，因为主眼由于运动多，获得的补给也多，往往发育的比辅视眼好。</p>
-<div class="figure align-center" style="width: 1200px; height: auto; max-width: 100%;">
-<img alt="cewDGhFVkU4U.jpg" src="./images/cewDGhFVkU4U.jpg" style="width: 1200px; height: auto; max-width: 100%;"/>
-<p class="caption"><strong>我们眼睛和手一样，也是分主辅的。</strong></p>
-</div>
-<p>很多人可能觉得主视眼和辅视眼眼这个问题过于深奥，其实关于这个问题真没有那么难理解，笔者举个比较突出的例子，我们在街上看见有得小孩戴着眼镜，一只眼镜被黑布蒙着，这是为什么呢？这就是为了纠正辅眼发育严重不良，黑布遮挡主眼，这样，辅眼被迫承担起了“主人翁”的责任，不停地观察分析事物，而身体的养分也源源不断地补充过去，经过时间的累积，辅眼发育不良的情况就得到解决啦。上面笔者向大家阐述了一下主视眼与辅视眼区别，那么我们如何自行分辨自己哪只眼睛是主视眼呢？网上有很多种自己测主视眼和辅视眼的方式，而笔者也是选用了我认为最简单的一种方式给大家做一个说明。</p>
-<div class="figure align-center" style="width: 728px; height: auto; max-width: 100%;">
-<img alt="cexWygRDLxM8o.jpg" src="./images/cexWygRDLxM8o.jpg" style="width: 728px; height: auto; max-width: 100%;"/>
-<p class="caption"><strong>测试你自己的主视眼</strong></p>
-</div>
-<p>通过刚才上面这个测试，大家一定能分辨出自己的主视眼和辅视眼，笔者在本页开始也说过，主视眼能够更好的帮助大脑分析成像和定位物体，所在笔者看来，用那只眼睛取景都不是问题，问题是你要选择主视眼来取景。其实很长时间以来，笔者都把用那只眼取景这件事看成是一个无关紧要的习惯问题，就跟你喜欢用食指按快门还是中指按快门的区别一样。但是通过笔者了解主视眼与辅视眼的区别之后，我更推荐大家用主视眼取景。</p>
-</div>
-<div class="section" id="id6">
-<h2>延伸阅读：双眼的色温问题</h2>
-<p>其实本页的内容和今天的主题已经无关，但是既然都说到双眼了，那笔者也就借着这个机会再扯点别的（其实主要是因为这个问题内容量过小，没必要再另外写一篇文章了），通过刚才的介绍想必大家都对主视眼和辅视眼有了一定的认识，但是我们的双眼除了这些差别，在色温上其实也有一些差别的。</p>
-<div class="figure align-center" style="width: 1200px; height: auto; max-width: 100%;">
-<img alt="cegVlw3Z8Yv2Y.jpg" src="./images/cegVlw3Z8Yv2Y.jpg" style="width: 1200px; height: auto; max-width: 100%;"/>
-<p class="caption"><strong>笔者用直观的方式作了一个示意图，当然这么画是错误的，只为大家更好的理解色温差的问题。</strong></p>
-</div>
-<p>正常人的双眼色温是有细微的差别的（患有色盲症的除外），一只偏冷，而另一只则偏暖，这个东西是天生的。笔者自己也拿了一张白纸做了一个实验，我的一只眼睛色温明显偏高，整体成像有些发青色，而另一只眼睛的色温则相对于低一些，有些发黄。为什么说双眼的色温差是天生的呢？其原因很简单，因为我们的双眼看东西是有立体感的，按着笔者的理解应该和早期的红蓝3D眼镜原理一样，只是红蓝3D眼镜将立体的效果更加夸张化了。</p>
-<p>笔者本想把双眼色温的问题和主视眼与辅视眼放在一起说的，但是没有证据证明主视眼一定偏冷或者偏暖，所以就在最后简单的和大家介绍了一下，不过在我看来这一页和今天的主题也不是毫无关系，我一直再想一个问题，我们每个人欣赏画面的角度不同，有没有可能有些人天生喜欢暖色调的画面，所以潜意识中不喜欢用冷色调的眼睛去取景呢？人体的奥秘太多太多，不是我一个影像编辑可以研究透的，所以我觉得这事咱们了解一下就好了。</p>
-<p><em>原文地址：</em><a class="reference external" href="http://dcdv.zol.com.cn/488/4882505_all.html">http://dcdv.zol.com.cn/488/4882505_all.html</a></p>
-</div>
-<p>There are <a href="./she-ying/pai-zhao-shi-nian-ni-yong-cuo-liao-yan-jie-mi-zheng-que-qu-jing-xi-guan.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p class="caption"><strong>右眼取景视线更宽 ...</strong></p></div></div>
+                <a class="readmore" href="./she-ying/pai-zhao-shi-nian-ni-yong-cuo-liao-yan-jie-mi-zheng-que-qu-jing-xi-guan.html">read more</a>
+<p>There are <a href="./she-ying/pai-zhao-shi-nian-ni-yong-cuo-liao-yan-jie-mi-zheng-que-qu-jing-xi-guan.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -343,7 +434,7 @@ fdisk /dev/sdX
                         <ul>
 
                             <li><a href="http://github.com/whypro">github</a></li>
-                            <li><a href="http://my.oschina.net/apoptosis">OSChina</a></li>
+                            <li><a href="http://my.oschina.net/apoptosis">oschina</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->
