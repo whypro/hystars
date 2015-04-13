@@ -72,5 +72,5 @@ LINKS = (
 # Social widget
 SOCIAL = (
     ('github', 'http://github.com/whypro'),
-    ('OSChina', 'http://my.oschina.net/apoptosis'),
+    ('oschina', 'http://my.oschina.net/apoptosis'),
 )
