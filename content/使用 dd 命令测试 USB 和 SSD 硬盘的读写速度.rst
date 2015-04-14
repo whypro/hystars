@@ -130,7 +130,7 @@ Sony 4GB - 读取
 
 读取速度出来大约是25兆字节/秒，这大致跟廉价 USB 驱动盘的标准相匹配吧。
 
-USB2.0 理论上最大信号传输速率为480兆比特/秒，最小为60兆字节/秒。然而，由于各种限制实际传输速率大约280兆比特/秒和35兆字节/秒之间。除了这个，实际的速度还取决于驱动盘本身的质量好坏以及其他的因素。
+    USB2.0 理论上最大信号传输速率为480兆比特/秒，最小为60兆字节/秒。然而，由于各种限制实际传输速率大约280兆比特/秒和35兆字节/秒之间。除了这个，实际的速度还取决于驱动盘本身的质量好坏以及其他的因素。
 
 上面实验中， USB 驱动盘插入USB 2.0 端口，读取的速度达到了 24.7兆字节/秒，这是很不错的读速度。但写入速度就不敢恭维了。
 
@@ -168,11 +168,9 @@ Strontium 16gb 盘读取速度
 参考资料
 ========
 
-http://en.wikipedia.org/wiki/USB
+| http://en.wikipedia.org/wiki/USB
+| https://wiki.archlinux.org/index.php/SSD_Benchmarking
 
-https://wiki.archlinux.org/index.php/SSD_Benchmarking
 
-
-*来源：binarytides* *原文：*\ http://www.binarytides.com/linux-test-drive-speed/
-
-*译文：*\ `LCTT <http://lctt.github.io/>`_ http://linux.cn/article-3696-1.html *译者：runningwater*
+| *来源：binarytides* *原文：*\ http://www.binarytides.com/linux-test-drive-speed/
+| *译文：*\ `LCTT <http://lctt.github.io/>`_ http://linux.cn/article-3696-1.html *译者：runningwater*
