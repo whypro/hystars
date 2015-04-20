@@ -1,0 +1,6 @@
+[submodule "themes/elegant"]
+	path = themes/elegant
+	url = https://github.com/talha131/pelican-elegant.git
+[submodule "plugins/better_figures_and_images"]
+	path = plugins/better_figures_and_images
+	url = https://github.com/getpelican-plugins/better_figures_and_images.git

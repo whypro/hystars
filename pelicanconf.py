@@ -50,13 +50,13 @@ EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'}
 }
 
-PLUGIN_PATHS = ['/home/whypro/tools/pelican-plugins']
+PLUGIN_PATHS = ['plugins']
 PLUGINS = ['better_figures_and_images']
 
 # better_figures_and_images plugin settings
 RESPONSIVE_IMAGES = True
 
-# THEME = '/home/whypro/tools/pelican-themes/elegant'
+# THEME = 'themes/elegant'
 THEME = 'notmyidea'
 
 # notmyidea theme settings
