@@ -3,7 +3,7 @@
 
 :date: 2015-04-13 21:18
 :modified: 2015-04-13 21:18
-:tag: Linux
+:tags: Linux
 :slug: linux-test-drive-speed
 
 磁盘驱动器速度
