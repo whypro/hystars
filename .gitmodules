@@ -4,3 +4,6 @@
 [submodule "plugins/better_figures_and_images"]
 	path = plugins/better_figures_and_images
 	url = https://github.com/getpelican-plugins/better_figures_and_images.git
+[submodule "themes/niu-x2"]
+	path = themes/niu-x2
+	url = https://github.com/mawenbao/niu-x2.git
