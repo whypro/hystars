@@ -29,7 +29,7 @@ RELATIVE_URLS = True
 
 USE_FOLDER_AS_CATEGORY = True
 # REVERSE_CATEGORY_ORDER = True
-DEFAULT_CATEGORY = 'uncategorized'
+DEFAULT_CATEGORY = 'Misc'
 DEFAULT_PAGINATION = 7
 
 ARTICLE_URL = '{category}/{slug}.html'
@@ -51,26 +51,31 @@ EXTRA_PATH_METADATA = {
 }
 
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['better_figures_and_images']
+# PLUGINS = ['better_figures_and_images']
 
 # better_figures_and_images plugin settings
 RESPONSIVE_IMAGES = True
 
 # THEME = 'themes/elegant'
-THEME = 'notmyidea'
+THEME = 'themes/niu-x2'
+
+# niu-x2 theme settings
+JINJA_EXTENSIONS = ['jinja2.ext.ExprStmtExtension', ]
+DISQUS_SITENAME = 'hystars'
+NIUX2_FAVICON_URL = '/favicon.ico'
 
 # notmyidea theme settings
-SITESUBTITLE = ''
+# SITESUBTITLE = ''
 # GITHUB_URL = 'http://github.com/whypro/'
-DISQUS_SITENAME = 'hystars'
+# DISQUS_SITENAME = 'hystars'
 # Blogroll
-LINKS = (
-    ('Pelican', 'http://getpelican.com/'),
-    ('Python.org', 'http://python.org/'),
-    ('Jinja2', 'http://jinja.pocoo.org/'),
-)
+# LINKS = (
+#     ('Pelican', 'http://getpelican.com/'),
+#     ('Python.org', 'http://python.org/'),
+#     ('Jinja2', 'http://jinja.pocoo.org/'),
+# )
 # Social widget
-SOCIAL = (
-    ('github', 'http://github.com/whypro'),
-    ('oschina', 'http://my.oschina.net/apoptosis'),
-)
+# SOCIAL = (
+#     ('github', 'http://github.com/whypro'),
+#     ('oschina', 'http://my.oschina.net/apoptosis'),
+# )
