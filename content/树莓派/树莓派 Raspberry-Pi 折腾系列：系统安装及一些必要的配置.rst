@@ -8,7 +8,7 @@
 
 入手树莓派将近一个月了，很折腾，许多资源不好找，也很乱。简单整理一下自己用到的东西，方便以后自己或别人继续折腾。
 
-.. image:: {filename}/images/raspberry-pi-0.jpg
+.. image:: {filename}/images/RPi/setup/raspberry-pi-0.jpg
     :alt: raspberry-pi-0.jpg
     :align: center
 
@@ -26,7 +26,7 @@
 
 在 Windows 下可以使用 **Win32 Disk Imager** 进行镜像恢复，非常方便，也是树莓派官方推荐的方法。官方下载地址：http://sourceforge.net/projects/win32diskimager/
 
-.. image:: {filename}/images/raspberry-pi-1.gif
+.. image:: {filename}/images/RPi/setup/raspberry-pi-1.gif
     :alt: raspberry-pi-1.gif
     :align: center
 
@@ -36,7 +36,7 @@
 
 好在树莓派默认是有开启 SSH 的，但是我们系统刚安装，IP 还没设置，怎么找到它的 IP 地址呢？这时候就推荐使用另一个神器 **PortScan** 来找出我们的机器：
 
-.. image:: {filename}/images/raspberry-pi-2.gif
+.. image:: {filename}/images/RPi/setup/raspberry-pi-2.gif
     :alt: raspberry-pi-2.gif
     :align: center
 
@@ -62,7 +62,7 @@ PortScan 下载地址：http://abel.oss.aliyuncs.com/file/PortScan.zip
 
 第一次用 root 登录，会自动弹出树莓派的高级设置面板（以后也可以通过 **raspi-config** 命令进入）：
 
-.. image:: {filename}/images/raspberry-pi-3.gif
+.. image:: {filename}/images/RPi/setup/raspberry-pi-3.gif
     :alt: raspberry-pi-3.gif
     :align: center
 
@@ -84,7 +84,7 @@ PortScan 下载地址：http://abel.oss.aliyuncs.com/file/PortScan.zip
 
 进入编辑界面，删除原有的内容，粘贴中科大提供的内容，结果如下：
 
-.. image:: {filename}/images/raspberry-pi-4.gif
+.. image:: {filename}/images/RPi/setup/raspberry-pi-4.gif
     :alt: raspberry-pi-4.gif
     :align: center
 

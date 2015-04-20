@@ -31,27 +31,27 @@
 
 分别用0.7A，1.0A，2.1A的充电器连在功率表上测量功率（P=U*I），电压一致，实际电流大小和功率成正比，所以从功率中就可以看出充电器实际的电流大小。
 
-.. image:: {filename}/images/30738095_1390227366920_1024x1024.jpg
+.. image:: {filename}/images/misc/ac_adapter/30738095_1390227366920_1024x1024.jpg
     :alt: 30738095_1390227366920_1024x1024.jpg
     :align: center
 
-.. image:: {filename}/images/30738100_1390227375836_1024x1024.jpg
+.. image:: {filename}/images/misc/ac_adapter/30738100_1390227375836_1024x1024.jpg
     :alt: 30738100_1390227375836_1024x1024.jpg
     :align: center
 
-.. image:: {filename}/images/30738102_1390227380614_1024x1024.jpg
+.. image:: {filename}/images/misc/ac_adapter/30738102_1390227380614_1024x1024.jpg
     :alt: 30738102_1390227380614_1024x1024.jpg
     :align: center
 
-.. image:: {filename}/images/30738106_1390227384995_1024x1024.jpg
+.. image:: {filename}/images/misc/ac_adapter/30738106_1390227384995_1024x1024.jpg
     :alt: 30738106_1390227384995_1024x1024.jpg
     :align: center
 
-.. image:: {filename}/images/30738110_1390227390006_1024x1024.jpg
+.. image:: {filename}/images/misc/ac_adapter/30738110_1390227390006_1024x1024.jpg
     :alt: 30738110_1390227390006_1024x1024.jpg
     :align: center
 
-.. image:: {filename}/images/30738113_1390227394261_1024x1024.jpg
+.. image:: {filename}/images/misc/ac_adapter/30738113_1390227394261_1024x1024.jpg
     :alt: 30738113_1390227394261_1024x1024.jpg
     :align: center
 

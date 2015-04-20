@@ -10,13 +10,13 @@
 
 今天我们来说说关于拍摄习惯的问题，笔者接触摄影也有五六年了，小弟自知摄影水平有限，但是对于自己的拍摄习惯还是很有自信，但是最近被身边一些朋友指出我用左眼取景的方式不正确，在之后的几天里，我细心的观察了身边的同事们，发现大家基本的摄影姿势几乎都一样，但是在取景习惯这一点上却无法统一，有人习惯用左眼取景而有人则用右眼取景，那么到底用那只眼取景才是正确的呢？
 
-.. figure:: {filename}/images/cebiOjyE2BFC.jpg
+.. figure:: {filename}/images/Photography/which_eye/cebiOjyE2BFC.jpg
     :alt: cebiOjyE2BFC.jpg
     :align: center
 
 网络上关于“取景到底应该用那只眼”的问题有很多种解释，有人说跟是不是左撇子有关系，也有人说是双眼距离的关系，更有人说是因为怕鼻子蹭在屏幕上的关系，总之答案有很多种，但是笔者对于网上的一些说法并不是很认同，在我看来这些东西绝对不是一个很笼统的问题，要想知道真相，我们还是需要自己去探索和证实。
 
-.. figure:: {filename}/images/cetqel5gS4sCs.jpg
+.. figure:: {filename}/images/Photography/which_eye/cetqel5gS4sCs.jpg
     :alt: cetqel5gS4sCs.jpg
     :align: center
 
@@ -29,7 +29,7 @@
 
 即便笔者是个坚定的用左眼取景的人，但是不得不承认一个事实，那就是用右眼取景的人有一些天生的优势，首先是视野优势，用右眼取景的朋友左眼可以同时睁着，去查看取景器以外的环境，如果使用左眼取景，右眼则会被握持相机的右手遮挡，相比于左眼取景，右眼取景的视野明显更大一些，当然使用右眼取景的一些人，也会习惯性的闭上左眼，也正是因为这个问题，才会有人用左眼取景，不然左眼取景就真的没有意义了。
 
-.. figure:: {filename}/images/cesRoSHlyFf1g.jpg
+.. figure:: {filename}/images/Photography/which_eye/cesRoSHlyFf1g.jpg
     :alt: cesRoSHlyFf1g.jpg
     :align: center
 
@@ -37,7 +37,7 @@
 
 而右眼取景的第二个优势，也是我们左眼用户无法回避的一点，那就是现在市面上大多数单反相机是为右眼取景设计的，也许很多网友不理解，但是笔者可以告诉你一个最简单的理由，现在所有单反相机说明书上的正确手持相机方法都是右眼看取景器。
 
-.. figure:: {filename}/images/ce5OMAHpX6FI6.jpg
+.. figure:: {filename}/images/Photography/which_eye/ce5OMAHpX6FI6.jpg
     :alt: ce5OMAHpX6FI6.jpg
     :align: center
 
@@ -50,7 +50,7 @@
 
 刚才说了半天右眼取景的优势，下面笔者也要说说左眼取景的好处，作为一个左眼取景的摄影爱好者来说，我们虽然并非“正统”但是也不是毫无优势可言，早前有一本名为热靴日记的摄影书籍，其中有几页写下了左眼取景的福利，因为之前那本书笔者实在找不到了，所以只好找来同事做模特，翻拍了一个版本。
 
-.. figure:: {filename}/images/cer8EPDF598Ck.jpg
+.. figure:: {filename}/images/Photography/which_eye/cer8EPDF598Ck.jpg
     :alt: cer8EPDF598Ck.jpg
     :align: center
 
@@ -58,7 +58,7 @@
 
 上面这张图片是单反相机加强稳定性的握法，在使用左眼取景时可以轻松的做到（其实右眼取景也可以使用这种稳定握法，但是违反了人体工程学，因为市面上很少有为左撇子设计的相机，硬来的话会对脖子造成损伤），同理，除了稳定性之后，左眼取景也增加了单反相机的扩展性，比如一个人操作离机引闪这种颇有难度的摄影技巧。
 
-.. figure:: {filename}/images/ceqPAJqkc0qLM.jpg
+.. figure:: {filename}/images/Photography/which_eye/ceqPAJqkc0qLM.jpg
     :alt: ceqPAJqkc0qLM.jpg
     :align: center
 
@@ -71,7 +71,7 @@
 
 也许大家都知道主手与辅手区别（就是左撇子和右撇子的区别），但是很少有人知道人的眼睛也分为主视眼和辅视眼，每个人不管你视力是好是坏，也不管你眼睛的大小和颜色，都会有一个主视眼，而这个主视眼可能是左眼，也可能是右眼。而我们人的大脑习惯利用主视眼的成像来分析和定位物体，因为主眼所看到的东西会被大脑优先接受，那么为什么会造成主视眼比辅视眼更强大呢？造成这样的原因主要还是用眼习惯问题，因为主眼由于运动多，获得的补给也多，往往发育的比辅视眼好。
 
-.. figure:: {filename}/images/cewDGhFVkU4U.jpg
+.. figure:: {filename}/images/Photography/which_eye/cewDGhFVkU4U.jpg
     :alt: cewDGhFVkU4U.jpg
     :align: center
 
@@ -79,7 +79,7 @@
 
 很多人可能觉得主视眼和辅视眼眼这个问题过于深奥，其实关于这个问题真没有那么难理解，笔者举个比较突出的例子，我们在街上看见有得小孩戴着眼镜，一只眼镜被黑布蒙着，这是为什么呢？这就是为了纠正辅眼发育严重不良，黑布遮挡主眼，这样，辅眼被迫承担起了“主人翁”的责任，不停地观察分析事物，而身体的养分也源源不断地补充过去，经过时间的累积，辅眼发育不良的情况就得到解决啦。上面笔者向大家阐述了一下主视眼与辅视眼区别，那么我们如何自行分辨自己哪只眼睛是主视眼呢？网上有很多种自己测主视眼和辅视眼的方式，而笔者也是选用了我认为最简单的一种方式给大家做一个说明。
 
-.. figure:: {filename}/images/cexWygRDLxM8o.jpg
+.. figure:: {filename}/images/Photography/which_eye/cexWygRDLxM8o.jpg
     :alt: cexWygRDLxM8o.jpg
     :align: center
 
@@ -92,7 +92,7 @@
 
 其实本页的内容和今天的主题已经无关，但是既然都说到双眼了，那笔者也就借着这个机会再扯点别的（其实主要是因为这个问题内容量过小，没必要再另外写一篇文章了），通过刚才的介绍想必大家都对主视眼和辅视眼有了一定的认识，但是我们的双眼除了这些差别，在色温上其实也有一些差别的。
 
-.. figure:: {filename}/images/cegVlw3Z8Yv2Y.jpg
+.. figure:: {filename}/images/Photography/which_eye/cegVlw3Z8Yv2Y.jpg
     :alt: cegVlw3Z8Yv2Y.jpg
     :align: center
 
