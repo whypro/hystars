@@ -241,4 +241,5 @@ Ruby将”free bitmap”保存在一个独立的内存区域，以便可以更�
 
 下周我将发布演讲的其他部分。我将讨论Python怎样处理循环引用数据结构，以及在即将到来的Ruby2.1中，垃圾回收器是怎样工作的。
 
-*原文地址：*\ http://python.jobbole.com/60900/
+| *原文地址：*\ http://python.jobbole.com/60900/
+| *英文出处：*\ `Pat Shaughnessy <http://patshaughnessy.net/2013/10/24/visualizing-garbage-collection-in-ruby-and-python>`_
