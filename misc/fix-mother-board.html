@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>真相侠告诉你 2.1A 充电器给手机充电到底好不好 - hystars</title>
+    <title>主板维修——更换爆浆电容 - hystars</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
@@ -56,7 +56,7 @@ initTocScrollAnimation();        });
                     <i class="icon-list-ul"></i>TOC<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#content-heading">真相侠告诉你 2.1A 充电器给手机充电到底好不好</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
+                    <li><a href="#content-heading">主板维修——更换爆浆电容</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
             </li></ul>
         
         <!-- right nav bar -->
@@ -68,34 +68,69 @@ initTocScrollAnimation();        });
     
     <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-article"><div class="niu2-meta">
     <span class="niu2-meta-category pull-left"><i class="icon-open-folder"></i>Misc</span><span class="niu2-meta-tag pull-left">
-        <i class="icon-tag"></i><a href="../tag/shou-ji.html">手机</a></span><span class="niu2-meta-date pull-right">
-        <i class="icon-calendar"></i>2015-04-14 22:44:00
+        <i class="icon-tag"></i><a href="../tag/zhu-ban.html">主板</a><a href="../tag/dian-rong.html">电容</a><a href="../tag/wei-xiu.html">维修</a></span><span class="niu2-meta-date pull-right">
+        <i class="icon-calendar"></i>2015-04-21 11:01:00
     </span>
 </div>
-<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">真相侠告诉你 2.1A 充电器给手机充电到底好不好</h1><p>手机没电了，拿起基友的ipad充电器开始充电。</p>
-<p>基友甲：你他妈的要命不，这2.1A的给手机充电会炸的，没看前几天新闻啊！</p>
-<p>基友乙：扯淡！对手机来说2.1A完全能承受，而且充电速度会大于一般的手机充电器。</p>
-<p>我想很多人都有这样的疑问吧。</p>
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">主板维修——更换爆浆电容</h1><p>家里的电脑买了七、八年了，最近显示器突然出现了偶尔无法正常工作，桌面黑屏，画面无法刷新的情况。</p>
+<p>首先怀疑是显卡问题，但是该主板没有独立显卡，是集成显卡，所以问题也就转移到了主板了。</p>
+<div class="figure align-center">
+<img alt="IMAG0001.jpg" src="../images/misc/fix-mother-board/IMAG0001.jpg" />
 </div>
-<p>到底2.1A的这种充电器能否安全的给手机充电？</p>
-<p>用它给手机充电会不会加速充电时间？</p>
-<p>大家都知道ipad的充电器是2.1A的，而一般手机充电器都不大于1A。</p>
-<p>按照理论上：用2.1A的充电器比1A的充电器要充电快1倍，同时手机电池承受较大的电流，肯对不好。</p>
-<p>实际上是这样吗？</p>
-<div class="line-block">
-<div class="line"><br /></div>
+<p>仔细观察了一下主板上的电容，发现果然有一个爆浆了，如图。记下规格：6.3V 1500μF。</p>
+<div class="figure align-center">
+<img alt="IMAG0002.jpg" src="../images/misc/fix-mother-board/IMAG0002.jpg" />
 </div>
-<p>我打算做一个实验，思路如下：</p>
-<p>分别用0.7A，1.0A，2.1A的充电器连在功率表上测量功率（P=U*I），电压一致，实际电流大小和功率成正比，所以从功率中就可以看出充电器实际的电流大小。</p>
-<img alt="30738095_1390227366920_1024x1024.jpg" class="align-center" src="../images/misc/ac_adapter/30738095_1390227366920_1024x1024.jpg" />
-<img alt="30738100_1390227375836_1024x1024.jpg" class="align-center" src="../images/misc/ac_adapter/30738100_1390227375836_1024x1024.jpg" />
-<img alt="30738102_1390227380614_1024x1024.jpg" class="align-center" src="../images/misc/ac_adapter/30738102_1390227380614_1024x1024.jpg" />
-<img alt="30738106_1390227384995_1024x1024.jpg" class="align-center" src="../images/misc/ac_adapter/30738106_1390227384995_1024x1024.jpg" />
-<img alt="30738110_1390227390006_1024x1024.jpg" class="align-center" src="../images/misc/ac_adapter/30738110_1390227390006_1024x1024.jpg" />
-<img alt="30738113_1390227394261_1024x1024.jpg" class="align-center" src="../images/misc/ac_adapter/30738113_1390227394261_1024x1024.jpg" />
-<p>以后可以放心的用2.1A充电器给手机充电咯！</p>
+<p>下面是具体维修步骤：</p>
+<ol class="arabic">
+<li><p class="first">从机箱上卸下主板，卸下风扇，将灰尘清理干净</p>
+<blockquote>
+<div class="figure align-center">
+<img alt="IMAG0002.jpg" src="../images/misc/fix-mother-board/IMAG0003.jpg" />
+</div>
+</blockquote>
+</li>
+<li><p class="first">焊下爆浆的电容</p>
+<blockquote>
+<div class="figure align-center">
+<img alt="IMAG0004.jpg" src="../images/misc/fix-mother-board/IMAG0004.jpg" />
+</div>
+<p>用烙铁拆卸电容是一定要注意，因为主板制造工艺与一般家电不同，大部分烙铁无法轻松地将其焊下来，所以最好使用加焊法，即同时给两个焊点加焊至熔化，然后轻轻取下。</p>
+<p>然后从旧主板上拆下两个同型号的电容，当然也可以从电子城买到。</p>
+<div class="figure align-center">
+<img alt="IMAG0005.jpg" src="../images/misc/fix-mother-board/IMAG0005.jpg" />
+</div>
+<div class="figure align-center">
+<img alt="IMAG0006.jpg" src="../images/misc/fix-mother-board/IMAG0006.jpg" />
+</div>
+<p>左边是爆浆的电容，右边是好电容</p>
+</blockquote>
+</li>
+<li><p class="first">焊上好的电容</p>
+<blockquote>
+<p>焊接前最好用大头针将主板孔清理干净，然后将电容轻轻插入，注意正负极。加松香、焊锡焊接。</p>
+<div class="figure align-center">
+<img alt="IMAG0007.jpg" src="../images/misc/fix-mother-board/IMAG0007.jpg" />
+</div>
+<p>焊好后用酒精擦除掉残留的松香。</p>
+<div class="figure align-center">
+<img alt="IMAG0010.jpg" src="../images/misc/fix-mother-board/IMAG0010.jpg" />
+</div>
+</blockquote>
+</li>
+<li><p class="first">最终效果图</p>
+<blockquote>
+<div class="figure align-center">
+<img alt="IMAG0008.jpg" src="../images/misc/fix-mother-board/IMAG0008.jpg" />
+</div>
+<div class="figure align-center">
+<img alt="IMAG0009.jpg" src="../images/misc/fix-mother-board/IMAG0009.jpg" />
+</div>
+</blockquote>
+</li>
+<li><p class="first">成功点亮，问题解决</p>
+</li>
+</ol>
 
     </div><div id="content-comments"><div id="disqus_thread"></div>
 <script type="text/javascript">
