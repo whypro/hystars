@@ -15,7 +15,7 @@ FTP_TARGET_DIR=/
 SSH_HOST=localhost
 SSH_PORT=22
 SSH_USER=root
-SSH_TARGET_DIR=/srv/www/hystars
+SSH_TARGET_DIR=/srv/http/hystars
 
 S3_BUCKET=my_s3_bucket
 
