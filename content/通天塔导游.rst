@@ -4,6 +4,7 @@
 :date: 2015-04-23 09:37
 :modified: 2015-04-23 10:42
 :tags: 编程语言
+:slug: tour-de-babel
 
 ..
 
@@ -266,14 +267,13 @@ Python 的作者，Guido Van Rossum，也在早期犯过一些很傻的技术错
 
     That was the ADJ article I really wanted to write。Or at least something like it。For some reason, though, my true feelings only seem to come out during insomniac attacks between 3am and 6am。Time for bed！2 hours ’til my next meeting。
 
+这才是我真正想给亚马逊开发者杂志写的文章。或者至少是这样的。出于某些原因，我的真感情好像只有在我凌晨三点到六点失眠的时候都会流露。该睡觉了！我下个会议再过两小时就开始了。
 
 .. [注1] Eric告诉我当时几乎全是Jamie Zawinski，当他们在Lucid工作的时候。
 
 .. [注2] 我写了这个之后很多人告诉我Paul Graham是用VI的，想不到。
 
 .. [注3] 为了有据可查，我个人根本不介意空格问题。我认为因为这个而不喜欢Python是很傻的。我只是说有一堆比例让人惊奇的其他工程师讨厌空格问题。
-
-这才是我真正想给亚马逊开发者杂志写的文章。或者至少是这样的。出于某些原因，我的真感情好像只有在我凌晨三点到六点失眠的时候都会流露。该睡觉了！我下个会议再过两小时就开始了。
 
 (发布于 2004 年 9 月，小小的更新在2006年3月28日)
 
