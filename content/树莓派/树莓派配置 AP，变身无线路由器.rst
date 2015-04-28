@@ -2,11 +2,11 @@
 #############################
 
 :date: 2015-04-26 10:09
-:modified: 2015-04-26 17:20
+:modified: 2015-04-28 22:26
 :tags: 树莓派, Arch Linux, hostapd, dnsmasq
 :slug: raspberry-pi-soft-ap-config
 
-首先介绍一下系统环境，笔者用的是树莓派2B (Raspberry Pi 2 Model B)系统是 Arch Linux。另外购得了一个无线网卡，`Tenda W311M <http://www.tenda.com.cn/product/W311M.html>`_，RT5370 芯片，支持 Soft-AP，这点大家购买前一定要注意。
+首先介绍一下系统环境，笔者用的是树莓派2B (Raspberry Pi 2 Model B)系统是 `Arch Linux <{filename}/树莓派/为树莓派制作%20Arch%20Linux%20SD%20卡.rst>`_。另外购得了一个无线网卡，`Tenda W311M <http://www.tenda.com.cn/product/W311M.html>`_，RT5370 芯片，支持 Soft-AP。无线网卡是否支持 AP，这点大家购买前一定要确认一下。
 
 大家知道，配置无线 AP 有很多种方法，本文使用 hostapd + dnsmasq 进行配置，如果你不太习惯这两个工具，也可以使用其他方案。
 
@@ -102,6 +102,10 @@
         bind-interfaces
         dhcp-range=192.168.0.100,192.168.0.150,12h
 
+        # Google DNS
+        server=8.8.8.8
+        server=8.8.4.4
+
 #. 修改 resolvconf.conf
 
     `vim /etc/resolvconf.conf`，取消 `name_servers=127.0.0.1` 的注释。
@@ -112,9 +116,7 @@
 
     `vim /etc/resolv.dnsmasq.conf`，增加： ::
 
-        # Google's nameservers
-        nameserver 8.8.8.8
-        nameserver 8.8.4.4
+        nameserver 127.0.0.1
 
 3. 启动 ::
 
@@ -143,10 +145,24 @@
     iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 
-其他问题
+5. 导出 NAT 规则至文件 ::
+
+    iptables-save > /etc/iptables/ap.rules
+
+
+其他
 ========
 
 * 如果网速不稳定，请确认是否安装了 haveged
+
+* 上面配置完成后，每次重启后运行以下脚本即可 ::
+
+    ifconfig wlan0 192.168.0.1/24
+    resolvconf -u
+    systemctl start dnsmasq
+    iptables-restore < /etc/iptables/ap.rules
+    sysctl net.ipv4.ip_forward=1
+    systemctl start hostapd
 
 
 .. [1] http://www.361way.com/hostapd-soft-ap/2933.html
