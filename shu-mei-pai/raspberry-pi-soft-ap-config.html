@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>树莓派配置 AP，变身无线路由器 - hystars</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/niu2.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/custom.css" type="text/css" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../theme/js/niu2.js"></script>
+<link rel="stylesheet" href="../theme/css/pygments/github.css" type="text/css" />    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initGoogleCSEAnimation();
+initTocScrollAnimation();        });
+    </script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../theme/js/html5shiv.js"></script>
+        <script src="../theme/js/respond.min.js"></script>
+    <![endif]-->
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" type="text/css" />
+    <![endif]--></head>
+  <body>
+    <div id="body-header"><div class="navbar navbar-inverse navbar-fixed-top">
+<div class="col-md-12">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="..">
+            <i class="icon-home"></i>hystars
+        </a>
+    </div>
+	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+		<ul class="nav navbar-nav"><li><a href="../archives.html">
+                <i class="icon-archive"></i>Archive</a>
+		</li>
+		<li><a href="../tag/index.html">
+                <i class="icon-tag"></i>Tag</a>
+		</li><!-- category dropdown list -->
+		<li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-folder-open"></i>Category<b class="caret"></b>
+           </a>
+           <ul class="dropdown-menu"><li><a href="../misc/index.html"><i class="icon-folder-close"></i>Misc                      (6)</a></li><li><a href="../python/index.html"><i class="icon-folder-close"></i>Python                      (3)</a></li><li><a href="../she-ying/index.html"><i class="icon-folder-close"></i>摄影                      (1)</a></li><li><a href="../shu-mei-pai/index.html"><i class="icon-folder-close"></i>树莓派                      (4)</a></li></ul>
+        </li>
+        <!--  self defined dropdown list --><!--  table of contents of page or article --><li class="dropdown dropdown-toc">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-list-ul"></i>TOC<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#content-heading">树莓派配置 AP，变身无线路由器</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
+            </li></ul>
+        
+        <!-- right nav bar -->
+		<ul class="nav navbar-nav navbar-right">
+		<!-- google custom search --></ul>
+	</nav>
+</div>
+</div></div>
+    
+    <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-article"><div class="niu2-meta">
+    <span class="niu2-meta-category pull-left"><i class="icon-open-folder"></i>树莓派</span><span class="niu2-meta-tag pull-left">
+        <i class="icon-tag"></i><a href="../tag/shu-mei-pai.html">树莓派</a><a href="../tag/arch-linux.html">Arch Linux</a><a href="../tag/hostapd.html">hostapd</a><a href="../tag/dnsmasq.html">dnsmasq</a></span><span class="niu2-meta-date pull-right">
+        <i class="icon-calendar"></i>2015-04-26 10:09:00
+    </span>
+</div>
+<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">树莓派配置 AP，变身无线路由器</h1><p>首先介绍一下系统环境，笔者用的是树莓派2B (Raspberry Pi 2 Model B)系统是 <a class="reference external" href="../shu-mei-pai/sd-card-creation-for-rpi.html">Arch Linux</a>。另外购得了一个无线网卡，<a class="reference external" href="http://www.tenda.com.cn/product/W311M.html">Tenda W311M</a>，RT5370 芯片，支持 Soft-AP。无线网卡是否支持 AP，这点大家购买前一定要确认一下。</p>
+<p>大家知道，配置无线 AP 有很多种方法，本文使用 hostapd + dnsmasq 进行配置，如果你不太习惯这两个工具，也可以使用其他方案。</p>
+<div class="section" id="id1">
+<h2>确认无线网卡支持 AP 模式</h2>
+<ol class="arabic">
+<li><p class="first">执行 <cite>lsusb</cite> 查看接入的 USB 信息。</p>
+<blockquote>
+<pre class="literal-block">
+Bus 001 Device 004: ID 148f:5370 Ralink Technology, Corp. RT5370 Wireless Adapter
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+</pre>
+<p>可以看到第一行便是笔者的无线网卡。</p>
+</blockquote>
+</li>
+<li><p class="first">执行 <cite>iw list</cite> 查看无线网卡支持的模式。（如果没有请使用 pacman 安装）</p>
+<blockquote>
+<p>请注意 <cite>software interface modes</cite> 这一项：</p>
+<pre class="literal-block">
+software interface modes (can always be added):
+    * AP/VLAN
+    * monitor
+</pre>
+<p>如果包含 <cite>AP</cite> 或者 <cite>AP/VLAN</cite>，则说明是网卡是支持的，可以继续下一步，否则说明网卡硬件不支持或者驱动不支持。</p>
+<p>如果硬件不支持那就没有办法，如果只是驱动不支持可以 Google 相关的驱动，再此就不赘述了。 <a class="footnote-reference" href="#id7" id="id2">[1]</a> <a class="footnote-reference" href="#id8" id="id3">[2]</a></p>
+</blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h2>配置无线热点</h2>
+<ol class="arabic">
+<li><p class="first">安装 hostapd</p>
+</li>
+<li><p class="first">修改（新建） hostapd.conf</p>
+<blockquote>
+<p><cite>vim /etc/hostapd/hostapd.conf</cite>，检查以下配置项：</p>
+<pre class="literal-block">
+# 无线网卡名称，这里应该与无线网卡对应
+interface=wlan0
+driver=nl80211
+# WIFI 名称
+ssid=YourWiFiName
+# 模式：a/b/g
+hw_mode=g
+# 信道
+channel=6
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+# WIFI 密码
+wpa_passphrase=Somepassphrase
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+# 最大支持的 station 数量
+max_num_sta=5
+logger_stdout=-1
+logger_stdout_level=2
+</pre>
+</blockquote>
+</li>
+<li><p class="first">启动</p>
+<pre class="literal-block">
+systemctl start hostapd
+</pre>
+</li>
+</ol>
+</div>
+<div class="section" id="dns-dhcp">
+<h2>配置 DNS 和 DHCP 服务器</h2>
+<ol class="arabic">
+<li><p class="first">为无线网卡配置 IP 地址</p>
+<blockquote>
+<pre class="literal-block">
+ifconfig wlan 192.168.0.1/24
+</pre>
+<p>也可以使用</p>
+<pre class="literal-block">
+ip link set up dev wlan0
+ip addr add 192.168.0.1/24 dev wlan0
+</pre>
+</blockquote>
+</li>
+<li><p class="first">修改 dnsmasq.conf</p>
+<blockquote>
+<p><cite>vim /etc/dnsmasq.conf</cite>，检查以下几项：</p>
+<pre class="literal-block">
+# dnsmasq 的 dns 配置
+resolv-file=/etc/resolv.dnsmasq.conf
+# 无线网卡设备名
+interface=wlan0
+# ipconfig 配置的无线网卡地址
+listen-address=192.168.0.1
+bind-interfaces
+dhcp-range=192.168.0.100,192.168.0.150,12h
+
+# Google DNS
+server=8.8.8.8
+server=8.8.4.4
+</pre>
+</blockquote>
+</li>
+<li><p class="first">修改 resolvconf.conf</p>
+<blockquote>
+<p><cite>vim /etc/resolvconf.conf</cite>，取消 <cite>name_servers=127.0.0.1</cite> 的注释。</p>
+<p>执行 <cite>resolvconf -u</cite> 更新 /etc/resolv.conf</p>
+</blockquote>
+</li>
+<li><p class="first">修改（新建） resolv.dnsmasq.conf <a class="footnote-reference" href="#id9" id="id5">[3]</a></p>
+<blockquote>
+<p><cite>vim /etc/resolv.dnsmasq.conf</cite>，增加：</p>
+<pre class="literal-block">
+nameserver 127.0.0.1
+</pre>
+</blockquote>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><p class="first">启动</p>
+<pre class="literal-block">
+systemctl start dnsmasq
+</pre>
+</li>
+</ol>
+</div>
+<div class="section" id="nat">
+<h2>启用包转发和 NAT</h2>
+<ol class="arabic">
+<li><p class="first">检查当前转发设置</p>
+<pre class="literal-block">
+sysctl -a | grep forward
+</pre>
+</li>
+<li><p class="first">临时启用包转发</p>
+<pre class="literal-block">
+sysctl net.ipv4.ip_forward=1
+</pre>
+</li>
+<li><p class="first">编辑 /etc/sysctl.d/30-ipforward.conf 使每次启动时生效</p>
+<pre class="literal-block">
+net.ipv4.ip_forward=1
+net.ipv6.conf.default.forwarding=1
+net.ipv6.conf.all.forwarding=1
+</pre>
+</li>
+<li><p class="first">启用 NAT</p>
+<pre class="literal-block">
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+</pre>
+</li>
+<li><p class="first">导出 NAT 规则至文件</p>
+<pre class="literal-block">
+iptables-save &gt; /etc/iptables/ap.rules
+</pre>
+</li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h2>其他</h2>
+<ul>
+<li><p class="first">如果网速不稳定，请确认是否安装了 haveged</p>
+</li>
+<li><p class="first">上面配置完成后，每次重启后运行以下脚本即可</p>
+<pre class="literal-block">
+ifconfig wlan0 192.168.0.1/24
+resolvconf -u
+systemctl start dnsmasq
+iptables-restore &lt; /etc/iptables/ap.rules
+sysctl net.ipv4.ip_forward=1
+systemctl start hostapd
+</pre>
+</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://www.361way.com/hostapd-soft-ap/2933.html">http://www.361way.com/hostapd-soft-ap/2933.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td><a class="reference external" href="https://wiki.archlinux.org/index.php/Software_access_point">https://wiki.archlinux.org/index.php/Software_access_point</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td><a class="reference external" href="https://wiki.archlinux.org/index.php/Resolv.conf">https://wiki.archlinux.org/index.php/Resolv.conf</a></td></tr>
+</tbody>
+</table>
+</div>
+
+    </div><div id="content-comments"><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'hystars'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div>
+
+    <div id="body-footer" class="col-md-8 col-md-offset-2"><div class="niu2-footer">
+    <hr/>
+	<p>
+		Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+		theme built with <a href="http://getbootstrap.com">Bootstrap3</a>
+		by <a href="http://atime.me">Ma Wenbao</a>, icons by 
+		<a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+	</p>
+	<p>
+		Copyright
+2015		<a href="..">whypro</a>
+</p>
+    <p class="niu2-icons"></p>
+</div></div><!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+</html>
