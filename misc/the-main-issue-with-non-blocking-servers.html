@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非阻塞服务器需要注意的主要问题 - hystars</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/niu2.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/custom.css" type="text/css" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../theme/js/niu2.js"></script>
+<link rel="stylesheet" href="../theme/css/pygments/github.css" type="text/css" />    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initGoogleCSEAnimation();
+initTocScrollAnimation();        });
+    </script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../theme/js/html5shiv.js"></script>
+        <script src="../theme/js/respond.min.js"></script>
+    <![endif]-->
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" type="text/css" />
+    <![endif]--></head>
+  <body>
+    <div id="body-header"><div class="navbar navbar-inverse navbar-fixed-top">
+<div class="col-md-12">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="..">
+            <i class="icon-home"></i>hystars
+        </a>
+    </div>
+	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+		<ul class="nav navbar-nav"><li><a href="../archives.html">
+                <i class="icon-archive"></i>Archive</a>
+		</li>
+		<li><a href="../tag/index.html">
+                <i class="icon-tag"></i>Tag</a>
+		</li><!-- category dropdown list -->
+		<li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-folder-open"></i>Category<b class="caret"></b>
+           </a>
+           <ul class="dropdown-menu"><li><a href="../misc/index.html"><i class="icon-folder-close"></i>Misc                      (7)</a></li><li><a href="../python/index.html"><i class="icon-folder-close"></i>Python                      (3)</a></li><li><a href="../she-ying/index.html"><i class="icon-folder-close"></i>摄影                      (1)</a></li><li><a href="../shu-mei-pai/index.html"><i class="icon-folder-close"></i>树莓派                      (4)</a></li></ul>
+        </li>
+        <!--  self defined dropdown list --><!--  table of contents of page or article --><li class="dropdown dropdown-toc">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-list-ul"></i>TOC<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#content-heading">非阻塞服务器需要注意的主要问题</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
+            </li></ul>
+        
+        <!-- right nav bar -->
+		<ul class="nav navbar-nav navbar-right">
+		<!-- google custom search --></ul>
+	</nav>
+</div>
+</div></div>
+    
+    <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-article"><div class="niu2-meta">
+    <span class="niu2-meta-category pull-left"><i class="icon-open-folder"></i>Misc</span><span class="niu2-meta-tag pull-left">
+        <i class="icon-tag"></i><a href="../tag/fei-zu-sai.html">非阻塞</a><a href="../tag/tornado.html">Tornado</a><a href="../tag/python.html">Python</a></span><span class="niu2-meta-date pull-right">
+        <i class="icon-calendar"></i>2015-04-29 18:35:00
+    </span>
+</div>
+<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">非阻塞服务器需要注意的主要问题</h1><p>非阻塞服务器有一个严重的问题，一些人甚至在没解决这个问题的背景下就开发自己的应用框架（比如 Python 的 <a class="reference external" href="http://www.tornadoweb.org/en/stable/">Tornado</a>）</p>
+<p>当你使用非阻塞服务器的时候，你会获得出色的性能并且不需要担心可扩展性，然而同时你需要意识到一个问题：你的IO调用、网络系统调用也都是非阻塞的吗？很多人忽略了，他们使用的非阻塞服务器，其实是构建在阻塞库之上的。</p>
+<p>在这篇文章里，我将深入对比多线程的服务器与非阻塞的服务器分别是如何工作的，以及你之所以需要在&quot;使用的服务器&quot;与&quot;使用的库&quot;在阻塞模式上保持一致的原因。</p>
+<div class="section" id="non-blocking-servers-perform-better">
+<h2>Non-blocking servers perform better</h2>
+<p>首先，我不会否认非阻塞服务器比阻塞服务器有更好的性能，尤其在那些有着数以万计的高并发用户的应用场景中。下面通过一些图片对说明这个问题，这些图片是WebFaction所测试的结果：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://blog.webfaction.com/a-little-holiday-present">A little holiday present: 10,000 reqs/sec with Nginx!</a></li>
+</ul>
+<p>当他们从 <a class="reference external" href="http://httpd.apache.org/">Apache</a> 向 <a class="reference external" href="http://nginx.org/">Nginx</a> 迁移时，发现：</p>
+<p>Nginx每秒可以处理更多的请求：</p>
+<img alt="req_pr_sec.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/req_pr_sec.png" />
+<p>Nginx比Apache使用更少的内存：</p>
+<img alt="memory_usage.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/memory_usage.png" />
+<p>真是令人吃惊的结果，那么为何不把非阻塞技术引入到你的 Python/Java/Ruby/PHP 框架里呢？</p>
+</div>
+<div class="section" id="how-blocking-servers-work">
+<h2>How blocking servers work</h2>
+<p>阻塞式服务器通常是基于多线程的，一个线程处理一个请求，它的工作方式可以现象化地表示为：</p>
+<img alt="threaded_server.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/threaded_server.png" />
+<p>关于阻塞式服务器，有如下事实：</p>
+<ul class="simple">
+<li>处理高并发连接请求代价昂贵，服务器需要量产线程——线程并不便宜。</li>
+<li>库函数需要线程安全，这是多线程环境必需的。</li>
+</ul>
+</div>
+<div class="section" id="how-non-blocking-servers-work">
+<h2>How non-blocking servers work</h2>
+<p>非阻塞服务器不需要多线程，它通过一个IO循环及(异步)事件来处理请求，它的工作方式如下：</p>
+<img alt="non_blocking_server.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/non_blocking_server.png" />
+<p>关于非阻塞式服务器，有如下事实：</p>
+<ul class="simple">
+<li>处理高并发连接请求不是困难，这也是它被用于comet技术的重要原因</li>
+<li>在IO循环中的所有操作都必须是非阻塞，否则会因为你一个操作而阻断了整个循环</li>
+<li>不需要线程安全</li>
+</ul>
+</div>
+<div class="section" id="where-tornado-and-others-go-wrong">
+<h2>Where Tornado (and others) go wrong</h2>
+<p>我以Tornado为例，但是其它的非阻塞式应用存在相同的问题。</p>
+<p>Tornado使用了非阻塞式的服务器，但他们同时使用的库是阻塞式的，于是：</p>
+<ul class="simple">
+<li>Tornado关于Mysql连接的库是阻塞的，这意味如果你的查询需要1s，那么你的loop循环就需要停下来1s等待查询的完成</li>
+<li>不要使用昂贵的系统调用，它会卡住整个循环</li>
+<li>同样，不要在循环中渲染模板，原因同上</li>
+</ul>
+<p>就像我之前提过的，阻塞整个loop是致命的，因为此时你什么也做不了！</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>总之，非阻塞技术精巧且性能卓越，但要正确运用此技术，你必须使用同样是阻塞式的IO和Network调用，否则你将后患无穷！还有，请注意Python, Ruby, Java or PHP等这些语言缺省都是阻塞式的，所以当你同时使用非阻塞的服务器和这些语言其中之一的话，请务必当心！</p>
+<div class="line-block">
+<div class="line"><em>原文：</em><a class="reference external" href="http://amix.dk/blog/post/19581#The-main-issue-with-non-blocking-servers">http://amix.dk/blog/post/19581#The-main-issue-with-non-blocking-servers</a></div>
+<div class="line"><em>译文：</em><a class="reference external" href="http://blog.csdn.net/chong232/article/details/6153161">http://blog.csdn.net/chong232/article/details/6153161</a></div>
+</div>
+</div>
+
+    </div><div id="content-comments"><div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'hystars'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div>
+
+    <div id="body-footer" class="col-md-8 col-md-offset-2"><div class="niu2-footer">
+    <hr/>
+	<p>
+		Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+		theme built with <a href="http://getbootstrap.com">Bootstrap3</a>
+		by <a href="http://atime.me">Ma Wenbao</a>, icons by 
+		<a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+	</p>
+	<p>
+		Copyright
+2015		<a href="..">whypro</a>
+</p>
+    <p class="niu2-icons"></p>
+</div></div><!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+</html>
