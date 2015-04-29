@@ -2,7 +2,7 @@
 #################################################
 
 :date: 2015-04-20 21:54
-:modified: 2015-04-20 21:54
+:modified: 2015-04-29 18:50
 :tags: Python, Ruby, 垃圾回收
 :slug: generational-gc-in-python-and-ruby
 
@@ -189,5 +189,5 @@ Ruby2.1 的白障实现相当复杂，主要是因为已有的C扩展并未包�
 
 这种相似性应该不会让人感到意外。两种编程语言都使用了几十年前的计算机科学研究成果来进行设计，这些成果早在语言成型之前就已经被做出来了。我比较惊异的是当你掀开不同编程语言的表面而深入底层，你总能够发现一些相似的基础理念和算法。现代编程语言应该感激那些六七十年代由麦卡锡等计算机先贤所作出的计算机科学开创性研究。
 
-| *原文地址：*\ http://blog.jobbole.com/73300/
-| *英文出处：*\ `Pat Shaughnessy <http://patshaughnessy.net/2013/10/30/generational-gc-in-python-and-ruby>`_
+| *原文：*\ `Pat Shaughnessy <http://patshaughnessy.net/2013/10/30/generational-gc-in-python-and-ruby>`_
+| *译文：*\ http://blog.jobbole.com/73300/

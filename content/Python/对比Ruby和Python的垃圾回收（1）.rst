@@ -2,7 +2,7 @@
 ###############################
 
 :date: 2015-04-20 21:27
-:modified: 2015-04-20 21:27
+:modified: 2015-04-29 18:50
 :tags: Python, Ruby, 垃圾回收
 :slug: visualizing-garbage-collection-in-ruby-and-python
 
@@ -117,7 +117,7 @@ Python不同于Ruby，当你创建对象的时候，Python会立即向操作系�
     :align: center
 
     *Ruby将没有用的对象扔的到处都是，直到下一个垃圾回收过程*
- 
+
 Ruby开发者生活在一个脏乱的房间
 ==============================
 
@@ -140,7 +140,7 @@ Ruby开发者生活在一个脏乱的房间
     :align: center
 
     *当你的程序不在使用任何对象的时候，Python会立刻进行清理。*
- 
+
 Python开发者生活在一所整洁的房子
 ================================
 
@@ -242,5 +242,5 @@ Ruby将”free bitmap”保存在一个独立的内存区域，以便可以更�
 下周我将发布演讲的其他部分。我将讨论Python怎样处理循环引用数据结构，以及在即将到来的Ruby2.1中，垃圾回收器是怎样工作的。
 「`传送门 <{filename}/Python/对比Ruby和Python的垃圾回收（2）：代式垃圾回收机制.rst>`_」
 
-| *原文地址：*\ http://python.jobbole.com/60900/
-| *英文出处：*\ `Pat Shaughnessy <http://patshaughnessy.net/2013/10/24/visualizing-garbage-collection-in-ruby-and-python>`_
+| *原文：*\ `Pat Shaughnessy <http://patshaughnessy.net/2013/10/24/visualizing-garbage-collection-in-ruby-and-python>`_
+| *译文：*\ http://python.jobbole.com/60900/
