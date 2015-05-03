@@ -61,15 +61,6 @@ def my_slugify(value, sep):
 MY_SLUGIFY_FUNC = my_slugify
 MY_TOC_LIST_TYPE = 'ol'
 
-from markdown.extensions import headerid, codehilite, footnotes
-MD_EXTENSIONS = ([
-    'extra',
-    'footnotes',
-    'tables',
-    codehilite.CodeHiliteExtension(configs=[('linenums', False), ('guess_lang', False)]),
-    headerid.HeaderIdExtension(configs=[('slugify', my_slugify)]),
-])
-
 # niux2_lazyload_helper settings
 NIUX2_LAZY_LOAD = False
 NIUX2_LAZY_LOAD_TEXT = 'orz 努力加载中'
