@@ -1,85 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>使用 dd 命令测试 USB 和 SSD 硬盘的读写速度 - hystars</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/niu2.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/custom.css" type="text/css" />
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../theme/js/niu2.js"></script>
-<link rel="stylesheet" href="../theme/css/pygments/github.css" type="text/css" />    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            initGoogleCSEAnimation();
-initTocScrollAnimation();        });
-    </script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="../theme/js/html5shiv.js"></script>
-        <script src="../theme/js/respond.min.js"></script>
-    <![endif]-->
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" type="text/css" />
-    <![endif]--></head>
-  <body>
-    <div id="body-header"><div class="navbar navbar-inverse navbar-fixed-top">
-<div class="col-md-12">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="..">
-            <i class="icon-home"></i>hystars
-        </a>
-    </div>
-	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-		<ul class="nav navbar-nav"><li><a href="../archives.html">
-                <i class="icon-archive"></i>Archive</a>
-		</li>
-		<li><a href="../tag/index.html">
-                <i class="icon-tag"></i>Tag</a>
-		</li><!-- category dropdown list -->
-		<li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-folder-open"></i>Category<b class="caret"></b>
-           </a>
-           <ul class="dropdown-menu"><li><a href="../misc/index.html"><i class="icon-folder-close"></i>Misc                      (7)</a></li><li><a href="../python/index.html"><i class="icon-folder-close"></i>Python                      (3)</a></li><li><a href="../she-ying/index.html"><i class="icon-folder-close"></i>摄影                      (1)</a></li><li><a href="../shu-mei-pai/index.html"><i class="icon-folder-close"></i>树莓派                      (4)</a></li></ul>
-        </li>
-        <!--  self defined dropdown list --><!--  table of contents of page or article --><li class="dropdown dropdown-toc">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-list-ul"></i>TOC<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#content-heading">使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
-            </li></ul>
-        
-        <!-- right nav bar -->
-		<ul class="nav navbar-nav navbar-right">
-		<!-- google custom search --></ul>
-	</nav>
-</div>
-</div></div>
-    
-    <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-article"><div class="niu2-meta">
-    <span class="niu2-meta-category pull-left"><i class="icon-open-folder"></i>Misc</span><span class="niu2-meta-tag pull-left">
-        <i class="icon-tag"></i><a href="../tag/linux.html">Linux</a></span><span class="niu2-meta-date pull-right">
-        <i class="icon-calendar"></i>2015-04-13 21:18:00
-    </span>
-</div>
-<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</h1><div class="section" id="id1">
-<h2>磁盘驱动器速度</h2>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>使用 dd 命令测试 USB 和 SSD 硬盘的读写速度 - hystars</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../misc/linux-test-drive-speed.html" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="..">
+                            <i class="icon-home"></i>hystars
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/about.html" title="about me">
+                                <i class="icon-anchor"></i>关于</a>
+                            </li>
+                            <li><a href="/tag/" title="tags">
+                                <i class="icon-tag"></i>标签</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>存档</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>分类<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="../misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (7)</a></li>
+                               <li><a href="../python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (3)</a></li>
+                               <li><a href="../she-ying/index.html">
+                                      <i class="icon-briefcase"></i>摄影
+                                      (1)</a></li>
+                               <li><a href="../shu-mei-pai/index.html">
+                                      <i class="icon-leaf"></i>树莓派
+                                      (4)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <div class="section" id="id1">
+<h2 id="974cdb">磁盘驱动器速度</h2>
 <p>磁盘驱动器的速度是以一个单位时间内读写数据量的多少来衡量的。dd 命令是一个简单的命令行工具，它可用对磁盘进行任意数据块的读取和写入，同时可以度量读取写入的速度。</p>
 <p>在这篇文章中，我们将会使用 dd 命令来测试 USB 和 SSD 磁盘的读取和写入速度。</p>
 <p>数据传输速度不但取决于驱动盘本身，而且还与连接的接口有关。比如， USB 2.0 端口的最大传输速度是 35 兆字节/秒，所以如果您把一个支持高速传输的 USB 3.0 驱动盘插入 USB 2.0 端口的话，它实际的传输速度将是 2.0 端口的下限。</p>
 <p>这对于 SSD 也是一样的。 SSD 连接的 SATA 端口有不同的类型。平均是 375 兆字节/秒的 SATA 2.0 端口理论上最大传输速度是 3 Gbit/秒，而 SATA 3.0 是这个速度的两倍。</p>
 <div class="section" id="id2">
-<h3>测试方法</h3>
+<h3 id="7180e0">测试方法</h3>
 <p>挂载上驱动盘，从终端进入此盘目录下。然后使用 dd 命令，首先写入固定大小块的一个文件，接着读取这个文件。</p>
 <p>dd 命令通用语法格式如下：</p>
 <div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>path/to/input_file <span class="nv">of</span><span class="o">=</span>/path/to/output_file <span class="nv">bs</span><span class="o">=</span>block_size <span class="nv">count</span><span class="o">=</span>number_of_blocks
@@ -87,11 +93,11 @@ initTocScrollAnimation();        });
 <p>当写入到驱动盘的时候，我们简单的从无穷无用字节的源 /dev/zero 读取，当从驱动盘读取的时候，我们读取的是刚才的文件，并把输出结果发送到无用的 /dev/null。在整个操作过程中， dd 命令会跟踪数据传输的速度并且报告出结果。</p>
 </div>
 <div class="section" id="id3">
-<h3>固态硬盘</h3>
+<h3 id="f16597">固态硬盘</h3>
 <p>我们使用的是一块“三星 Evo 120G” 的固态硬盘。它性价比很高，很适合刚开始用固态硬盘的用户，也是我的第一块固态硬盘，并且也是市场上效果最好的固态硬盘之一。</p>
 <p>这次实验中，我们把硬盘接在 SATA 2.0 端口上。</p>
 <div class="section" id="id4">
-<h4>写入速度</h4>
+<h4 id="81b996">写入速度</h4>
 <p>首先让我们写入固态硬盘</p>
 <div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>1024
 </pre></div>
@@ -103,10 +109,10 @@ initTocScrollAnimation();        });
 <p>1M 的大小实际上是相当大的。你可以尝试用更小的尺寸如 64K 甚至是 4K 的。</p>
 </div>
 <div class="section" id="id5">
-<h4>读取速度</h4>
+<h4 id="fa33cf">读取速度</h4>
 <p>现在读回这个文件。但是，得首先清除内存的缓存，以确保这个文件确实是从驱动盘读取的。</p>
 <p>运行下面的命令来清除内存缓存</p>
-<div class="highlight"><pre>sudo sh -c <span class="s2">&quot;sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches&quot;</span>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
 </pre></div>
 <p>现在读取此文件</p>
 <div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>4k
@@ -121,11 +127,11 @@ initTocScrollAnimation();        });
 </div>
 </div>
 <div class="section" id="usb">
-<h3>USB</h3>
+<h3 id="7aca5e">USB</h3>
 <p>此次实验我们会测量普通的 USB/随身笔的读写速度。驱动盘都是接入标准的 USB 2.0 端口的。首先用的是一个 4GB 大小的 sony USB 驱动盘，随后用的是一个 16GB 大小的 strontium 驱动盘。</p>
 <p>首先把驱动盘插入端口，并挂载上，使其可读。然后从命令行下面进入挂载的文件目录下。</p>
 <div class="section" id="sony-4gb">
-<h4>Sony 4GB - 写入</h4>
+<h4 id="fa308b">Sony 4GB - 写入</h4>
 <p>这个实验中，用 dd 命令向驱动盘写入一个有 10000 块，每块 8K 字节的文件。</p>
 <div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>8k <span class="nv">count</span><span class="o">=</span>10000
 </pre></div>
@@ -137,9 +143,9 @@ initTocScrollAnimation();        });
 <p>因此，写入速度约为7.5兆字节/秒。这是一个很低的数字。</p>
 </div>
 <div class="section" id="id6">
-<h4>Sony 4GB - 读取</h4>
+<h4 id="d34866">Sony 4GB - 读取</h4>
 <p>把相同的文件读取回来，测试速度。首先运行如下命令清除内存缓存。</p>
-<div class="highlight"><pre>sudo sh -c <span class="s2">&quot;sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches&quot;</span>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
 </pre></div>
 <p>现在就可以使用 dd 命令来读取文件了。</p>
 <div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>8k
@@ -156,7 +162,7 @@ USB2.0 理论上最大信号传输速率为480兆比特/秒，最小为60兆字�
 <p>下面让我们用 16GB 的 Strontium 驱动盘来做相同的实验。虽然 Strontium 的 USB 驱动盘很稳定，但它也是一款很便宜的品牌。</p>
 </div>
 <div class="section" id="strontium-16gb">
-<h4>Strontium 16gb 盘写入速度</h4>
+<h4 id="ace9aa">Strontium 16gb 盘写入速度</h4>
 <div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>./largefile <span class="nv">bs</span><span class="o">=</span>64k <span class="nv">count</span><span class="o">=</span>1000
 </pre></div>
 <pre class="literal-block">
@@ -166,8 +172,8 @@ USB2.0 理论上最大信号传输速率为480兆比特/秒，最小为60兆字�
 </pre>
 </div>
 <div class="section" id="id7">
-<h4>Strontium 16gb 盘读取速度</h4>
-<div class="highlight"><pre>sudo sh -c <span class="s2">&quot;sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches&quot;</span>
+<h4 id="11e22e">Strontium 16gb 盘读取速度</h4>
+<div class="highlight"><pre>sudo sh -c <span class="s2">"sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches"</span>
 dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>8k
 </pre></div>
 <pre class="literal-block">
@@ -180,7 +186,7 @@ dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv"
 </div>
 </div>
 <div class="section" id="id8">
-<h2>参考资料</h2>
+<h2 id="35808e">参考资料</h2>
 <div class="line-block">
 <div class="line"><a class="reference external" href="http://en.wikipedia.org/wiki/USB">http://en.wikipedia.org/wiki/USB</a></div>
 <div class="line"><a class="reference external" href="https://wiki.archlinux.org/index.php/SSD_Benchmarking">https://wiki.archlinux.org/index.php/SSD_Benchmarking</a></div>
@@ -191,33 +197,70 @@ dd <span class="k">if</span><span class="o">=</span>./largefile <span class="nv"
 </div>
 </div>
 
-    </div><div id="content-comments"><div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'hystars'; // required: replace example with your forum shortname
+                </div>
+                <div id="content-comments">
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div>
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
+                    <div class="niu2-sidebar-value">2015-04-13 21:18</div>
+                    <div class="niu2-sidebar-label"><i class="icon-coffee"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="../misc/index.html">其他</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/linux.html">Linux</a><sup>1</sup></div>
+                </div>
 
-    <div id="body-footer" class="col-md-8 col-md-offset-2"><div class="niu2-footer">
-    <hr/>
-	<p>
-		Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
-		theme built with <a href="http://getbootstrap.com">Bootstrap3</a>
-		by <a href="http://atime.me">Ma Wenbao</a>, icons by 
-		<a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
-	</p>
-	<p>
-		Copyright
-2015		<a href="..">whypro</a>
-</p>
-    <p class="niu2-icons"></p>
-</div></div><!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
+                    </div>
+                    <ol id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</a></li>
+                        <li><a href='#974cdb'>磁盘驱动器速度</a><ol><li><a href='#7180e0'>测试方法</a></li><li><a href='#f16597'>固态硬盘</a><ol><li><a href='#81b996'>写入速度</a></li><li><a href='#fa33cf'>读取速度</a></li></ol></li><li><a href='#7aca5e'>USB</a><ol><li><a href='#fa308b'>Sony 4GB - 写入</a></li><li><a href='#d34866'>Sony 4GB - 读取</a></li><li><a href='#ace9aa'>Strontium 16gb 盘写入速度</a></li><li><a href='#11e22e'>Strontium 16gb 盘读取速度</a></li></ol></li></ol></li><li><a href='#35808e'>参考资料</a></li>
+                        <li><a href="#content-comments">评论</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="http://getbootstrap.com">Bootstrap3</a>
+                    by <a href="http://blog.atime.me">Ma Wenbao</a>, icons by 
+                    <a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    ©
+                            2015
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="/about.html" title="about me">关于</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/whypro" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div id="niu2-pygments" data-theme="github"></div>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
 </html>

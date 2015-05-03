@@ -1,97 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>使用 Python 进行并发编程 - hystars</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/niu2.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/custom.css" type="text/css" />
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../theme/js/niu2.js"></script>
-<link rel="stylesheet" href="../theme/css/pygments/github.css" type="text/css" />    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            initGoogleCSEAnimation();
-initTocScrollAnimation();        });
-    </script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="../theme/js/html5shiv.js"></script>
-        <script src="../theme/js/respond.min.js"></script>
-    <![endif]-->
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" type="text/css" />
-    <![endif]--></head>
-  <body>
-    <div id="body-header"><div class="navbar navbar-inverse navbar-fixed-top">
-<div class="col-md-12">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="..">
-            <i class="icon-home"></i>hystars
-        </a>
-    </div>
-	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-		<ul class="nav navbar-nav"><li><a href="../archives.html">
-                <i class="icon-archive"></i>Archive</a>
-		</li>
-		<li><a href="../tag/index.html">
-                <i class="icon-tag"></i>Tag</a>
-		</li><!-- category dropdown list -->
-		<li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-folder-open"></i>Category<b class="caret"></b>
-           </a>
-           <ul class="dropdown-menu"><li><a href="../misc/index.html"><i class="icon-folder-close"></i>Misc                      (7)</a></li><li><a href="../python/index.html"><i class="icon-folder-close"></i>Python                      (3)</a></li><li><a href="../she-ying/index.html"><i class="icon-folder-close"></i>摄影                      (1)</a></li><li><a href="../shu-mei-pai/index.html"><i class="icon-folder-close"></i>树莓派                      (4)</a></li></ul>
-        </li>
-        <!--  self defined dropdown list --><!--  table of contents of page or article --><li class="dropdown dropdown-toc">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-list-ul"></i>TOC<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#content-heading">使用 Python 进行并发编程</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
-            </li></ul>
-        
-        <!-- right nav bar -->
-		<ul class="nav navbar-nav navbar-right">
-		<!-- google custom search --></ul>
-	</nav>
-</div>
-</div></div>
-    
-    <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-article"><div class="niu2-meta">
-    <span class="niu2-meta-category pull-left"><i class="icon-open-folder"></i>Python</span><span class="niu2-meta-tag pull-left">
-        <i class="icon-tag"></i><a href="../tag/python.html">Python</a><a href="../tag/bing-fa.html">并发</a></span><span class="niu2-meta-date pull-right">
-        <i class="icon-calendar"></i>2015-04-08 23:45:00
-    </span>
-</div>
-<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">使用 Python 进行并发编程</h1><p>让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。</p>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>使用 Python 进行并发编程 - hystars</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="..">
+                            <i class="icon-home"></i>hystars
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/about.html" title="about me">
+                                <i class="icon-anchor"></i>关于</a>
+                            </li>
+                            <li><a href="/tag/" title="tags">
+                                <i class="icon-tag"></i>标签</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>存档</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>分类<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="../misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (7)</a></li>
+                               <li><a href="../python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (3)</a></li>
+                               <li><a href="../she-ying/index.html">
+                                      <i class="icon-briefcase"></i>摄影
+                                      (1)</a></li>
+                               <li><a href="../shu-mei-pai/index.html">
+                                      <i class="icon-leaf"></i>树莓派
+                                      (4)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">使用 Python 进行并发编程</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。</p>
 <div class="section" id="id1">
-<h2>并发方式</h2>
+<h2 id="397717">并发方式</h2>
 <div class="section" id="id2">
-<h3>线程（<a class="reference external" href="http://search.aol.com/aol/search?enabled_terms=&amp;s_it=comsearch&amp;q=thread">Thread</a>）</h3>
+<h3 id="5fda96">线程（<a class="reference external" href="http://search.aol.com/aol/search?enabled_terms=&amp;s_it=comsearch&amp;q=thread">Thread</a>）</h3>
 <p>多线程几乎是每一个程序猿在使用每一种语言时都会首先想到用于解决并发的工具（JS程序员请回避），使用多线程可以有效的利用CPU资源（Python例外）。然而多线程所带来的程序的复杂度也不可避免，尤其是对竞争资源的同步问题。</p>
 <p>然而在python中由于使用了全局解释锁（GIL）的原因，代码并不能同时在多核上并发的运行，也就是说，Python的多线程不能并发，很多人会发现使用多线程来改进自己的Python代码后，程序的运行效率却下降了，这是多么蛋疼的一件事呀！如果想了解更多细节，推荐阅读<a class="reference external" href="http://www.jeffknupp.com/blog/2012/03/31/pythons-hardest-problem/">这篇文章</a>。实际上使用多线程的编程模型是很困难的，程序员很容易犯错，这并不是程序员的错误，因为并行思维是反人类的，我们大多数人的思维是串行（精神分裂不讨论），而且冯诺依曼设计的计算机架构也是以顺序执行为基础的。所以如果你总是不能把你的多线程程序搞定，恭喜你，你是个思维正常的程序猿：）</p>
 <p>Python提供两组线程的接口，一组是thread模块，提供基础的，低等级（Low Level）接口，使用Function作为线程的运行体。还有一组是threading模块，提供更容易使用的基于对象的接口（类似于Java），可以继承Thread对象来实现线程，还提供了其它一些线程相关的对象，例如Timer，Lock</p>
 <p>使用thread模块的例子</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">thread</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+    <span class="sd">"""thread worker function"""</span>
+    <span class="k">print</span> <span class="s">'Worker'</span>
 <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
 </pre></div>
 <p>使用threading模块的例子</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+    <span class="sd">"""thread worker function"""</span>
+    <span class="k">print</span> <span class="s">'Worker'</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
@@ -101,22 +107,22 @@ initTocScrollAnimation();        });
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-        <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+        <span class="sd">"""thread worker function"""</span>
+        <span class="k">print</span> <span class="s">'Worker'</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">worker</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="section" id="process">
-<h3>进程（Process）</h3>
+<h3 id="a301c7">进程（Process）</h3>
 <p>由于前文提到的全局解释锁的问题，Python下比较好的并行方式是使用多进程，这样可以非常有效的使用CPU资源，并实现真正意义上的并发。当然，进程的开销比线程要大，也就是说如果你要创建数量惊人的并发进程的话，需要考虑一下你的机器是不是有一颗强大的心。</p>
 <p>Python的mutliprocess模块和threading具有类似的接口。</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
 
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;thread worker function&quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&#39;Worker&#39;</span>
+    <span class="sd">"""thread worker function"""</span>
+    <span class="k">print</span> <span class="s">'Worker'</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
@@ -127,7 +133,7 @@ initTocScrollAnimation();        });
 <p>另外，Python还提供了进程池Pool对象，可以方便的管理和控制线程。</p>
 </div>
 <div class="section" id="distributed-node">
-<h3>远程分布式主机 （Distributed Node）</h3>
+<h3 id="07abb9">远程分布式主机 （Distributed Node）</h3>
 <p>随着大数据时代的到临，摩尔定理在单机上似乎已经失去了效果，数据的计算和处理需要分布式的计算机网络来运行，程序并行的运行在多个主机节点上，已经是现在的软件架构所必需考虑的问题。</p>
 <p>远程主机间的进程间通信有几种常见的方式</p>
 <ul>
@@ -209,7 +215,7 @@ initTocScrollAnimation();        });
 <p>另外，许多的分布式系统多提供了对Python接口的支持，例如 <a class="reference external" href="http://spark.apache.org/docs/1.2.0/programming-guide.html">Spark</a></p>
 </div>
 <div class="section" id="pseudo-thread">
-<h3>伪线程 （Pseudo－Thread）</h3>
+<h3 id="007a85">伪线程 （Pseudo－Thread）</h3>
 <p>还有一种并发手段并不常见，我们可以称之为伪线程，就是看上去像是线程，使用的接口类似线程接口，但是实际使用非线程的方式，对应的线程开销也不存的。</p>
 <ul>
 <li><dl class="first docutils">
@@ -249,7 +255,7 @@ initTocScrollAnimation();        });
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">eventlet</span>
 <span class="kn">from</span> <span class="nn">eventlet.green</span> <span class="kn">import</span> <span class="n">urllib2</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://www.google.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.example.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.python.org&#39;</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://www.google.com'</span><span class="p">,</span> <span class="s">'http://www.example.com'</span><span class="p">,</span> <span class="s">'http://www.python.org'</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -257,7 +263,7 @@ initTocScrollAnimation();        });
 <span class="n">pool</span> <span class="o">=</span> <span class="n">eventlet</span><span class="o">.</span><span class="n">GreenPool</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="n">fetch</span><span class="p">,</span> <span class="n">urls</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;got body&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"got body"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
 </pre></div>
 <p>执行结果如下</p>
 <pre class="literal-block">
@@ -274,7 +280,7 @@ initTocScrollAnimation();        });
 <dd><p class="first">gevent和eventlet类似，关于它们的差异大家可以参考<a class="reference external" href="http://blog.gevent.org/2010/02/27/why-gevent/">这篇文章</a></p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">gevent</span>
 <span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">socket</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;www.google.com&#39;</span><span class="p">,</span> <span class="s">&#39;www.example.com&#39;</span><span class="p">,</span> <span class="s">&#39;www.python.org&#39;</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'www.google.com'</span><span class="p">,</span> <span class="s">'www.example.com'</span><span class="p">,</span> <span class="s">'www.python.org'</span><span class="p">]</span>
 <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
 <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -297,12 +303,12 @@ initTocScrollAnimation();        });
 </div>
 </div>
 <div class="section" id="id4">
-<h2>实战运用</h2>
+<h2 id="09f522">实战运用</h2>
 <p>通常需要用到并发的场合有两种，一种是计算密集型，也就是说你的程序需要大量的CPU资源;另一种是IO密集型，程序可能有大量的读写操作，包括读写文件，收发网络请求等等。</p>
 <div class="section" id="id5">
-<h3>计算密集型</h3>
+<h3 id="f94eef">计算密集型</h3>
 <p>对应计算密集型的应用，我们选用著名的<a class="reference external" href="http://en.wikipedia.org/wiki/Monte_Carlo_method">蒙特卡洛算法</a>来计算PI值。基本原理如下</p>
-<img alt="Monte-Carlo-method.png" class="align-center" src="../images/Python/concurrency/Monte-Carlo-method.png" />
+<img alt="Monte-Carlo-method.png" class="align-center" src="../images/Python/concurrency/Monte-Carlo-method.png" width="220px"/>
 <p>蒙特卡洛算法利用统计学原理来模拟计算圆周率，在一个正方形中，一个随机的点落在1/4圆的区域（红色点）的概率与其面积成正比。也就该概率 p ＝ Pi ＊ R＊R ／4  ： R＊ R ， 其中R是正方形的边长，圆的半径。也就是说该概率是圆周率的1/4, 利用这个结论，只要我们模拟出点落在四分之一圆上的概率就可以知道圆周率了，为了得到这个概率，我们可以通过大量的实验，也就是生成大量的点，看看这个点在哪个区域，然后统计出结果。</p>
 <p>基本算法如下：</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
@@ -332,7 +338,7 @@ initTocScrollAnimation();        });
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -359,12 +365,12 @@ initTocScrollAnimation();        });
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;pi = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -372,7 +378,7 @@ initTocScrollAnimation();        });
 <li><dl class="first docutils">
 <dt>多进程 multiprocess</dt>
 <dd><p class="first">理论上对于计算密集型的任务，使用多进程并发比较合适，在以下的例子中，进程池的规模设置为5，修改进程池的大小可以看到对结果的影响，当进程池设置为1时，和多线程的结果所需的时间类似，因为这时候并不存在并发；当设置为2时，响应时间有了明显的改进，是之前没有并发的一半；然而继续扩大进程池对性能影响并不大，甚至有所下降，也许我的Apple Air的CPU只有两个核？</p>
-<img alt="apple-air-info.png" class="align-center" src="../images/Python/concurrency/apple-air-info.png" />
+<img alt="apple-air-info.png" class="align-center" src="../images/Python/concurrency/apple-air-info.png" width="194px"/>
 <p>当心，如果你设置一个非常大的进程池，你会遇到 Resource temporarily unavailable的错误，系统并不能支持创建太多的进程，毕竟资源是有限的。</p>
 <div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
 
@@ -389,11 +395,11 @@ initTocScrollAnimation();        });
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;pi = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -415,7 +421,7 @@ initTocScrollAnimation();        });
     <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -441,7 +447,7 @@ initTocScrollAnimation();        });
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -465,11 +471,11 @@ initTocScrollAnimation();        });
     <span class="n">expr</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;pi = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -482,8 +488,8 @@ initTocScrollAnimation();        });
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">&#39;tasks&#39;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&#39;amqp&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s">&#39;amqp://guest@localhost//&#39;</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s">&#39;db+sqlite:///results.sqlite&#39;</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">'tasks'</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">'amqp'</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s">'amqp://guest@localhost//'</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s">'db+sqlite:///results.sqlite'</span>
 
 <span class="nd">@app.task</span>
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">tries</span><span class="p">):</span>
@@ -501,7 +507,7 @@ initTocScrollAnimation();        });
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
@@ -528,7 +534,7 @@ initTocScrollAnimation();        });
     <span class="n">coros</span> <span class="o">=</span> <span class="p">[</span> <span class="n">asyncoro</span><span class="o">.</span><span class="n">Coro</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">]</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">coros</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -539,14 +545,14 @@ initTocScrollAnimation();        });
 </ul>
 </div>
 <div class="section" id="io">
-<h3>IO密集型</h3>
+<h3 id="d38fe0">IO密集型</h3>
 <p>IO密集型的任务是另一种常见的用例，例如网络WEB服务器就是一个例子，每秒钟能处理多少个请求时WEB服务器的重要指标。</p>
 <p>我们就以网页读取作为最简单的例子</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://www.google.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.example.com&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.python.org&#39;</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://www.google.com'</span><span class="p">,</span> <span class="s">'http://www.example.com'</span><span class="p">,</span> <span class="s">'http://www.python.org'</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -556,7 +562,7 @@ initTocScrollAnimation();        });
     <span class="nb">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">urls</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
 
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">&quot;time spend &quot;</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
 
 <span class="n">testIO</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -565,38 +571,76 @@ initTocScrollAnimation();        });
 </div>
 </div>
 <div class="section" id="id7">
-<h2>总结</h2>
+<h2 id="25f9c7">总结</h2>
 <p>Python提供了不同的并发方式，对应于不同的场景，我们需要选择不同的方式进行并发。选择合适的方式，不但要对该方法的原理有所了解，还应该做一些测试和试验，数据才是你做选择的最好参考。</p>
 <p><em>原文地址：</em><a class="reference external" href="http://my.oschina.net/taogang/blog/389293">http://my.oschina.net/taogang/blog/389293</a></p>
 </div>
 
-    </div><div id="content-comments"><div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'hystars'; // required: replace example with your forum shortname
+                </div>
+                <div id="content-comments">
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div>
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
+                    <div class="niu2-sidebar-value">2015-04-08 23:45</div>
+                    <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="../python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/python.html">Python</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/bing-fa.html">并发</a><sup>1</sup></div>
+                </div>
 
-    <div id="body-footer" class="col-md-8 col-md-offset-2"><div class="niu2-footer">
-    <hr/>
-	<p>
-		Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
-		theme built with <a href="http://getbootstrap.com">Bootstrap3</a>
-		by <a href="http://atime.me">Ma Wenbao</a>, icons by 
-		<a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
-	</p>
-	<p>
-		Copyright
-2015		<a href="..">whypro</a>
-</p>
-    <p class="niu2-icons"></p>
-</div></div><!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
+                    </div>
+                    <ol id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">使用 Python 进行并发编程</a></li>
+                        <li><a href='#397717'>并发方式</a><ol><li><a href='#5fda96'>线程（Thread）</a></li><li><a href='#a301c7'>进程（Process）</a></li><li><a href='#07abb9'>远程分布式主机 （Distributed Node）</a></li><li><a href='#007a85'>伪线程 （Pseudo－Thread）</a></li></ol></li><li><a href='#09f522'>实战运用</a><ol><li><a href='#f94eef'>计算密集型</a></li><li><a href='#d38fe0'>IO密集型</a></li></ol></li><li><a href='#25f9c7'>总结</a></li>
+                        <li><a href="#content-comments">评论</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="http://getbootstrap.com">Bootstrap3</a>
+                    by <a href="http://blog.atime.me">Ma Wenbao</a>, icons by 
+                    <a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    ©
+                            2015
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="/about.html" title="about me">关于</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/whypro" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div id="niu2-pygments" data-theme="github"></div>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
 </html>

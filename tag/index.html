@@ -1,96 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags - hystars</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/niu2.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/custom.css" type="text/css" />
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../theme/js/niu2.js"></script>
-<script type="text/javascript" src="../theme/js/tagcloud.min.js"></script>
-<script type="text/javascript">
-var tc = TagCloud.create();tc.add('树莓派', 4, '../tag/shu-mei-pai.html', null);tc.add('电容', 1, '../tag/dian-rong.html', null);tc.add('Tornado', 1, '../tag/tornado.html', null);tc.add('垃圾回收', 2, '../tag/la-ji-hui-shou.html', null);tc.add('维修', 1, '../tag/wei-xiu.html', null);tc.add('Python', 4, '../tag/python.html', null);tc.add('摄影', 1, '../tag/she-ying.html', null);tc.add('编程语言', 1, '../tag/bian-cheng-yu-yan.html', null);tc.add('手机', 1, '../tag/shou-ji.html', null);tc.add('Arch Linux', 3, '../tag/arch-linux.html', null);tc.add('hostapd', 1, '../tag/hostapd.html', null);tc.add('非阻塞', 1, '../tag/fei-zu-sai.html', null);tc.add('主板', 1, '../tag/zhu-ban.html', null);tc.add('Linux', 1, '../tag/linux.html', null);tc.add('dnsmasq', 1, '../tag/dnsmasq.html', null);tc.add('加班', 1, '../tag/jia-ban.html', null);tc.add('Ruby', 2, '../tag/ruby.html', null);tc.add('并发', 1, '../tag/bing-fa.html', null);tc.loadEffector('CountSize');tc.loadEffector('CountSize');
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>标签 - hystars</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="..">
+                            <i class="icon-home"></i>hystars
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/about.html" title="about me">
+                                <i class="icon-anchor"></i>关于</a>
+                            </li>
+                            <li><a href="/tag/" title="tags">
+                                <i class="icon-tag"></i>标签</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>存档</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>分类<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="../misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (7)</a></li>
+                               <li><a href="../python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (3)</a></li>
+                               <li><a href="../she-ying/index.html">
+                                      <i class="icon-briefcase"></i>摄影
+                                      (1)</a></li>
+                               <li><a href="../shu-mei-pai/index.html">
+                                      <i class="icon-leaf"></i>树莓派
+                                      (4)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
 
-function tag_filter() {
-  tc.searchAndDisplay('niu2-tagcloud', $('#niu2-tagcloud-filter-input').val());
-  return false;
-}
-</script>    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            initGoogleCSEAnimation();
-tc.setup('niu2-tagcloud');        });
-    </script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="../theme/js/html5shiv.js"></script>
-        <script src="../theme/js/respond.min.js"></script>
-    <![endif]-->
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" type="text/css" />
-    <![endif]--></head>
-  <body>
-    <div id="body-header"><div class="navbar navbar-inverse navbar-fixed-top">
-<div class="col-md-12">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="..">
-            <i class="icon-home"></i>hystars
-        </a>
-    </div>
-	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-		<ul class="nav navbar-nav"><li><a href="../archives.html">
-                <i class="icon-archive"></i>Archive</a>
-		</li>
-		<li><a href="../tag/index.html">
-                <i class="icon-tag"></i>Tag</a>
-		</li><!-- category dropdown list -->
-		<li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-folder-open"></i>Category<b class="caret"></b>
-           </a>
-           <ul class="dropdown-menu"><li><a href="../misc/index.html"><i class="icon-folder-close"></i>Misc                      (7)</a></li><li><a href="../python/index.html"><i class="icon-folder-close"></i>Python                      (3)</a></li><li><a href="../she-ying/index.html"><i class="icon-folder-close"></i>摄影                      (1)</a></li><li><a href="../shu-mei-pai/index.html"><i class="icon-folder-close"></i>树莓派                      (4)</a></li></ul>
-        </li>
-        <!--  self defined dropdown list --><!--  table of contents of page or article --></ul>
-        
-        <!-- right nav bar -->
-		<ul class="nav navbar-nav navbar-right">
-		<!-- google custom search --></ul>
-	</nav>
-</div>
-</div></div>
-    
-    <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-content">
-	<h1><i class="icon-tags"></i>Tag</h1>
-    <input id="niu2-tagcloud-filter-input" type="text" placeholder="filter tags"
-           class="form-control pull-left" onkeyup="tag_filter()">
-    <button class="btn btn-success niu2-button" 
-            onclick="$('#niu2-tagcloud-filter-input').val('');tag_filter()">clear</button>
-	<div id="niu2-tagcloud">
-	</div>
-</div></div>
+        <div id="body-content">
+        <div class="col-md-8 col-md-offset-2">
+            <h1><i class="icon-tags"></i>标签</h1>
+            <input id="niu2-tagcloud-filter-input" type="text" placeholder="过滤标签，不妨试试[0-9]{3}"
+                   class="form-control pull-left" onkeyup="tag_filter()" autofocus>
+            <button class="btn btn-success niu2-button" 
+                    onclick="$('#niu2-tagcloud-filter-input').val('');tag_filter()">清空</button>
+            <div id="niu2-tagcloud">
+            </div>
+        </div>
+        </div>
 
-    <div id="body-footer" class="col-md-8 col-md-offset-2"><div class="niu2-footer">
-    <hr/>
-	<p>
-		Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
-		theme built with <a href="http://getbootstrap.com">Bootstrap3</a>
-		by <a href="http://atime.me">Ma Wenbao</a>, icons by 
-		<a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
-	</p>
-	<p>
-		Copyright
-2015		<a href="..">whypro</a>
-</p>
-    <p class="niu2-icons"></p>
-</div></div><!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-8 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="http://getbootstrap.com">Bootstrap3</a>
+                    by <a href="http://blog.atime.me">Ma Wenbao</a>, icons by 
+                    <a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    ©
+                            2015
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="/about.html" title="about me">关于</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/whypro" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div id="niu2-pygments" data-theme="github"></div>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/tagcloud.min.js"></script>
+        <script type="text/javascript">
+            
+            var tc = TagCloud.create();
+            tc.add('树莓派', 4, '../tag/shu-mei-pai.html', null);
+            tc.add('电容', 1, '../tag/dian-rong.html', null);
+            tc.add('Tornado', 1, '../tag/tornado.html', null);
+            tc.add('垃圾回收', 2, '../tag/la-ji-hui-shou.html', null);
+            tc.add('维修', 1, '../tag/wei-xiu.html', null);
+            tc.add('Python', 4, '../tag/python.html', null);
+            tc.add('摄影', 1, '../tag/she-ying.html', null);
+            tc.add('编程语言', 1, '../tag/bian-cheng-yu-yan.html', null);
+            tc.add('手机', 1, '../tag/shou-ji.html', null);
+            tc.add('Arch Linux', 3, '../tag/arch-linux.html', null);
+            tc.add('hostapd', 1, '../tag/hostapd.html', null);
+            tc.add('非阻塞', 1, '../tag/fei-zu-sai.html', null);
+            tc.add('主板', 1, '../tag/zhu-ban.html', null);
+            tc.add('Linux', 1, '../tag/linux.html', null);
+            tc.add('dnsmasq', 1, '../tag/dnsmasq.html', null);
+            tc.add('加班', 1, '../tag/jia-ban.html', null);
+            tc.add('Ruby', 2, '../tag/ruby.html', null);
+            tc.add('并发', 1, '../tag/bing-fa.html', null);
+            tc.loadEffector('CountSize');tc.loadEffector('CountSize');
+
+            function tag_filter() {
+              tc.searchAndDisplay('niu2-tagcloud', $('#niu2-tagcloud-filter-input').val());
+              return false;
+            }
+            tc.setup('niu2-tagcloud');
+        </script>
+    </body>
 </html>

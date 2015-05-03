@@ -1,79 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置 - hystars</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/niu2.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/custom.css" type="text/css" />
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../theme/js/niu2.js"></script>
-<link rel="stylesheet" href="../theme/css/pygments/github.css" type="text/css" />    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            initGoogleCSEAnimation();
-initTocScrollAnimation();        });
-    </script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="../theme/js/html5shiv.js"></script>
-        <script src="../theme/js/respond.min.js"></script>
-    <![endif]-->
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" type="text/css" />
-    <![endif]--></head>
-  <body>
-    <div id="body-header"><div class="navbar navbar-inverse navbar-fixed-top">
-<div class="col-md-12">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="..">
-            <i class="icon-home"></i>hystars
-        </a>
-    </div>
-	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-		<ul class="nav navbar-nav"><li><a href="../archives.html">
-                <i class="icon-archive"></i>Archive</a>
-		</li>
-		<li><a href="../tag/index.html">
-                <i class="icon-tag"></i>Tag</a>
-		</li><!-- category dropdown list -->
-		<li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-folder-open"></i>Category<b class="caret"></b>
-           </a>
-           <ul class="dropdown-menu"><li><a href="../misc/index.html"><i class="icon-folder-close"></i>Misc                      (7)</a></li><li><a href="../python/index.html"><i class="icon-folder-close"></i>Python                      (3)</a></li><li><a href="../she-ying/index.html"><i class="icon-folder-close"></i>摄影                      (1)</a></li><li><a href="../shu-mei-pai/index.html"><i class="icon-folder-close"></i>树莓派                      (4)</a></li></ul>
-        </li>
-        <!--  self defined dropdown list --><!--  table of contents of page or article --><li class="dropdown dropdown-toc">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-list-ul"></i>TOC<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#content-heading">树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
-            </li></ul>
-        
-        <!-- right nav bar -->
-		<ul class="nav navbar-nav navbar-right">
-		<!-- google custom search --></ul>
-	</nav>
-</div>
-</div></div>
-    
-    <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-article"><div class="niu2-meta">
-    <span class="niu2-meta-category pull-left"><i class="icon-open-folder"></i>树莓派</span><span class="niu2-meta-tag pull-left">
-        <i class="icon-tag"></i><a href="../tag/shu-mei-pai.html">树莓派</a></span><span class="niu2-meta-date pull-right">
-        <i class="icon-calendar"></i>2015-04-08 22:48:00
-    </span>
-</div>
-<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置</h1><p>入手树莓派将近一个月了，很折腾，许多资源不好找，也很乱。简单整理一下自己用到的东西，方便以后自己或别人继续折腾。</p>
-<img alt="raspberry-pi-0.jpg" class="align-center" src="../images/RPi/setup/raspberry-pi-0.jpg" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置 - hystars</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../shu-mei-pai/shu-mei-pai-raspberry-pi-zhe-teng-xi-lie-xi-tong-an-zhuang-ji-yi-xie-bi-yao-de-pei-zhi.html" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="..">
+                            <i class="icon-home"></i>hystars
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/about.html" title="about me">
+                                <i class="icon-anchor"></i>关于</a>
+                            </li>
+                            <li><a href="/tag/" title="tags">
+                                <i class="icon-tag"></i>标签</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>存档</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>分类<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="../misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (7)</a></li>
+                               <li><a href="../python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (3)</a></li>
+                               <li><a href="../she-ying/index.html">
+                                      <i class="icon-briefcase"></i>摄影
+                                      (1)</a></li>
+                               <li><a href="../shu-mei-pai/index.html">
+                                      <i class="icon-leaf"></i>树莓派
+                                      (4)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>入手树莓派将近一个月了，很折腾，许多资源不好找，也很乱。简单整理一下自己用到的东西，方便以后自己或别人继续折腾。</p>
+<img alt="raspberry-pi-0.jpg" class="align-center" src="../images/RPi/setup/raspberry-pi-0.jpg" width="440px"/>
 <ol class="arabic simple" start="0">
 <li>操作系统下载</li>
 </ol>
@@ -85,13 +91,13 @@ initTocScrollAnimation();        });
 </ol>
 <p>所谓“安装系统”其实不如说是“恢复”下载到的系统镜像到内存卡上，这个过程也没什么难度，就是看内存卡的速度，慢慢等而已。需要注意的是，市面上部分 4G 的内存卡，实际大小才 3.6G 多，会提示空间不足，所以还是直接购买 8G 吧，也差不了几块钱。</p>
 <p>在 Windows 下可以使用 <strong>Win32 Disk Imager</strong> 进行镜像恢复，非常方便，也是树莓派官方推荐的方法。官方下载地址：<a class="reference external" href="http://sourceforge.net/projects/win32diskimager/">http://sourceforge.net/projects/win32diskimager/</a></p>
-<img alt="raspberry-pi-1.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-1.gif" />
+<img alt="raspberry-pi-1.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-1.gif" width="431px"/>
 <ol class="arabic simple" start="2">
 <li>通过 SSH 远程访问</li>
 </ol>
 <p>老实说，我一直把树莓派定位为“<em>一个扔在某个角落就可以自己跑得很欢的小电脑</em>”，加上那仅有的两个 USB 口，一个插了 USB 无限网卡，另一个再拖个键盘或鼠标啥的，实在很不方便，那么最好还是能远程访问吧。</p>
 <p>好在树莓派默认是有开启 SSH 的，但是我们系统刚安装，IP 还没设置，怎么找到它的 IP 地址呢？这时候就推荐使用另一个神器 <strong>PortScan</strong> 来找出我们的机器：</p>
-<img alt="raspberry-pi-2.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-2.gif" />
+<img alt="raspberry-pi-2.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-2.gif" width="574px"/>
 <p>打开 PortScan 选择扫描范围，可以很方便的找出局域网中的其它机器，一般家庭中也没太多机器，找出树莓派是很容易的，如果是在公司，有很多机器的话，那么可以忽略那些有机器名的，然后剩下的一个一个尝试吧…</p>
 <p>PortScan 下载地址：<a class="reference external" href="http://abel.oss.aliyuncs.com/file/PortScan.zip">http://abel.oss.aliyuncs.com/file/PortScan.zip</a></p>
 <ol class="arabic simple" start="3">
@@ -111,7 +117,7 @@ sudo passwd --unlock root
 <li>扩展可用空间</li>
 </ol>
 <p>第一次用 root 登录，会自动弹出树莓派的高级设置面板（以后也可以通过 <strong>raspi-config</strong> 命令进入）：</p>
-<img alt="raspberry-pi-3.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-3.gif" />
+<img alt="raspberry-pi-3.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-3.gif" width="675px"/>
 <p>选择第一项 <strong>Expand Filesystem</strong> 扩展 SD 卡上可用的空间，不然以后会有很多大软件，不能安装（提示空间不足，例如 mysql）。</p>
 <p>扩展之后可以通过 <strong>df -h</strong> 命令看到效果~</p>
 <ol class="arabic simple" start="5">
@@ -125,7 +131,7 @@ sudo passwd --unlock root
 nano /etc/apt/sources.list
 </pre>
 <p>进入编辑界面，删除原有的内容，粘贴中科大提供的内容，结果如下：</p>
-<img alt="raspberry-pi-4.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-4.gif" />
+<img alt="raspberry-pi-4.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-4.gif" width="675px"/>
 <p>然后使用 <strong>Ctrl+O</strong> 保存文件，<strong>Ctrl+X</strong> 退出编辑器。</p>
 <p>然后执行 <strong>apt-get update</strong> 命令更新软件列表。</p>
 <ol class="arabic simple" start="6">
@@ -160,33 +166,70 @@ network 192.168.1.1   # 网络地址
 <p>由于我当初手贱没有购买面驱动的 USB 网卡，买的是一个要自己编译驱动的，所以我折腾的东西还有很多，下次专门再来说说无线网卡驱动的事吧。</p>
 <p><em>原文地址：</em><a class="reference external" href="http://www.cnblogs.com/abel/p/3441175.html">http://www.cnblogs.com/abel/p/3441175.html</a></p>
 
-    </div><div id="content-comments"><div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'hystars'; // required: replace example with your forum shortname
+                </div>
+                <div id="content-comments">
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div>
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
+                    <div class="niu2-sidebar-value">2015-04-08 22:48</div>
+                    <div class="niu2-sidebar-label"><i class="icon-leaf"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="../shu-mei-pai/index.html">树莓派</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/shu-mei-pai.html">树莓派</a><sup>4</sup></div>
+                </div>
 
-    <div id="body-footer" class="col-md-8 col-md-offset-2"><div class="niu2-footer">
-    <hr/>
-	<p>
-		Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
-		theme built with <a href="http://getbootstrap.com">Bootstrap3</a>
-		by <a href="http://atime.me">Ma Wenbao</a>, icons by 
-		<a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
-	</p>
-	<p>
-		Copyright
-2015		<a href="..">whypro</a>
-</p>
-    <p class="niu2-icons"></p>
-</div></div><!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
+                    </div>
+                    <ol id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置</a></li>
+                        
+                        <li><a href="#content-comments">评论</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="http://getbootstrap.com">Bootstrap3</a>
+                    by <a href="http://blog.atime.me">Ma Wenbao</a>, icons by 
+                    <a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    ©
+                            2015
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="/about.html" title="about me">关于</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/whypro" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div id="niu2-pygments" data-theme="github"></div>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
 </html>

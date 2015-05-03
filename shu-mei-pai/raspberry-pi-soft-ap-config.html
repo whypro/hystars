@@ -1,81 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>树莓派配置 AP，变身无线路由器 - hystars</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/niu2.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/custom.css" type="text/css" />
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../theme/js/niu2.js"></script>
-<link rel="stylesheet" href="../theme/css/pygments/github.css" type="text/css" />    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            initGoogleCSEAnimation();
-initTocScrollAnimation();        });
-    </script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="../theme/js/html5shiv.js"></script>
-        <script src="../theme/js/respond.min.js"></script>
-    <![endif]-->
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome-ie7.min.css" type="text/css" />
-    <![endif]--></head>
-  <body>
-    <div id="body-header"><div class="navbar navbar-inverse navbar-fixed-top">
-<div class="col-md-12">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="..">
-            <i class="icon-home"></i>hystars
-        </a>
-    </div>
-	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-		<ul class="nav navbar-nav"><li><a href="../archives.html">
-                <i class="icon-archive"></i>Archive</a>
-		</li>
-		<li><a href="../tag/index.html">
-                <i class="icon-tag"></i>Tag</a>
-		</li><!-- category dropdown list -->
-		<li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-folder-open"></i>Category<b class="caret"></b>
-           </a>
-           <ul class="dropdown-menu"><li><a href="../misc/index.html"><i class="icon-folder-close"></i>Misc                      (7)</a></li><li><a href="../python/index.html"><i class="icon-folder-close"></i>Python                      (3)</a></li><li><a href="../she-ying/index.html"><i class="icon-folder-close"></i>摄影                      (1)</a></li><li><a href="../shu-mei-pai/index.html"><i class="icon-folder-close"></i>树莓派                      (4)</a></li></ul>
-        </li>
-        <!--  self defined dropdown list --><!--  table of contents of page or article --><li class="dropdown dropdown-toc">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-list-ul"></i>TOC<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#content-heading">树莓派配置 AP，变身无线路由器</a><ul></ul></li><li><a href="#content-comments">Comments</a></li></ul>
-            </li></ul>
-        
-        <!-- right nav bar -->
-		<ul class="nav navbar-nav navbar-right">
-		<!-- google custom search --></ul>
-	</nav>
-</div>
-</div></div>
-    
-    <div id="body-content" class="col-md-8 col-md-offset-2"><div class="niu2-article"><div class="niu2-meta">
-    <span class="niu2-meta-category pull-left"><i class="icon-open-folder"></i>树莓派</span><span class="niu2-meta-tag pull-left">
-        <i class="icon-tag"></i><a href="../tag/shu-mei-pai.html">树莓派</a><a href="../tag/arch-linux.html">Arch Linux</a><a href="../tag/hostapd.html">hostapd</a><a href="../tag/dnsmasq.html">dnsmasq</a></span><span class="niu2-meta-date pull-right">
-        <i class="icon-calendar"></i>2015-04-26 10:09:00
-    </span>
-</div>
-<div class="clearfix visible-xs niu2-clearfix"></div><h1 id="content-heading">树莓派配置 AP，变身无线路由器</h1><p>首先介绍一下系统环境，笔者用的是树莓派2B (Raspberry Pi 2 Model B)系统是 <a class="reference external" href="../shu-mei-pai/sd-card-creation-for-rpi.html">Arch Linux</a>。另外购得了一个无线网卡，<a class="reference external" href="http://www.tenda.com.cn/product/W311M.html">Tenda W311M</a>，RT5370 芯片，支持 Soft-AP。无线网卡是否支持 AP，这点大家购买前一定要确认一下。</p>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>树莓派配置 AP，变身无线路由器 - hystars</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../shu-mei-pai/raspberry-pi-soft-ap-config.html" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="..">
+                            <i class="icon-home"></i>hystars
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/about.html" title="about me">
+                                <i class="icon-anchor"></i>关于</a>
+                            </li>
+                            <li><a href="/tag/" title="tags">
+                                <i class="icon-tag"></i>标签</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>存档</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>分类<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="../misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (7)</a></li>
+                               <li><a href="../python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (3)</a></li>
+                               <li><a href="../she-ying/index.html">
+                                      <i class="icon-briefcase"></i>摄影
+                                      (1)</a></li>
+                               <li><a href="../shu-mei-pai/index.html">
+                                      <i class="icon-leaf"></i>树莓派
+                                      (4)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">树莓派配置 AP，变身无线路由器</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <p>首先介绍一下系统环境，笔者用的是树莓派2B (Raspberry Pi 2 Model B)系统是 <a class="reference external" href="../shu-mei-pai/sd-card-creation-for-rpi.html">Arch Linux</a>。另外购得了一个无线网卡，<a class="reference external" href="http://www.tenda.com.cn/product/W311M.html">Tenda W311M</a>，RT5370 芯片，支持 Soft-AP。无线网卡是否支持 AP，这点大家购买前一定要确认一下。</p>
 <p>大家知道，配置无线 AP 有很多种方法，本文使用 hostapd + dnsmasq 进行配置，如果你不太习惯这两个工具，也可以使用其他方案。</p>
 <div class="section" id="id1">
-<h2>确认无线网卡支持 AP 模式</h2>
+<h2 id="f63915">确认无线网卡支持 AP 模式</h2>
 <ol class="arabic">
 <li><p class="first">执行 <cite>lsusb</cite> 查看接入的 USB 信息。</p>
 <blockquote>
@@ -103,7 +109,7 @@ software interface modes (can always be added):
 </ol>
 </div>
 <div class="section" id="id4">
-<h2>配置无线热点</h2>
+<h2 id="ae5978">配置无线热点</h2>
 <ol class="arabic">
 <li><p class="first">安装 hostapd</p>
 </li>
@@ -144,7 +150,7 @@ systemctl start hostapd
 </ol>
 </div>
 <div class="section" id="dns-dhcp">
-<h2>配置 DNS 和 DHCP 服务器</h2>
+<h2 id="0fc924">配置 DNS 和 DHCP 服务器</h2>
 <ol class="arabic">
 <li><p class="first">为无线网卡配置 IP 地址</p>
 <blockquote>
@@ -201,7 +207,7 @@ systemctl start dnsmasq
 </ol>
 </div>
 <div class="section" id="nat">
-<h2>启用包转发和 NAT</h2>
+<h2 id="7666cb">启用包转发和 NAT</h2>
 <ol class="arabic">
 <li><p class="first">检查当前转发设置</p>
 <pre class="literal-block">
@@ -235,7 +241,7 @@ iptables-save &gt; /etc/iptables/ap.rules
 </ol>
 </div>
 <div class="section" id="id6">
-<h2>其他</h2>
+<h2 id="0d98c7">其他</h2>
 <ul>
 <li><p class="first">如果网速不稳定，请确认是否安装了 haveged</p>
 </li>
@@ -251,52 +257,92 @@ systemctl start hostapd
 </li>
 </ul>
 <table class="docutils footnote" frame="void" id="id7" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
+<colgroup><col class="label"></col><col></col></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://www.361way.com/hostapd-soft-ap/2933.html">http://www.361way.com/hostapd-soft-ap/2933.html</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id8" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
+<colgroup><col class="label"></col><col></col></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td><a class="reference external" href="https://wiki.archlinux.org/index.php/Software_access_point">https://wiki.archlinux.org/index.php/Software_access_point</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id9" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
+<colgroup><col class="label"></col><col></col></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td><a class="reference external" href="https://wiki.archlinux.org/index.php/Resolv.conf">https://wiki.archlinux.org/index.php/Resolv.conf</a></td></tr>
 </tbody>
 </table>
 </div>
 
-    </div><div id="content-comments"><div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'hystars'; // required: replace example with your forum shortname
+                </div>
+                <div id="content-comments">
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div>
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
+                    <div class="niu2-sidebar-value">2015-04-26 10:09</div>
+                    <div class="niu2-sidebar-label"><i class="icon-leaf"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="../shu-mei-pai/index.html">树莓派</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/shu-mei-pai.html">树莓派</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/arch-linux.html">Arch Linux</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/hostapd.html">hostapd</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/dnsmasq.html">dnsmasq</a><sup>1</sup></div>
+                </div>
 
-    <div id="body-footer" class="col-md-8 col-md-offset-2"><div class="niu2-footer">
-    <hr/>
-	<p>
-		Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
-		theme built with <a href="http://getbootstrap.com">Bootstrap3</a>
-		by <a href="http://atime.me">Ma Wenbao</a>, icons by 
-		<a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
-	</p>
-	<p>
-		Copyright
-2015		<a href="..">whypro</a>
-</p>
-    <p class="niu2-icons"></p>
-</div></div><!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
+                    </div>
+                    <ol id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">树莓派配置 AP，变身无线路由器</a></li>
+                        <li><a href='#f63915'>确认无线网卡支持 AP 模式</a></li><li><a href='#ae5978'>配置无线热点</a></li><li><a href='#0fc924'>配置 DNS 和 DHCP 服务器</a></li><li><a href='#7666cb'>启用包转发和 NAT</a></li><li><a href='#0d98c7'>其他</a></li>
+                        <li><a href="#content-comments">评论</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="http://getbootstrap.com">Bootstrap3</a>
+                    by <a href="http://blog.atime.me">Ma Wenbao</a>, icons by 
+                    <a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    ©
+                            2015
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="/about.html" title="about me">关于</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/whypro" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div id="niu2-pygments" data-theme="github"></div>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
 </html>
