@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+from collections import OrderedDict
 
 AUTHOR = 'whypro'
 SITENAME = 'hystars'
@@ -16,6 +17,7 @@ DATE_FORMATS = {
     'zh': '%Y-%m-%d',
 }
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
+DEFAULT_DATE = 'fs' # use filesystem's mtime
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -84,6 +86,52 @@ THEME = 'themes/niu-x2-sidebar'
 JINJA_EXTENSIONS = ['jinja2.ext.ExprStmtExtension', ]
 DISQUS_SITENAME = 'hystars'
 NIUX2_FAVICON_URL = '/favicon.ico'
+
+# niu-x2 theme translating settings
+NIUX2_AUTHOR_TRANSL = '作者'
+NIUX2_404_TITLE_TRANSL = '404'
+NIUX2_404_INFO_TRANSL = '请求页面未找到!'
+NIUX2_TAG_TRANSL = '标签'
+NIUX2_ARCHIVE_TRANSL = '存档'
+NIUX2_ARCHIVE_UPDATEDATE_TRANSL = '存档 (按修改时间)'
+NIUX2_CATEGORY_TRANSL = '分类'
+NIUX2_TAG_CLEAR_TRANSL = '清空'
+NIUX2_TAG_FILTER_TRANSL = '过滤标签，不妨试试[0-9]{3}'
+NIUX2_HEADER_TOC_TRANSL = '目录'
+NIUX2_SEARCH_TRANSL = '搜索'
+NIUX2_SEARCH_PLACEHOLDER_TRANSL = '按回车开始搜索...'
+NIUX2_COMMENTS_TRANSL = '评论'
+NIUX2_PUBLISHED_TRANSL = '发布时间'
+NIUX2_LASTMOD_TRANSL = '最后修改'
+NIUX2_PAGE_TITLE_TRANSL = '页面'
+NIUX2_RECENT_UPDATE_TRANSL = '最近修改'
+NIUX2_HIDE_SIDEBAR_TRANSL = '隐藏侧边栏'
+NIUX2_SHOW_SIDEBAR_TRANSL = '显示侧边栏'
+NIUX2_REVISION_HISTORY_TRANSL = '修订历史'
+NIUX2_VIEW_SOURCE_TRANSL = '查看源文件'
+
+NIUX2_CATEGORY_MAP = {
+    'python': ('Python', 'icon-code'),
+    'she-ying': ('摄影', 'icon-briefcase'),
+    'shu-mei-pai': ('树莓派', 'icon-leaf'),
+    'misc': ('其他', 'icon-coffee'),
+}
+
+NIUX2_HEADER_SECTIONS = [
+    ('关于', 'about me', '/about.html', 'icon-anchor'),
+    ('标签', 'tags', '/tag/', 'icon-tag'),
+    ('存档', 'archives', '/archives.html', 'icon-archive'),
+]
+
+NIUX2_FOOTER_LINKS = [
+    ('关于', 'about me', '/about.html', ''),
+]
+
+NIUX2_FOOTER_ICONS = [
+    ('icon-envelope-o', 'my email address', 'mailto: whypro@live.com'),
+    ('icon-github-alt', 'my github page', 'http://github.com/whypro'),
+    # ('icon-rss', 'subscribe my blog', '/feed.xml'),
+]
 
 # notmyidea theme settings
 # SITESUBTITLE = ''
