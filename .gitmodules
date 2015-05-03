@@ -7,3 +7,12 @@
 [submodule "themes/niu-x2"]
 	path = themes/niu-x2
 	url = https://github.com/mawenbao/niu-x2.git
+[submodule "themes/niu-x2-sidebar"]
+	path = themes/niu-x2-sidebar
+	url = https://github.com/mawenbao/niu-x2-sidebar.git
+[submodule "plugins/extract_headings"]
+	path = plugins/extract_headings
+	url = https://github.com/mawenbao/extract_headings.git
+[submodule "plugins/niux2_lazyload_helper"]
+	path = plugins/niux2_lazyload_helper
+	url = https://github.com/mawenbao/niux2_lazyload_helper.git

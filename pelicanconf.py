@@ -51,13 +51,43 @@ EXTRA_PATH_METADATA = {
 }
 
 PLUGIN_PATHS = ['plugins']
-# PLUGINS = ['better_figures_and_images']
+PLUGINS = ['extract_headings', 'niux2_lazyload_helper']
+
+# extract_headings settings
+import md5
+def my_slugify(value, sep):
+    m = md5.md5(value.encode('utf-8'))
+    return m.digest().encode('hex')[:6]
+MY_SLUGIFY_FUNC = my_slugify
+MY_TOC_LIST_TYPE = 'ol'
+
+from markdown.extensions import headerid, codehilite, footnotes
+MD_EXTENSIONS = ([
+    'extra',
+    'footnotes',
+    'tables',
+    codehilite.CodeHiliteExtension(configs=[('linenums', False), ('guess_lang', False)]),
+    headerid.HeaderIdExtension(configs=[('slugify', my_slugify)]),
+])
+
+# niux2_lazyload_helper settings
+NIUX2_LAZY_LOAD = False
+NIUX2_LAZY_LOAD_TEXT = 'orz 努力加载中'
+NIUX2_LAZY_LOAD_ICON = 'icon-spin icon-spinner2'
+
+def my_img_url_2_path(url):
+    new_url = url.replace('{filename}', 'content')
+    return new_url
+
+MY_IMG_URL2PATH_FUNC = my_img_url_2_path
+
 
 # better_figures_and_images plugin settings
 RESPONSIVE_IMAGES = True
 
 # THEME = 'themes/elegant'
-THEME = 'themes/niu-x2'
+# THEME = 'themes/niu-x2'
+THEME = 'themes/niu-x2-sidebar'
 
 # niu-x2 theme settings
 JINJA_EXTENSIONS = ['jinja2.ext.ExprStmtExtension', ]
