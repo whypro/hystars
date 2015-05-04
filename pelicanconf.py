@@ -118,13 +118,13 @@ NIUX2_CATEGORY_MAP = {
 }
 
 NIUX2_HEADER_SECTIONS = [
-    ('关于', 'about me', '/about.html', 'icon-anchor'),
-    ('标签', 'tags', '/tag/', 'icon-tag'),
-    ('存档', 'archives', '/archives.html', 'icon-archive'),
+    ('关于', 'about me', 'about.html', 'icon-anchor'),
+    ('标签', 'tags', 'tag/', 'icon-tag'),
+    ('存档', 'archives', 'archives.html', 'icon-archive'),
 ]
 
 NIUX2_FOOTER_LINKS = [
-    ('关于', 'about me', '/about.html', ''),
+    ('关于', 'about me', 'about.html', ''),
 ]
 
 NIUX2_FOOTER_ICONS = [
