@@ -26,13 +26,16 @@
 
 2. 执行 `iw list` 查看无线网卡支持的模式。（如果没有请使用 pacman 安装）
 
-    请注意 `software interface modes` 这一项： ::
+    请注意 `supported interface modes` 这一项： ::
 
         software interface modes (can always be added):
+            * IBSS
+            * managed
+            * AP
             * AP/VLAN
             * monitor
 
-    如果包含 `AP` 或者 `AP/VLAN`，则说明是网卡是支持的，可以继续下一步，否则说明网卡硬件不支持或者驱动不支持。
+    如果包含 `AP` 则说明是网卡是支持的，可以继续下一步，否则说明网卡硬件不支持或者驱动不支持。
 
     如果硬件不支持那就没有办法，如果只是驱动不支持可以 Google 相关的驱动，再此就不赘述了。 [1]_ [2]_
 
@@ -106,11 +109,11 @@
         server=8.8.8.8
         server=8.8.4.4
 
-#. 修改 resolvconf.conf
+.. #. 修改 resolvconf.conf
 
-    `vim /etc/resolvconf.conf`，取消 `name_servers=127.0.0.1` 的注释。
+..     `vim /etc/resolvconf.conf`，取消 `name_servers=127.0.0.1` 的注释。
 
-    执行 `resolvconf -u` 更新 /etc/resolv.conf
+..     执行 `resolvconf -u` 更新 /etc/resolv.conf
 
 #. 修改（新建） resolv.dnsmasq.conf [3]_
 
@@ -158,7 +161,6 @@
 * 上面配置完成后，每次重启后运行以下脚本即可 ::
 
     ifconfig wlan0 192.168.0.1/24
-    resolvconf -u
     systemctl start dnsmasq
     iptables-restore < /etc/iptables/ap.rules
     sysctl net.ipv4.ip_forward=1
