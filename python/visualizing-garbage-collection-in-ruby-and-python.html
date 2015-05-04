@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>对比Ruby和Python的垃圾回收（1） - hystars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="http://hystars.hy/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://hystars.hy/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://hystars.hy/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="http://hystars.hy/python/visualizing-garbage-collection-in-ruby-and-python.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../python/visualizing-garbage-collection-in-ruby-and-python.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="http://hystars.hy/theme/js/html5shiv.js"></script>
-            <script src="http://hystars.hy/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
     </head>
     <body> 
@@ -25,19 +25,19 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="http://hystars.hy">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>hystars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -46,16 +46,16 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="http://hystars.hy/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (8)</a></li>
-                               <li><a href="http://hystars.hy/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (3)</a></li>
-                               <li><a href="http://hystars.hy/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (1)</a></li>
-                               <li><a href="http://hystars.hy/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (4)</a></li>
                            </ul>
@@ -81,7 +81,7 @@
                     <p>注：这篇文章基于我在布达佩斯的RuPy大会上所作的演讲。我觉得与其直接将幻灯片发布出来，不如在我还有印象的时候将它写成博客来的更有意义。同样，我会在将来发布RuPy大会的视频链接。我计划将在RubyConf大会上发表类似的演讲，除了有关于Python的部分，并且将对比MRI、JRuby和Rubinius的垃圾回收器是怎样工作的。</p>
 <p>如果想要对Ruby垃圾回收器以及内部原理有更加深入的了解，你可以在我即将出版的新书《Ruby Under a Microscope》中找到答案。</p>
 <div class="figure align-center">
-<img alt="circuitory-sysvsdtem-polish" src="http://hystars.hy/images/Python/garbage_collection/95160acf42af5a9730778d70eed7904b.png" width="350px"/>
+<img alt="circuitory-sysvsdtem-polish" src="../images/Python/garbage_collection/95160acf42af5a9730778d70eed7904b.png" width="350px"/>
 <p class="caption"><em>如果算法和业务逻辑是一个人的大脑，那么垃圾回收机制是人体的哪个器官呢？</em></p>
 </div>
 <p>在”Ruby Python”大会上，我想对比Ruby和Python内部的垃圾回收机制是一件很有意思的事情。在开始之前，我们为什么要讨论垃圾回收机制呢？毕竟这是一个最迷人的，最令人激动的主题，不是吗？你们有多少人对垃圾回收机制感到兴奋？(许多大会参与者竟然举起了双手！)</p>
@@ -98,7 +98,7 @@
 </ul>
 <p>想象你的应用程序是一个人的身体：所有你写的优雅代码，业务逻辑，算法，将会成为你的应用程序的大脑或智能。与此类似的，你认为垃圾回收器会成为身体的哪一个部分呢？(我从大会的听众中得到了很多有趣的答案：肾，白细胞)</p>
 <div class="figure align-center">
-<img alt="heart-polishefwefwefwefwef" src="http://hystars.hy/images/Python/garbage_collection/5f82687969e5b4a77ff2448bc1cc45a9.png" width="200px"/>
+<img alt="heart-polishefwefwefwefwef" src="../images/Python/garbage_collection/5f82687969e5b4a77ff2448bc1cc45a9.png" width="200px"/>
 </div>
 <p>我认为垃圾回收器是一个应用的心脏。正如心脏为身体的其他部分提供血液和养料一样，垃圾回收器提供内存和对象供程序使用。如果你的心脏停跳，你将活不了几秒。如果垃圾回收器停止运行或者变慢，就像动脉阻塞一样，你的程序将变的慢下来，最后死掉！</p>
 </div>
@@ -106,7 +106,7 @@
 <h2 id="4c9119">一个简单的例子</h2>
 <p>通过例子来验证理论是一种很好的方式。这里有一个简单的类，用Python和Ruby写成，我们可以将它们作为一个简单的例子：</p>
 <div class="figure align-center">
-<img alt="codfdbfdhhgrthrthrth45t34te" src="http://hystars.hy/images/Python/garbage_collection/5960558b76c2257f7470756bb6d278c2.png" width="600px"/>
+<img alt="codfdbfdhhgrthrthrth45t34te" src="../images/Python/garbage_collection/5960558b76c2257f7470756bb6d278c2.png" width="600px"/>
 </div>
 <p>于此同时，两种代码如此相似，让我感到非常吃惊：Python和Ruby在表达相同的语义时几乎没有差别。但是，两种语言的内部实现方式是否相同呢？</p>
 </div>
@@ -115,22 +115,22 @@
 <p>在上面的代码中，当我们调用了Node.new(1)之后，ruby将会做什么？也就是说，Ruby怎样创建一个新的对象？</p>
 <p>令人惊讶的是，Ruby做的事情非常少！事实上，在代码运行之前，Ruby解释器会提前创建成千上万的对象放置到一个链表中，这个链表被称为”空闲对象链表”(free list)。空闲对象链表(<cite>free list</cite>)在概念上看起来像下面的样子：</p>
 <div class="figure align-center">
-<img alt="frgfbfgthrthrthee-list1" src="http://hystars.hy/images/Python/garbage_collection/933f0f452b9641faa7e2b216a3d95471.png" width="600px"/>
+<img alt="frgfbfgthrthrthee-list1" src="../images/Python/garbage_collection/933f0f452b9641faa7e2b216a3d95471.png" width="600px"/>
 </div>
 <p>每一个白色方块可以想象成一个预创建的，没有使用的Ruby对象。当我们调用Node.new，Ruby简单的使用一个对象，并且将它的引用返回给我们：</p>
 <div class="figure align-center">
-<img alt="freegfhhrthrth-list2" src="http://hystars.hy/images/Python/garbage_collection/aff36daa0d656c208351c513530e1ee1.png" width="613px"/>
+<img alt="freegfhhrthrth-list2" src="../images/Python/garbage_collection/aff36daa0d656c208351c513530e1ee1.png" width="613px"/>
 </div>
 <p>在上图中，左边的灰色方块代表一个活跃的Ruby对象，已被使用，而其余的白色方块代码没有使用的对象。(注意：当然，图中是一种简化的实现版本。事实上，Ruby将会使用另外一个对象保存字符串”ABC”，使用第三个对象保存Node的定义，以及其他的对象保存代码处理过的抽象语法数”AST”。)</p>
 <p>如果我们再次调用Node.new，Ruby仅仅返回另外一个对象的引用。</p>
 <div class="figure align-center">
-<img alt="frefbhfhthrte-list3" src="http://hystars.hy/images/Python/garbage_collection/4f2a0046fbfd7f7c57ca39c2235380d7.png" width="613px"/>
+<img alt="frefbhfhthrte-list3" src="../images/Python/garbage_collection/4f2a0046fbfd7f7c57ca39c2235380d7.png" width="613px"/>
 </div>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
 <div class="figure align-center">
-<img alt="mcchkhkhkhjkarthy" src="http://hystars.hy/images/Python/garbage_collection/0ea877aa07080c2c8217865bb295e5da.jpg" width="350px"/>
+<img alt="mcchkhkhkhjkarthy" src="../images/Python/garbage_collection/0ea877aa07080c2c8217865bb295e5da.jpg" width="350px"/>
 <p class="caption"><em>约翰麦卡锡在1960年在Lisp中首次实现了垃圾回收机制</em></p>
 </div>
 <p>这种使用预创建对象链表的简单算法发明于50多年前，它的作者是传说中的计算机科学家，约翰·麦卡锡，正是他实现了最初的Lisp解释器。Lisp不仅是第一个函数式编程语言，并且包含了计算机科学中许多突破性的进展。其中之一便是通过垃圾回收机制自动管理内存。</p>
@@ -142,16 +142,16 @@
 <p>当然Python内部也会由于各种原因使用空闲对象链表(它使用链表循环确定对象)，Python为对象和值分配内存的方式常常不同于Ruby。</p>
 <p>假设我们创建一个Node对象使用Python：</p>
 <div class="figure align-center">
-<img alt="pythobvdfbfdbdfbn1" src="http://hystars.hy/images/Python/garbage_collection/13a712b72813a9b64160dabbcf082f61.png" width="247px"/>
+<img alt="pythobvdfbfdbdfbn1" src="../images/Python/garbage_collection/13a712b72813a9b64160dabbcf082f61.png" width="247px"/>
 </div>
 <p>Python不同于Ruby，当你创建对象的时候，Python会立即向操作系统申请分配内存。(Python 事实上实现了自己的内存分配系统，它在操作系统内存堆上提供了另外一层抽象，但是今天没有时间深入探讨。 )</p>
 <p>当我们创建第二个对象时，Python将再次向操作系统申请更多的内存：</p>
 <div class="figure align-center">
-<img alt="python2fbfdhhrt" src="http://hystars.hy/images/Python/garbage_collection/8e4e7359421a5b3fa5e32f0afb46fc2d.png" width="247px"/>
+<img alt="python2fbfdhhrt" src="../images/Python/garbage_collection/8e4e7359421a5b3fa5e32f0afb46fc2d.png" width="247px"/>
 </div>
 <p>看起来相当简单，当我们创建Python对象的时候，将花费时间申请内存。</p>
 <div class="figure align-center">
-<img alt="menbfgnfgnfhss" src="http://hystars.hy/images/Python/garbage_collection/6681c632bac1d3611eac7ae8c8a0a857.jpg" width="300px"/>
+<img alt="menbfgnfgnfhss" src="../images/Python/garbage_collection/6681c632bac1d3611eac7ae8c8a0a857.jpg" width="300px"/>
 <p class="caption"><em>Ruby将没有用的对象扔的到处都是，直到下一个垃圾回收过程</em></p>
 </div>
 </div>
@@ -159,15 +159,15 @@
 <h2 id="4db029">Ruby开发者生活在一个脏乱的房间</h2>
 <p>回到Ruby，由于我们分配越来越多的对象，Ruby将继续为我们从空闲对象链表(free list)获取预分配对象。因此，空闲对象链表将变得越来越短：</p>
 <div class="figure align-center">
-<img alt="fregergregrgge-list4" src="http://hystars.hy/images/Python/garbage_collection/c9a4bd57b7eb708e6e90a7661c00cab5.png" width="615px"/>
+<img alt="fregergregrgge-list4" src="../images/Python/garbage_collection/c9a4bd57b7eb708e6e90a7661c00cab5.png" width="615px"/>
 </div>
 <p>或者更短：</p>
 <div class="figure align-center">
-<img alt="freederfreferfg-list5" src="http://hystars.hy/images/Python/garbage_collection/5246fb8d72774f38459c7ac3eb3f097b.png" width="607px"/>
+<img alt="freederfreferfg-list5" src="../images/Python/garbage_collection/5246fb8d72774f38459c7ac3eb3f097b.png" width="607px"/>
 </div>
 <p>请注意，我将一个新的值赋给了n1，Ruby会遗留下旧的值。”ABC”, “JKL”和”MNO”等结点对象会依然保留在内存中。Ruby不会立即清理旧的对象，尽管程序不再使用！作为一名Ruby开发者就像生活在一个脏乱的房间，衣服随意扔在地板上，厨房的水槽中堆满了脏盘子。作为一个Ruby开发者，你必须在一大堆垃圾对象中工作。</p>
 <div class="figure align-center">
-<img alt="clfgdgergerggrean" src="http://hystars.hy/images/Python/garbage_collection/5734db1f6af0adea154144a6d21c75e9.jpg" width="300px"/>
+<img alt="clfgdgergerggrean" src="../images/Python/garbage_collection/5734db1f6af0adea154144a6d21c75e9.jpg" width="300px"/>
 <p class="caption"><em>当你的程序不在使用任何对象的时候，Python会立刻进行清理。</em></p>
 </div>
 </div>
@@ -175,27 +175,27 @@
 <h2 id="1353f8">Python开发者生活在一所整洁的房子</h2>
 <p>垃圾回收机制在Python和Ruby中迥然不同，让我们回到前面三个Python中Node对象的例子：</p>
 <div class="figure align-center">
-<img alt="pythfgbfgbfgbnfgon3b" src="http://hystars.hy/images/Python/garbage_collection/855c40169f2b4227e7cd3293c14da56b.png" width="225px"/>
+<img alt="pythfgbfgbfgbnfgon3b" src="../images/Python/garbage_collection/855c40169f2b4227e7cd3293c14da56b.png" width="225px"/>
 </div>
 <p>从内部来看，每当我们新建一个对象，Python将在对象对应的C语言结构中保存一个数字，叫做引用计数（reference count）。最初，Python将它的值设为1。</p>
 <div class="figure align-center">
-<img alt="pytefwefwefwefghon4" src="http://hystars.hy/images/Python/garbage_collection/72cd1cff3eedd169a6d2b02a976562ca.png" width="225px"/>
+<img alt="pytefwefwefwefghon4" src="../images/Python/garbage_collection/72cd1cff3eedd169a6d2b02a976562ca.png" width="225px"/>
 </div>
 <p>值为1表明每个对象有一个指针或引用指向它。假设我们创建一个新的对象，JKL：</p>
 <div class="figure align-center">
-<img alt="pythgbfgbfbfgbon5" src="http://hystars.hy/images/Python/garbage_collection/4333442dcfaa12095487dde0f94ea718.png" width="301px"/>
+<img alt="pythgbfgbfbfgbon5" src="../images/Python/garbage_collection/4333442dcfaa12095487dde0f94ea718.png" width="301px"/>
 </div>
 <p>正如前面所说，Python将”JKL”的引用设置为1。同样注意到我们改变n1指向了”JKL”，不再引用”ABC”，同时将”ABC”的引用计数减少为0。</p>
 <p>通过这一点，Python垃圾回收器将会立即执行！无论何时，只要一个对象的引用计数变为0，python将立即释放这个对象，并且将它的内存返回给操作系统。</p>
 <div class="figure align-center">
-<img alt="pythgfbfgbfgnbfgnon6" src="http://hystars.hy/images/Python/garbage_collection/06bd5cb55976ff8dcc643beddb2c3953.png" width="301px"/>
+<img alt="pythgfbfgbfgnbfgnon6" src="../images/Python/garbage_collection/06bd5cb55976ff8dcc643beddb2c3953.png" width="301px"/>
 </div>
 <p>上图中，Python将回收”ABC”对象的内存。记住，Ruby只是将旧的对象遗留在那里，并且不去释放它们占用的内存。</p>
 <p>这种垃圾回收算法被称为”引用计数”，由乔治柯林斯发明于1960年。非常巧合的是在同一年约翰麦卡锡大叔发明了”空闲对象链表算法”。正如Mike Bernstein在Ruby Conference大会上所说”1960年是属于垃圾回收器的…”。</p>
 <p>作为一个Python开发者，就像生活在一个整洁的房间中。你知道，你的室友有些洁癖，他会把你使用过的任何东西都清洗一遍。你把脏盘子，脏杯子一放到水槽中他就会清洗。</p>
 <p>现在看另外一个例子，假设我们让n2和n1指向同样的结点：</p>
 <div class="figure align-center">
-<img alt="pytvwefwefwefhon8" src="http://hystars.hy/images/Python/garbage_collection/068f98ba94d41bb6181b0c3228e20afe.png" width="223px"/>
+<img alt="pytvwefwefwefhon8" src="../images/Python/garbage_collection/068f98ba94d41bb6181b0c3228e20afe.png" width="223px"/>
 </div>
 <p>上图左边可以看到，Python减少了”DEF”的引用计数并且立即回收了”DEF”对象。同时可以看到，由于n1和n2同时指了”JKL”对象，所以它的引用计数变为了2。</p>
 </div>
@@ -203,25 +203,25 @@
 <h2 id="563472">标记回收算法</h2>
 <p>最终脏乱的房间将堆满垃圾，生活不能总是如此。Ruby程序在运行一段时间之后，空闲对象链表最终将被用尽。</p>
 <div class="figure align-center">
-<img alt="mark-fthrthand-sweep1" src="http://hystars.hy/images/Python/garbage_collection/43e9341161032b064bf4f3e5fc7f5297.png" width="604px"/>
+<img alt="mark-fthrthand-sweep1" src="../images/Python/garbage_collection/43e9341161032b064bf4f3e5fc7f5297.png" width="604px"/>
 </div>
 <p>上图中所有的预分配对象都被用尽(方块全部变成了灰色)，链表上没有对象可用(没有剩余的白色方块)。</p>
 <p>此时，Ruby使用了一种由约翰麦卡锡发明的被称为”标记回收”的算法。首先，Ruby将停止程序的执行，Ruby使用了”停止这个世界，然后回收垃圾”的方式。然后，Ruby会扫描所有的指向对象和值的指针或引用。同样，Ruby也会迭代虚拟机内部使用的指针。它会标记每一个指针所能到达的对象。在下图中，我使用了”M”指出了这些标记：</p>
 <div class="figure align-center">
-<img alt="mark-and-swfbdfdfbeep2" src="http://hystars.hy/images/Python/garbage_collection/825654e587e5a10f0cca673210dc5d9a.png" width="601px"/>
+<img alt="mark-and-swfbdfdfbeep2" src="../images/Python/garbage_collection/825654e587e5a10f0cca673210dc5d9a.png" width="601px"/>
 </div>
 <p>上面三个”M”标记的对象为活跃对象，依然被我们的程序使用。在Ruby解释器内部，通常使用”free bitmap”的数据结构来保存一个对象是否被标记：</p>
 <div class="figure align-center">
-<img alt="mark-anfdgdgdgd-sweep3" src="http://hystars.hy/images/Python/garbage_collection/c8bb8717d0045e940e3a82698776f721.png" width="616px"/>
+<img alt="mark-anfdgdgdgd-sweep3" src="../images/Python/garbage_collection/c8bb8717d0045e940e3a82698776f721.png" width="616px"/>
 </div>
 <p>Ruby将”free bitmap”保存在一个独立的内存区域，以便可以更好的利用Unix的”copy-on-write”特性。更详细的信息，请参考我的另一篇文章《为什么Ruby2.0的垃圾回收器让我们如此兴奋》。</p>
 <p>如果活跃对象被标记了，那么其余的便是垃圾对象，意味着它们不再会被代码使用。在下图中，我使用白色的方块表示垃圾对象：</p>
 <div class="figure align-center">
-<img alt="mafdbdffdbrk-and-sweep4" src="http://hystars.hy/images/Python/garbage_collection/8e16a2600b48e2e2fd070448bbe28c85.png" width="601px"/>
+<img alt="mafdbdffdbrk-and-sweep4" src="../images/Python/garbage_collection/8e16a2600b48e2e2fd070448bbe28c85.png" width="601px"/>
 </div>
 <p>接下来，Ruby将清理没有使用的，垃圾对象，将它们链入空闲对象链表(free list)：</p>
 <div class="figure align-center">
-<img alt="gfhghfghtrhtrhjjrt-sweet5" src="http://hystars.hy/images/Python/garbage_collection/943487cd656bc9d72c6c240924f47b37.png" width="601px"/>
+<img alt="gfhghfghtrhtrhjjrt-sweet5" src="../images/Python/garbage_collection/943487cd656bc9d72c6c240924f47b37.png" width="601px"/>
 </div>
 <p>在解释器内部，这个过程非常迅速，Ruby并不会真正的将对象从一个地方拷贝到另一个地方。相反的，Ruby会将垃圾对象组成一个新的链表，并且链入空闲对象链表(free list)。</p>
 <p>现在，当我们要创建一个新的Ruby对象的时候，Ruby将为我们返回收集的垃圾对象。在Ruby中，对象是可以重生的，享受着多次的生命！</p>
@@ -237,7 +237,7 @@
 <div class="section" id="id6">
 <h2 id="cfa6af">下一次…</h2>
 <p>下周我将发布演讲的其他部分。我将讨论Python怎样处理循环引用数据结构，以及在即将到来的Ruby2.1中，垃圾回收器是怎样工作的。
-「<a class="reference external" href="http://hystars.hy/python/generational-gc-in-python-and-ruby.html">传送门</a>」</p>
+「<a class="reference external" href="../python/generational-gc-in-python-and-ruby.html">传送门</a>」</p>
 <div class="line-block">
 <div class="line"><em>原文：</em><a class="reference external" href="http://patshaughnessy.net/2013/10/24/visualizing-garbage-collection-in-ruby-and-python">Pat Shaughnessy</a></div>
 <div class="line"><em>译文：</em><a class="reference external" href="http://python.jobbole.com/60900/">http://python.jobbole.com/60900/</a></div>
@@ -258,11 +258,11 @@
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-20 21:27</div>
                     <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="http://hystars.hy/python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-value"><a href="../python/index.html">Python</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://hystars.hy/tag/python.html">Python</a><sup>4</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://hystars.hy/tag/ruby.html">Ruby</a><sup>2</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://hystars.hy/tag/la-ji-hui-shou.html">垃圾回收</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/python.html">Python</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/ruby.html">Ruby</a><sup>2</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/la-ji-hui-shou.html">垃圾回收</a><sup>2</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -290,8 +290,8 @@
                 <p>
                     ©
                             2015
-                    <a class="niu2-footer-link" href="http://hystars.hy">whypro</a>
-                    /                         <a class="niu2-footer-link" href="/about.html" title="about me">关于</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
                     <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
@@ -305,9 +305,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="http://hystars.hy/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="http://hystars.hy/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="http://hystars.hy/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>

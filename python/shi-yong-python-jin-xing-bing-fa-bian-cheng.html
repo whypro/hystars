@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>使用 Python 进行并发编程 - hystars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="http://hystars.hy/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://hystars.hy/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="http://hystars.hy/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="http://hystars.hy/python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="http://hystars.hy/theme/js/html5shiv.js"></script>
-            <script src="http://hystars.hy/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
     </head>
     <body> 
@@ -25,19 +25,19 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="http://hystars.hy">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>hystars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -46,16 +46,16 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="http://hystars.hy/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (8)</a></li>
-                               <li><a href="http://hystars.hy/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (3)</a></li>
-                               <li><a href="http://hystars.hy/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (1)</a></li>
-                               <li><a href="http://hystars.hy/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (4)</a></li>
                            </ul>
@@ -308,7 +308,7 @@
 <div class="section" id="id5">
 <h3 id="f94eef">计算密集型</h3>
 <p>对应计算密集型的应用，我们选用著名的<a class="reference external" href="http://en.wikipedia.org/wiki/Monte_Carlo_method">蒙特卡洛算法</a>来计算PI值。基本原理如下</p>
-<img alt="Monte-Carlo-method.png" class="align-center" src="http://hystars.hy/images/Python/concurrency/Monte-Carlo-method.png" width="220px"/>
+<img alt="Monte-Carlo-method.png" class="align-center" src="../images/Python/concurrency/Monte-Carlo-method.png" width="220px"/>
 <p>蒙特卡洛算法利用统计学原理来模拟计算圆周率，在一个正方形中，一个随机的点落在1/4圆的区域（红色点）的概率与其面积成正比。也就该概率 p ＝ Pi ＊ R＊R ／4  ： R＊ R ， 其中R是正方形的边长，圆的半径。也就是说该概率是圆周率的1/4, 利用这个结论，只要我们模拟出点落在四分之一圆上的概率就可以知道圆周率了，为了得到这个概率，我们可以通过大量的实验，也就是生成大量的点，看看这个点在哪个区域，然后统计出结果。</p>
 <p>基本算法如下：</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
@@ -378,7 +378,7 @@
 <li><dl class="first docutils">
 <dt>多进程 multiprocess</dt>
 <dd><p class="first">理论上对于计算密集型的任务，使用多进程并发比较合适，在以下的例子中，进程池的规模设置为5，修改进程池的大小可以看到对结果的影响，当进程池设置为1时，和多线程的结果所需的时间类似，因为这时候并不存在并发；当设置为2时，响应时间有了明显的改进，是之前没有并发的一半；然而继续扩大进程池对性能影响并不大，甚至有所下降，也许我的Apple Air的CPU只有两个核？</p>
-<img alt="apple-air-info.png" class="align-center" src="http://hystars.hy/images/Python/concurrency/apple-air-info.png" width="194px"/>
+<img alt="apple-air-info.png" class="align-center" src="../images/Python/concurrency/apple-air-info.png" width="194px"/>
 <p>当心，如果你设置一个非常大的进程池，你会遇到 Resource temporarily unavailable的错误，系统并不能支持创建太多的进程，毕竟资源是有限的。</p>
 <div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
 
@@ -590,10 +590,10 @@
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-08 23:45</div>
                     <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="http://hystars.hy/python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-value"><a href="../python/index.html">Python</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://hystars.hy/tag/python.html">Python</a><sup>4</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="http://hystars.hy/tag/bing-fa.html">并发</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/python.html">Python</a><sup>4</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/bing-fa.html">并发</a><sup>1</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -621,8 +621,8 @@
                 <p>
                     ©
                             2015
-                    <a class="niu2-footer-link" href="http://hystars.hy">whypro</a>
-                    /                         <a class="niu2-footer-link" href="/about.html" title="about me">关于</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
                     <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
@@ -636,9 +636,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="http://hystars.hy/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="http://hystars.hy/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="http://hystars.hy/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>
