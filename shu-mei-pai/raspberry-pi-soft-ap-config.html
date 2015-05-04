@@ -96,13 +96,16 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 </li>
 <li><p class="first">执行 <cite>iw list</cite> 查看无线网卡支持的模式。（如果没有请使用 pacman 安装）</p>
 <blockquote>
-<p>请注意 <cite>software interface modes</cite> 这一项：</p>
+<p>请注意 <cite>supported interface modes</cite> 这一项：</p>
 <pre class="literal-block">
 software interface modes (can always be added):
+    * IBSS
+    * managed
+    * AP
     * AP/VLAN
     * monitor
 </pre>
-<p>如果包含 <cite>AP</cite> 或者 <cite>AP/VLAN</cite>，则说明是网卡是支持的，可以继续下一步，否则说明网卡硬件不支持或者驱动不支持。</p>
+<p>如果包含 <cite>AP</cite> 则说明是网卡是支持的，可以继续下一步，否则说明网卡硬件不支持或者驱动不支持。</p>
 <p>如果硬件不支持那就没有办法，如果只是驱动不支持可以 Google 相关的驱动，再此就不赘述了。 <a class="footnote-reference" href="#id7" id="id2">[1]</a> <a class="footnote-reference" href="#id8" id="id3">[2]</a></p>
 </blockquote>
 </li>
@@ -183,12 +186,11 @@ server=8.8.4.4
 </pre>
 </blockquote>
 </li>
-<li><p class="first">修改 resolvconf.conf</p>
-<blockquote>
-<p><cite>vim /etc/resolvconf.conf</cite>，取消 <cite>name_servers=127.0.0.1</cite> 的注释。</p>
-<p>执行 <cite>resolvconf -u</cite> 更新 /etc/resolv.conf</p>
-</blockquote>
-</li>
+</ol>
+<!-- #. 修改 resolvconf.conf -->
+<!-- `vim /etc/resolvconf.conf`，取消 `name_servers=127.0.0.1` 的注释。 -->
+<!-- 执行 `resolvconf -u` 更新 /etc/resolv.conf -->
+<ol class="arabic">
 <li><p class="first">修改（新建） resolv.dnsmasq.conf <a class="footnote-reference" href="#id9" id="id5">[3]</a></p>
 <blockquote>
 <p><cite>vim /etc/resolv.dnsmasq.conf</cite>，增加：</p>
@@ -248,7 +250,6 @@ iptables-save &gt; /etc/iptables/ap.rules
 <li><p class="first">上面配置完成后，每次重启后运行以下脚本即可</p>
 <pre class="literal-block">
 ifconfig wlan0 192.168.0.1/24
-resolvconf -u
 systemctl start dnsmasq
 iptables-restore &lt; /etc/iptables/ap.rules
 sysctl net.ipv4.ip_forward=1
