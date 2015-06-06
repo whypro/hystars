@@ -3,7 +3,7 @@
 
 
 :date: 2015-06-06 22:32
-:modified: 2015-06-06 22:59
+:modified: 2015-06-06 23:06
 :tags: Python
 :slug: fingerprinting-images-for-near-duplicate-detection
 
@@ -339,5 +339,5 @@ Argparse库用于解析命令行参数，shelve库用作一个存储在硬盘上
 祝福！
 
 
-*译文地址：*\ http://www.pyimagesearch.com/
-*原文地址：*\ https://realpython.com/blog/python/fingerprinting-images-for-near-duplicate-detection/
+| *译文地址：*\ http://www.pyimagesearch.com/
+| *原文地址：*\ https://realpython.com/blog/python/fingerprinting-images-for-near-duplicate-detection/
