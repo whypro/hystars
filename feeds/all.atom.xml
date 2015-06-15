@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>hystars</title><link href="http://hystars.hy/" rel="alternate"></link><link href="http://hystars.hy/feeds/all.atom.xml" rel="self"></link><id>http://hystars.hy/</id><updated>2015-06-06T22:32:00+08:00</updated><entry><title>利用图片指纹检测高相似度图片</title><link href="http://hystars.hy/python/fingerprinting-images-for-near-duplicate-detection.html" rel="alternate"></link><updated>2015-06-06T22:32:00+08:00</updated><author><name>whypro</name></author><id>tag:hystars.hy,2015-06-06:python/fingerprinting-images-for-near-duplicate-detection.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;img alt="image_fingerprint_flow.jpg" class="align-center" src="http://hystars.hy/images/Python/fingerprinting-images-for-near-duplicate-detection/image_fingerprint_flow.jpg" width="1300px"/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>hystars</title><link href="http://hystars.hy/" rel="alternate"></link><link href="http://hystars.hy/feeds/all.atom.xml" rel="self"></link><id>http://hystars.hy/</id><updated>2015-06-06T22:59:00+08:00</updated><entry><title>利用图片指纹检测高相似度图片</title><link href="http://hystars.hy/python/fingerprinting-images-for-near-duplicate-detection.html" rel="alternate"></link><updated>2015-06-06T22:59:00+08:00</updated><author><name>whypro</name></author><id>tag:hystars.hy,2015-06-06:python/fingerprinting-images-for-near-duplicate-detection.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;img alt="image_fingerprint_flow.jpg" class="align-center" src="http://hystars.hy/images/Python/fingerprinting-images-for-near-duplicate-detection/image_fingerprint_flow.jpg" width="1300px"/&gt;
 &lt;p&gt;大概五年前吧，我那时还在为一家约会网站做开发工作。他们是早期创业公司，但他们也开始拥有了一些稳定用户量。不像其他约会网站，这家公司向来以洁身自好为主要市场形象。它不是一个供你鬼混的网站——是让你能找到忠实伴侣的地方。&lt;/p&gt;
 &lt;p&gt;由于投入了数以百万计的风险资本（在US大萧条之前），他们关于真爱并找寻灵魂伴侣的在线广告势如破竹。Forbes(福布斯，美国著名财经杂志)采访了他们。全国性电视节目也对他们进行了专访。早期的成功促成了事业起步时让人垂涎的指数级增长现象——他们的用户数量以每月加倍的速度增长。对他们而言，一切都似乎顺风顺水。&lt;/p&gt;
 &lt;p&gt;但他们有一个严重的问题——&lt;strong&gt;色情问题&lt;/strong&gt;。&lt;/p&gt;
@@ -49,9 +49,9 @@
 &lt;h2 id="e0b311"&gt;需要的库有哪些？&lt;/h2&gt;
 &lt;p&gt;为了建立图片指纹方案，我们打算使用三个主要的Python包：&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://pillow.readthedocs.org/"&gt;PIL/Pillow&lt;/a&gt; 用于读取和载入图片&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://pillow.readthedocs.org/"&gt;PIL / Pillow&lt;/a&gt; 用于读取和载入图片&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://pypi.python.org/pypi/ImageHash"&gt;ImageHash&lt;/a&gt;，包括DHash的实现&lt;/li&gt;
-&lt;li&gt;以及`NumPy &amp;lt;&lt;a class="reference external" href="http://www.numpy.org/"&gt;http://www.numpy.org/&lt;/a&gt;&amp;gt;`_/&lt;a class="reference external" href="http://www.scipy.org/"&gt;SciPy&lt;/a&gt;，ImageHash的依赖包&lt;/li&gt;
+&lt;li&gt;以及 &lt;a class="reference external" href="http://www.numpy.org/"&gt;NumPy&lt;/a&gt; / &lt;a class="reference external" href="http://www.scipy.org/"&gt;SciPy&lt;/a&gt;，ImageHash的依赖包&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;你可以使用下列命令一键安装所需要的必备库：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install pillow imagehash
@@ -116,8 +116,8 @@
 &lt;p&gt;而这也正是这几行代码做的事情。&lt;/p&gt;
 &lt;p&gt;前一个代码段提取了图片的文件名。而后一个代码片段维护了一个有相同指纹值的图片列表。&lt;/p&gt;
 &lt;p&gt;为了从我们的数据库中提取图片指纹并建立哈希数据库，运行下列命令：&lt;/p&gt;
-&lt;pre class="code python literal-block"&gt;
-&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt;&lt;span class="n"&gt;dataset&lt;/span&gt; &lt;span class="n"&gt;images&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt;&lt;span class="n"&gt;shelve&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shelve&lt;/span&gt;
+&lt;pre class="code shell literal-block"&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;python index.py —dataset images —shelve db.shelve
 &lt;/pre&gt;
 &lt;p&gt;这个脚本会运行几秒钟，完成后，就会出现一个名为db.shelve的文件，包含了图片指纹和文件名的键值对。&lt;/p&gt;
 &lt;p&gt;这个基本算法正是几年前我为这家约会创业公司工作时使用的算法。我们获得了一个不雅图片集，为其中的每张图片构建一个图片指纹并将其存入数据库。当来一张新图片时，我只需简单地计算它的哈希值，检测数据库查看是否上传图片已被标识为非法内容。&lt;/p&gt;
@@ -205,7 +205,7 @@
 &lt;p&gt;然而，我们遇到了第二个问题——算法的可扩展性。&lt;/p&gt;
 &lt;p&gt;考虑一下：我们有一张输入图片，又被要求在数据库中找到所有相似图片。然后我们必须计算输入图片和数据库中的每一张图片之间的汉明距离。&lt;/p&gt;
 &lt;p&gt;随着数据库规模的增长，和数据库比对的时间也随着延长。最终，我们的哈希数据库会达到一个线性比对已经不实际的规模。&lt;/p&gt;
-&lt;p&gt;解决办法，虽然已超出本文范围，就是利用`K-d trees &amp;lt;&lt;a class="reference external" href="http://en.wikipedia.org/wiki/K-d_tree"&gt;http://en.wikipedia.org/wiki/K-d_tree&lt;/a&gt;&amp;gt;`_和`VP trees &amp;lt;&lt;a class="reference external" href="http://en.wikipedia.org/wiki/Vantage-point_tree"&gt;http://en.wikipedia.org/wiki/Vantage-point_tree&lt;/a&gt;&amp;gt;`_将搜索问题的复杂度从线性减小到次线性。&lt;/p&gt;
+&lt;p&gt;解决办法，虽然已超出本文范围，就是利用 &lt;a class="reference external" href="http://en.wikipedia.org/wiki/K-d_tree"&gt;K-d trees&lt;/a&gt; 和 &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Vantage-point_tree"&gt;VP trees&lt;/a&gt; 将搜索问题的复杂度从线性减小到次线性。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id11"&gt;
 &lt;h2 id="25f9c7"&gt;总结&lt;/h2&gt;
@@ -213,10 +213,10 @@
 &lt;p&gt;正如一个指纹可以识别一个人，图片哈希也能唯一的识别一张图片。&lt;/p&gt;
 &lt;p&gt;使用图片指纹的知识，我们建立了一个仅使用图片哈希就能找到和识别具有相似内容的图片的系统。&lt;/p&gt;
 &lt;p&gt;然后我们又演示了图片哈希是如何应用于快速找到有相似内容的图片。&lt;/p&gt;
-&lt;p&gt;从`repo &amp;lt;&lt;a class="reference external" href="https://github.com/realpython/image-fingerprinting"&gt;https://github.com/realpython/image-fingerprinting&lt;/a&gt;&amp;gt;`_目录下下载代码。&lt;/p&gt;
+&lt;p&gt;从 &lt;a class="reference external" href="https://github.com/realpython/image-fingerprinting"&gt;repo&lt;/a&gt; 目录下下载代码。&lt;/p&gt;
 &lt;div class="section" id="id12"&gt;
 &lt;h3 id="3ed28b"&gt;周末学计算机视觉&lt;/h3&gt;
-&lt;p&gt;如果你很喜欢本文而且还想了解更多与计算机视觉，图片处理以及建立图片搜索引擎相关的东西，那就去我的博客吧，地址是`PyImageSearch.com &amp;lt;&lt;a class="reference external" href="http://www.pyimagesearch.com/"&gt;http://www.pyimagesearch.com/&lt;/a&gt;&amp;gt;`_&lt;/p&gt;
+&lt;p&gt;如果你很喜欢本文而且还想了解更多与计算机视觉，图片处理以及建立图片搜索引擎相关的东西，那就去我的博客吧，地址是 &lt;a class="reference external" href="http://www.pyimagesearch.com/"&gt;PyImageSearch.com&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;祝福！&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;译文地址：&lt;/em&gt;&lt;a class="reference external" href="http://www.pyimagesearch.com/"&gt;http://www.pyimagesearch.com/&lt;/a&gt;
 &lt;em&gt;原文地址：&lt;/em&gt;&lt;a class="reference external" href="https://realpython.com/blog/python/fingerprinting-images-for-near-duplicate-detection/"&gt;https://realpython.com/blog/python/fingerprinting-images-for-near-duplicate-detection/&lt;/a&gt;&lt;/p&gt;
