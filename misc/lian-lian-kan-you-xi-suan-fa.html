@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>连连看游戏算法 - hystars</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../misc/lian-lian-kan-you-xi-suan-fa.html" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="..">
+                            <i class="icon-home"></i>hystars
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="../about.html" title="about me">
+                                <i class="icon-anchor"></i>关于</a>
+                            </li>
+                            <li><a href="../tag/" title="tags">
+                                <i class="icon-tag"></i>标签</a>
+                            </li>
+                            <li><a href="../archives.html" title="archives">
+                                <i class="icon-archive"></i>存档</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>分类<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="../misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (9)</a></li>
+                               <li><a href="../python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (4)</a></li>
+                               <li><a href="../she-ying/index.html">
+                                      <i class="icon-briefcase"></i>摄影
+                                      (1)</a></li>
+                               <li><a href="../shu-mei-pai/index.html">
+                                      <i class="icon-leaf"></i>树莓派
+                                      (4)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">连连看游戏算法</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <html><body><p>今天收到一个面试题，题目大概如下：</p>
+<p>连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则：</p>
+<div class="figure align-center">
+<img alt="0.png" src="../images/misc/lianliankan/0.png" width="518px"/>
+</div>
+<p>图 A 中出现在同一直线上无障碍的圈圈可以消除；图 B 中两个圈圈可以通过一次转弯消除；图 C 和图 D 中，两个圈圈可以通过两次转弯消除。</p>
+<p>已知以下接口，表示位置(x, y)上有无障碍物：</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">isBlocked</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// 无障碍物（位置(x,y)为空）</span>
+<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>       <span class="c1">// 有障碍物（位置(x,y)上有方块或圈圈）</span>
+</pre></div>
+<p>请写一个函数来判断给定的任意两个圈圈是否可消除（x1, y1与x2, y2为两个圈圈的位置）：</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">remove</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">);</span>
+</pre></div>
+<div class="section" id="id2">
+<h2 id="7e4a77">水平检测</h2>
+<p>水平检测用来判断两个点的纵坐标是否相等，同时判断两点间有没有障碍物。</p>
+<div class="figure align-center">
+<img alt="1.png" src="../images/misc/lianliankan/1.png" width="213px"/>
+</div>
+<p>因此直接检测两点间是否有障碍物就可以了，代码如下：</p>
+<div class="highlight"><pre><span class="k">static</span> <span class="kt">bool</span> <span class="nf">horizon</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">y1</span> <span class="o">==</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">x1</span> <span class="o">!=</span> <span class="n">x2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">start_y</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="kt">int</span> <span class="n">end_y</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">start_y</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">end_y</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isBlocked</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h2 id="e27aee">垂直检测</h2>
+<p>垂直检测用来判断两个点的横坐标是否相等，同时判断两点间有没有障碍物。</p>
+<div class="figure align-center">
+<img alt="2.png" src="../images/misc/lianliankan/2.png" width="108px"/>
+</div>
+<p>同样地，直接检测两点间是否有障碍物，代码如下：</p>
+<div class="highlight"><pre><span class="k">static</span> <span class="kt">int</span> <span class="nf">vertical</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">y1</span> <span class="o">==</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">y1</span> <span class="o">!=</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">start_x</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">end_x</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start_x</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">end_x</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isBlocked</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">y1</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id4">
+<h2 id="04f372">一个拐角检测</h2>
+<p>一个拐角检测可分解为水平检测和垂直检测，当两个同时满足时，便两点可通过一个拐角相连。即：</p>
+<p>一个拐角检测 = 水平检测 &amp;&amp; 垂直检测</p>
+<div class="figure align-center">
+<img alt="3.png" src="../images/misc/lianliankan/3.png" width="178px"/>
+</div>
+<p>A 点至 B 点能否连接可转化为满足任意一点：</p>
+<ol class="arabic simple">
+<li>A 点至 C 点的垂直检测，以及 C 点至 B 点的水平检测；</li>
+<li>A 点至 D 点的水平检测，以及 D 点至 B 点的垂直检测。</li>
+</ol>
+<p>代码如下：</p>
+<div class="highlight"><pre><span class="k">static</span> <span class="kt">int</span> <span class="nf">turn_once</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">y1</span> <span class="o">==</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">c_x</span> <span class="o">=</span> <span class="n">x1</span><span class="p">,</span> <span class="n">c_y</span> <span class="o">=</span> <span class="n">y2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">d_x</span> <span class="o">=</span> <span class="n">x2</span><span class="p">,</span> <span class="n">d_y</span> <span class="o">=</span> <span class="n">y1</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isBlocked</span><span class="p">(</span><span class="n">c_x</span><span class="p">,</span> <span class="n">c_y</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">ret</span> <span class="o">|=</span> <span class="n">horizon</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">c_x</span><span class="p">,</span> <span class="n">c_y</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">vertical</span><span class="p">(</span><span class="n">c_x</span><span class="p">,</span> <span class="n">c_y</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isBlocked</span><span class="p">(</span><span class="n">d_x</span><span class="p">,</span> <span class="n">d_y</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">ret</span> <span class="o">|=</span> <span class="n">horizon</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">d_x</span><span class="p">,</span> <span class="n">d_y</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">vertical</span><span class="p">(</span><span class="n">d_x</span><span class="p">,</span> <span class="n">d_y</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h2 id="1a31c9">两个拐角检测</h2>
+<p>两个拐角检测可分解为一个拐角检测和水平检测或垂直检测。即：</p>
+<p>两个拐角检测 = 一个拐角检测 &amp;&amp; (水平检测 || 垂直检测)</p>
+<div class="figure align-center">
+<img alt="4.png" src="../images/misc/lianliankan/4.png" width="248px"/>
+</div>
+<p>扫描整个地图的点，看是否存在一点 C ，满足任意一项：</p>
+<ol class="arabic simple">
+<li>A 点至 C 点通过水平或垂直检测，C 点至 B 点可通过一个拐角连接。</li>
+<li>A 点至 C 点可通过一个拐角连接，C 点至 B 点通过水平或垂直连接。</li>
+</ol>
+<p>代码如下：</p>
+<div class="highlight"><pre><span class="k">static</span> <span class="kt">int</span> <span class="nf">turn_twice</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">y1</span> <span class="o">==</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">MAX_X</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">MAX_Y</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">==</span> <span class="n">x1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">y1</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">y2</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">isBlocked</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">turn_once</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">horizon</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">||</span> <span class="n">vertical</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)))</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">turn_once</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">horizon</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">||</span> <span class="n">vertical</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)))</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id6">
+<h2 id="6af019">整合</h2>
+<p>最后，整合以上四种情况，判断两点是否能消除的代码可以写成：</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">remove</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">horizon</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">vertical</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">turn_once</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">turn_twice</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</body></html>
+                </div>
+                <div id="content-comments">
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
+                    <div class="niu2-sidebar-value">2015-07-21 20:29</div>
+                    <div class="niu2-sidebar-label"><i class="icon-coffee"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="../misc/index.html">其他</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/lian-lian-kan.html">连连看</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/suan-fa.html">算法</a><sup>1</sup></div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
+                    </div>
+                    <ol id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">连连看游戏算法</a></li>
+                        <li><a href='#7e4a77'>水平检测</a></li><li><a href='#e27aee'>垂直检测</a></li><li><a href='#04f372'>一个拐角检测</a></li><li><a href='#1a31c9'>两个拐角检测</a></li><li><a href='#6af019'>整合</a></li>
+                        <li><a href="#content-comments">评论</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="http://getbootstrap.com">Bootstrap3</a>
+                    by <a href="http://blog.atime.me">Ma Wenbao</a>, icons by 
+                    <a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    ©
+                            2015
+                    <a class="niu2-footer-link" href="..">whypro</a>
+                    /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/whypro" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div id="niu2-pygments" data-theme="github"></div>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>
