@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>连连看游戏算法 - hystars</title>
+        <title>连连看游戏消除算法 - hystars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
@@ -74,11 +74,11 @@
 
         <div id="body-content">
             <div class="col-md-8 col-md-offset-2">
-                <h1 id="content-heading">连连看游戏算法</h1>
+                <h1 id="content-heading">连连看游戏消除算法</h1>
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <html><body><p>今天收到一个面试题，题目大概如下：</p>
+                    <html><body><p>今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。</p>
 <p>连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则：</p>
 <div class="figure align-center">
 <img alt="0.png" src="../images/misc/lianliankan/0.png" width="518px"/>
@@ -209,7 +209,7 @@
 <div class="figure align-center">
 <img alt="4.png" src="../images/misc/lianliankan/4.png" width="248px"/>
 </div>
-<p>扫描整个地图的点，看是否存在一点 C ，满足任意一项：</p>
+<p>如图，水平、垂直分别穿过 A B 共有四条直线，扫描直线上所有不包含 A B 的点，看是否存在一点 C ，满足以下任意一项：</p>
 <ol class="arabic simple">
 <li>A 点至 C 点通过水平或垂直检测，C 点至 B 点可通过一个拐角连接。（图中用 C 表示）</li>
 <li>A 点至 C 点可通过一个拐角连接，C 点至 B 点通过水平或垂直连接。（图中用 C 下划线表示）</li>
@@ -226,6 +226,11 @@
     <span class="p">{</span>
         <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">MAX_Y</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
         <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">x1</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">y1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">y2</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
             <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">==</span> <span class="n">x1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">y1</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">y2</span><span class="p">))</span>
             <span class="p">{</span>
                 <span class="k">continue</span><span class="p">;</span>
@@ -311,7 +316,7 @@
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>
                     <ol id="niu2-sidebar-toc-list">
-                        <li><a href="#content-heading">连连看游戏算法</a></li>
+                        <li><a href="#content-heading">连连看游戏消除算法</a></li>
                         <li><a href='#7e4a77'>水平检测</a></li><li><a href='#e27aee'>垂直检测</a></li><li><a href='#04f372'>一个拐角检测</a></li><li><a href='#1a31c9'>两个拐角检测</a></li><li><a href='#6af019'>整合</a></li>
                         <li><a href="#content-comments">评论</a></li>
                     </ol>
