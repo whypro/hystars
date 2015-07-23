@@ -148,3 +148,5 @@ NIUX2_FOOTER_ICONS = [
 #     ('github', 'http://github.com/whypro'),
 #     ('oschina', 'http://my.oschina.net/apoptosis'),
 # )
+
+NIUX2_BAIDU_TJ = 'ca2e5a178ca2b60a975d4f2a4d4497be'
