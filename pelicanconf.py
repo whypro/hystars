@@ -149,4 +149,4 @@ NIUX2_FOOTER_ICONS = [
 #     ('oschina', 'http://my.oschina.net/apoptosis'),
 # )
 
-NIUX2_BAIDU_TJ = 'ca2e5a178ca2b60a975d4f2a4d4497be'
+NIUX2_BAIDU_TJ = '17e1c6a0010d7be7e49ae6d2c2e7b817'
