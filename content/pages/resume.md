@@ -1,6 +1,6 @@
 Title: 个人简历
 Date: 2915-09-12 16:39
-Modified 2015-09-12 16:53
+Modified: 2015-09-12 16:53
 Slug: resume
 
 
