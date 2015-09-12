@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from collections import OrderedDict
 
 AUTHOR = 'whypro'
-SITENAME = 'hystars'
+SITENAME = 'HyStars'
 SITEURL = ''
 
 PATH = 'content'
@@ -119,6 +119,7 @@ NIUX2_CATEGORY_MAP = {
 
 NIUX2_HEADER_SECTIONS = [
     ('关于', 'about me', 'about.html', 'icon-anchor'),
+    ('简历', 'resume', 'resume.html', 'icon-fa-graduation-cap'),
     ('标签', 'tags', 'tag/', 'icon-tag'),
     ('存档', 'archives', 'archives.html', 'icon-archive'),
 ]
