@@ -1,6 +1,6 @@
 Title: 个人简历
 Date: 2015-09-12 16:39
-Modified: 2015-09-12 16:53
+Modified: 2015-10-14 22:35
 Slug: resume
 
 
@@ -67,10 +67,10 @@ Slug: resume
 
 ## 项目经验
 
-* 2015.07 ~ 2015.09 **布谷鸟搜索引擎**
+* 2015.07 ~ 2015.09 **综合学术搜索引擎**
 	* 简介：综合学术搜索引擎，基于 Python Flask，使用 Celery 作为分布式任务队列执行异步搜索，使用 Gunicorn + Nginx 部署在 Linux 平台
 	* 角色：后台开发工程师
-	* 演示：[http://115.28.57.72/search/](http://115.28.57.72/search/) 
+	* 演示：[http://xaailab.com/search/](http://xaailab.com/search/) 
 
 * 2015.05 ~ 2015.08 **西安交通大学——生物医学分析技术与仪器研究所网站**
 	* 简介：研究所主站，使用 Python 编写，MySQL 数据库，基于 Flask 框架，使用 Gunicorn + Nginx 部署在 Linux 平台。

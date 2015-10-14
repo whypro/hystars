@@ -2,7 +2,7 @@
 ################################
 
 :date: 2015-10-14 20:09
-:modified: 2015-10-14 20:09
+:modified: 2015-10-14 22:35
 :tags: 树莓派, 花生壳, DDNS
 
 
@@ -74,7 +74,7 @@
 
 因为笔者的树莓派安装的是 archlinux，使用了 systemd，因此需要手动添加 phddns 服务实现自启。（当然添加命令至 rc.local 文件也可以，但已不推荐使用，如果有兴趣可以百度一下具体方法。） ::
 
-    # vim /lib/systemd/system/phddns.service
+    # vim /etc/systemd/system/phddns.service
 
 输入以下内容并保存，用来添加服务。 ::
 
