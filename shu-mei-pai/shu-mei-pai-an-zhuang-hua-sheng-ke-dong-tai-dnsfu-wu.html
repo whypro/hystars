@@ -3,12 +3,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>download - HyStars</title>
+        <title>树莓派安装花生壳（动态 DNS）服务 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
         <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="/drafts/download.html" />
+        <link rel="canonical" href="/shu-mei-pai/shu-mei-pai-an-zhuang-hua-sheng-ke-dong-tai-dnsfu-wu.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
             <script src="/theme/js/html5shiv.js"></script>
@@ -86,13 +86,105 @@
 
         <div id="body-content">
             <div class="col-md-8 col-md-offset-2">
-                <h1 id="content-heading">download</h1>
+                <h1 id="content-heading">树莓派安装花生壳（动态 DNS）服务</h1>
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <html><body><p><a class="reference external" href="http://aria2.sourceforge.net">aria2</a></p>
-<p><a class="reference external" href="https://github.com/binux/yaaw">yaaw</a></p>
-<p><a class="reference external" href="https://github.com/binux/ThunderLixianExporter">ThunderLixianExporter</a></p>
+                    <html><body><div class="section" id="id1">
+<h2 id="f26ef9">下载</h2>
+<p>首先，下载花生壳 linux 版 phddns-2.0.2.16556.tar.gz 并解压：</p>
+<pre class="literal-block">
+# wget http://download.oray.com/peanuthull/phddns-2.0.2.16556.tar.gz
+
+# tar -zxf phddns-2.0.2.16556.tar.gz
+</pre>
+</div>
+<div class="section" id="id2">
+<h2 id="984612">编译</h2>
+<p>进入目录，编译：</p>
+<pre class="literal-block">
+# cd phddns-2.0.2.16556
+# ./configure
+# make
+</pre>
+<p>编译后生成会在 src 目录生成可执行文件 phddns。</p>
+<pre class="literal-block">
+# cd src
+# ls -l phddns
+-rwxr-xr-x 1 root root 38880 Oct 14 16:04 phddns
+</pre>
+</div>
+<div class="section" id="id3">
+<h2 id="4c763b">运行</h2>
+<p>执行编译好的程序并配置（默认使用/etc/phlinux.conf，如果不存在这个文件则自动进入交互配置）：</p>
+<pre class="literal-block">
+# ./phddns
+</pre>
+<p>根据提示配置后，程序将以交互模式开始运行。按 Ctrl + C 终止运行。</p>
+<p>将 phddns 拷贝到你希望的位置：</p>
+<pre class="literal-block">
+# cp phddns /usr/local/bin/
+</pre>
+<p>以 daemon 模式启动花生壳：</p>
+<pre class="literal-block">
+# /usr/local/bin/phddns -c /etc/phlinux.conf -d
+phlinux started as daemon!
+
+# tail /var/log/phddns.log
+Wed Oct 14 16:06:20 2015| ExecuteUpdate Connecting PhLinux3.Oray.Net.
+Wed Oct 14 16:06:20 2015| SEND AUTH REQUEST COMMAND...Wed Oct 14 16:06:20 2015| OK.
+Wed Oct 14 16:06:20 2015| SERVER SIDE KEY "334 ************************" RECEIVED.
+Wed Oct 14 16:06:20 2015| SEND AUTH DATA...Wed Oct 14 16:06:20 2015| OK
+Wed Oct 14 16:06:21 2015| Need redirect, waiting for 5 seconds...
+Wed Oct 14 16:06:26 2015| ExecuteUpdate Connecting phent-std.oray.net.
+Wed Oct 14 16:06:26 2015| SEND AUTH REQUEST COMMAND...Wed Oct 14 16:06:26 2015| OK.
+Wed Oct 14 16:06:26 2015| SERVER SIDE KEY "334 ************************" RECEIVED.
+Wed Oct 14 16:06:26 2015| SEND AUTH DATA...Wed Oct 14 16:06:26 2015| OK
+Wed Oct 14 16:06:26 2015| ExecuteUpdate domain "******.gicp.net"
+</pre>
+<p>查看进程 ID：</p>
+<pre class="literal-block">
+# ps -A | grep phddns
+239 ? 00:00:01 phddns
+</pre>
+<p>让后台进程退出：</p>
+<pre class="literal-block">
+# kill 239
+</pre>
+</div>
+<div class="section" id="id4">
+<h2 id="41eede">添加自启动</h2>
+<p>因为笔者的树莓派安装的是 archlinux，使用了 systemd，因此需要手动添加 phddns 服务实现自启。（当然添加命令至 rc.local 文件也可以，但已不推荐使用，如果有兴趣可以百度一下具体方法。）</p>
+<pre class="literal-block">
+# vim /lib/systemd/system/phddns.service
+</pre>
+<p>输入以下内容并保存，用来添加服务。</p>
+<pre class="literal-block">
+[Unit]
+Description=phddns service
+After=syslog.target network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/usr/local/bin/phddns -c /etc/phlinux.conf -d
+ExecReload=/usr/bin/kill -HUP $MAINPID
+KillSignal=SIGQUIT
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+</pre>
+<p>然后启动该服务：</p>
+<pre class="literal-block">
+# systemctl start phddns
+</pre>
+<p>使用 ps 查看是否运行成功，如果成功，将其设置为开机自启动：</p>
+<pre class="literal-block">
+# systemctl enable phddns
+</pre>
+</div>
 </body></html>
                 </div>
                 <div id="content-comments">
@@ -106,13 +198,13 @@
             <div class="niu2-right-container col-md-2">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
-                    <div class="niu2-sidebar-value">2015-04-21 22:22</div>
-                    <div class="niu2-sidebar-label"><i class="icon-coffee"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="/misc/index.html">其他</a></div>
+                    <div class="niu2-sidebar-value">2015-10-14 20:09</div>
+                    <div class="niu2-sidebar-label"><i class="icon-leaf"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="/shu-mei-pai/index.html">树莓派</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/aria2.html">aria2</a><sup></sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/yaaw.html">yaaw</a><sup></sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/thunderlixianexporter.html">ThunderLixianExporter</a><sup></sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/shu-mei-pai.html">树莓派</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/hua-sheng-ke.html">花生壳</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/ddns.html">DDNS</a><sup>1</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -120,8 +212,8 @@
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>
                     <ol id="niu2-sidebar-toc-list">
-                        <li><a href="#content-heading">download</a></li>
-                        
+                        <li><a href="#content-heading">树莓派安装花生壳（动态 DNS）服务</a></li>
+                        <li><a href='#f26ef9'>下载</a></li><li><a href='#984612'>编译</a></li><li><a href='#4c763b'>运行</a></li><li><a href='#41eede'>添加自启动</a></li>
                         <li><a href="#content-comments">评论</a></li>
                     </ol>
                 </div>
