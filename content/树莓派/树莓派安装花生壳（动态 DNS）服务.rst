@@ -1,0 +1,103 @@
+树莓派安装花生壳（动态 DNS）服务
+################################
+
+:date: 2015-10-14 20:09
+:modified: 2015-10-14 20:09
+:tags: 树莓派, 花生壳, DDNS
+
+
+下载
+===================
+
+首先，下载花生壳 linux 版 phddns-2.0.2.16556.tar.gz 并解压： ::
+
+    # wget http://download.oray.com/peanuthull/phddns-2.0.2.16556.tar.gz
+
+    # tar -zxf phddns-2.0.2.16556.tar.gz
+
+编译
+====
+
+进入目录，编译： ::
+
+    # cd phddns-2.0.2.16556
+    # ./configure
+    # make
+
+编译后生成会在 src 目录生成可执行文件 phddns。 ::
+
+    # cd src
+    # ls -l phddns
+    -rwxr-xr-x 1 root root 38880 Oct 14 16:04 phddns
+
+运行
+====
+
+执行编译好的程序并配置（默认使用/etc/phlinux.conf，如果不存在这个文件则自动进入交互配置）： ::
+
+    # ./phddns
+
+根据提示配置后，程序将以交互模式开始运行。按 Ctrl + C 终止运行。
+
+将 phddns 拷贝到你希望的位置： ::
+
+    # cp phddns /usr/local/bin/
+
+以 daemon 模式启动花生壳： ::
+
+    # /usr/local/bin/phddns -c /etc/phlinux.conf -d
+    phlinux started as daemon!
+
+    # tail /var/log/phddns.log
+    Wed Oct 14 16:06:20 2015| ExecuteUpdate Connecting PhLinux3.Oray.Net.
+    Wed Oct 14 16:06:20 2015| SEND AUTH REQUEST COMMAND...Wed Oct 14 16:06:20 2015| OK.
+    Wed Oct 14 16:06:20 2015| SERVER SIDE KEY "334 ************************" RECEIVED.
+    Wed Oct 14 16:06:20 2015| SEND AUTH DATA...Wed Oct 14 16:06:20 2015| OK
+    Wed Oct 14 16:06:21 2015| Need redirect, waiting for 5 seconds...
+    Wed Oct 14 16:06:26 2015| ExecuteUpdate Connecting phent-std.oray.net.
+    Wed Oct 14 16:06:26 2015| SEND AUTH REQUEST COMMAND...Wed Oct 14 16:06:26 2015| OK.
+    Wed Oct 14 16:06:26 2015| SERVER SIDE KEY "334 ************************" RECEIVED.
+    Wed Oct 14 16:06:26 2015| SEND AUTH DATA...Wed Oct 14 16:06:26 2015| OK
+    Wed Oct 14 16:06:26 2015| ExecuteUpdate domain "******.gicp.net"
+
+查看进程 ID： ::
+
+    # ps -A | grep phddns
+    239 ? 00:00:01 phddns
+
+让后台进程退出： ::
+
+    # kill 239
+
+添加自启动
+==========
+
+因为笔者的树莓派安装的是 archlinux，使用了 systemd，因此需要手动添加 phddns 服务实现自启。（当然添加命令至 rc.local 文件也可以，但已不推荐使用，如果有兴趣可以百度一下具体方法。） ::
+
+    # vim /lib/systemd/system/phddns.service
+
+输入以下内容并保存，用来添加服务。 ::
+
+    [Unit]
+    Description=phddns service
+    After=syslog.target network.target
+
+    [Service]
+    Type=oneshot
+    RemainAfterExit=yes
+
+    ExecStart=/usr/local/bin/phddns -c /etc/phlinux.conf -d
+    ExecReload=/usr/bin/kill -HUP $MAINPID
+    KillSignal=SIGQUIT
+    KillMode=mixed
+
+    [Install]
+    WantedBy=multi-user.target
+
+然后启动该服务： ::
+
+    # systemctl start phddns
+
+使用 ps 查看是否运行成功，如果成功，将其设置为开机自启动： ::
+
+    # systemctl enable phddns
