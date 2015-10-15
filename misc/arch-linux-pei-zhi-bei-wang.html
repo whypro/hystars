@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Arch Linux">
+        <meta name="description" content="增加用户 useradd whypro passwd whypro mkdir /home/whypro chown whypro:whypro /home/whypro 修改主机名 vi /etc/hostname 设置静态 IP 地址 本地化 本地化的程序与库若要本地化文本，都依赖 locales, 后者明确规定地域、货币、时区日期的格式、字符排列方式和其他本地化标准等等。在下面两个文件设置：locale.gen 与 locale.conf。 /etc/locale.gen 是一个仅包含注释文档的文本文件。指定您需要的本地化类型，只需移除对应行前面的注释符号（#）即可，建议选择带 UTF-8 的项： # nano /etc/locale.gen en_US.UTF-8 ...">
         <title>Arch Linux 配置备忘 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="/misc/arch-linux-pei-zhi-bei-wang.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../misc/arch-linux-pei-zhi-bei-wang.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="/theme/js/html5shiv.js"></script>
-            <script src="/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -34,22 +36,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="../about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/resume.html" title="resume">
-                                <i class="icon-fa-graduation-cap"></i>简历</a>
+                            <li><a href="../resume.html" title="resume">
+                                <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="../tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="../archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -58,16 +60,16 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (9)</a></li>
-                               <li><a href="/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (4)</a></li>
-                               <li><a href="/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -165,9 +167,9 @@ vi /etc/motd
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-11 19:20</div>
                     <div class="niu2-sidebar-label"><i class="icon-coffee"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="/misc/index.html">其他</a></div>
+                    <div class="niu2-sidebar-value"><a href="../misc/index.html">其他</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/arch-linux.html">Arch Linux</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/arch-linux.html">Arch Linux</a><sup>3</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -181,6 +183,7 @@ vi /etc/motd
                     </ol>
                 </div>
             </div>
+            <div id="niu2-toc" data-style="fixed"></div>
         </div>
 
         <div class="niu2-footer">
@@ -188,14 +191,14 @@ vi /etc/motd
                 <hr/>
                 <p>
                     Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
-                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="http://getbootstrap.com">Bootstrap3</a>
-                    by <a href="http://blog.atime.me">Ma Wenbao</a>, icons by 
-                    <a href="http://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
                 </p>
                 <p>
                     ©
                             2015
-                    <a class="niu2-footer-link" href="">whypro</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -210,9 +213,9 @@ vi /etc/motd
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>
