@@ -119,7 +119,7 @@ NIUX2_CATEGORY_MAP = {
 
 NIUX2_HEADER_SECTIONS = [
     ('关于', 'about me', 'about.html', 'icon-anchor'),
-    ('简历', 'resume', 'resume.html', 'icon-fa-graduation-cap'),
+    ('简历', 'resume', 'resume.html', 'icon-pencil'),
     ('标签', 'tags', 'tag/', 'icon-tag'),
     ('存档', 'archives', 'archives.html', 'icon-archive'),
 ]
