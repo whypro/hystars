@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>非阻塞服务器需要注意的主要问题 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="../misc/the-main-issue-with-non-blocking-servers.html" />
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="/misc/the-main-issue-with-non-blocking-servers.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="../theme/js/html5shiv.js"></script>
-            <script src="../theme/js/respond.min.js"></script>
+            <script src="/theme/js/html5shiv.js"></script>
+            <script src="/theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -34,22 +34,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="..">
+                        <a class="navbar-brand" href="">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="../about.html" title="about me">
+                            <li><a href="/about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="../resume.html" title="resume">
+                            <li><a href="/resume.html" title="resume">
                                 <i class="icon-fa-graduation-cap"></i>简历</a>
                             </li>
-                            <li><a href="../tag/" title="tags">
+                            <li><a href="/tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="../archives.html" title="archives">
+                            <li><a href="/archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -58,16 +58,16 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="../misc/index.html">
+                               <li><a href="/misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (9)</a></li>
-                               <li><a href="../python/index.html">
+                               <li><a href="/python/index.html">
                                       <i class="icon-code"></i>Python
                                       (4)</a></li>
-                               <li><a href="../she-ying/index.html">
+                               <li><a href="/she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
-                                      (1)</a></li>
-                               <li><a href="../shu-mei-pai/index.html">
+                                      (2)</a></li>
+                               <li><a href="/shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -101,15 +101,15 @@
 </ul>
 <p>当他们从 <a class="reference external" href="http://httpd.apache.org/">Apache</a> 向 <a class="reference external" href="http://nginx.org/">Nginx</a> 迁移时，发现：</p>
 <p>Nginx每秒可以处理更多的请求：</p>
-<img alt="req_pr_sec.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/req_pr_sec.png" width="644px"/>
+<img alt="req_pr_sec.png" class="align-center" src="/images/misc/the-main-issue-with-non-blocking-servers/req_pr_sec.png" width="644px"/>
 <p>Nginx比Apache使用更少的内存：</p>
-<img alt="memory_usage.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/memory_usage.png" width="645px"/>
+<img alt="memory_usage.png" class="align-center" src="/images/misc/the-main-issue-with-non-blocking-servers/memory_usage.png" width="645px"/>
 <p>真是令人吃惊的结果，那么为何不把非阻塞技术引入到你的 Python/Java/Ruby/PHP 框架里呢？</p>
 </div>
 <div class="section" id="how-blocking-servers-work">
 <h2 id="917c3d">How blocking servers work</h2>
 <p>阻塞式服务器通常是基于多线程的，一个线程处理一个请求，它的工作方式可以现象化地表示为：</p>
-<img alt="threaded_server.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/threaded_server.png" width="445px"/>
+<img alt="threaded_server.png" class="align-center" src="/images/misc/the-main-issue-with-non-blocking-servers/threaded_server.png" width="445px"/>
 <p>关于阻塞式服务器，有如下事实：</p>
 <ul class="simple">
 <li>处理高并发连接请求代价昂贵，服务器需要量产线程——线程并不便宜。</li>
@@ -119,7 +119,7 @@
 <div class="section" id="how-non-blocking-servers-work">
 <h2 id="d7075a">How non-blocking servers work</h2>
 <p>非阻塞服务器不需要多线程，它通过一个IO循环及(异步)事件来处理请求，它的工作方式如下：</p>
-<img alt="non_blocking_server.png" class="align-center" src="../images/misc/the-main-issue-with-non-blocking-servers/non_blocking_server.png" width="452px"/>
+<img alt="non_blocking_server.png" class="align-center" src="/images/misc/the-main-issue-with-non-blocking-servers/non_blocking_server.png" width="452px"/>
 <p>关于非阻塞式服务器，有如下事实：</p>
 <ul class="simple">
 <li>处理高并发连接请求不是困难，这也是它被用于comet技术的重要原因</li>
@@ -161,11 +161,11 @@
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-29 18:35</div>
                     <div class="niu2-sidebar-label"><i class="icon-coffee"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="../misc/index.html">其他</a></div>
+                    <div class="niu2-sidebar-value"><a href="/misc/index.html">其他</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/fei-zu-sai.html">非阻塞</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/tornado.html">Tornado</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/python.html">Python</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/fei-zu-sai.html">非阻塞</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/tornado.html">Tornado</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/python.html">Python</a><sup>5</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -193,7 +193,7 @@
                 <p>
                     ©
                             2015
-                    <a class="niu2-footer-link" href="..">whypro</a>
+                    <a class="niu2-footer-link" href="">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -208,9 +208,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>

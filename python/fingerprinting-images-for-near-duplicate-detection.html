@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>利用图片指纹检测高相似度图片 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="../python/fingerprinting-images-for-near-duplicate-detection.html" />
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="/python/fingerprinting-images-for-near-duplicate-detection.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="../theme/js/html5shiv.js"></script>
-            <script src="../theme/js/respond.min.js"></script>
+            <script src="/theme/js/html5shiv.js"></script>
+            <script src="/theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -34,22 +34,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="..">
+                        <a class="navbar-brand" href="">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="../about.html" title="about me">
+                            <li><a href="/about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="../resume.html" title="resume">
+                            <li><a href="/resume.html" title="resume">
                                 <i class="icon-fa-graduation-cap"></i>简历</a>
                             </li>
-                            <li><a href="../tag/" title="tags">
+                            <li><a href="/tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="../archives.html" title="archives">
+                            <li><a href="/archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -58,16 +58,16 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="../misc/index.html">
+                               <li><a href="/misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (9)</a></li>
-                               <li><a href="../python/index.html">
+                               <li><a href="/python/index.html">
                                       <i class="icon-code"></i>Python
                                       (4)</a></li>
-                               <li><a href="../she-ying/index.html">
+                               <li><a href="/she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
-                                      (1)</a></li>
-                               <li><a href="../shu-mei-pai/index.html">
+                                      (2)</a></li>
+                               <li><a href="/shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -90,7 +90,7 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <html><body><img alt="image_fingerprint_flow.jpg" class="align-center" src="../images/Python/fingerprinting-images-for-near-duplicate-detection/image_fingerprint_flow.jpg" width="1300px"/>
+                    <html><body><img alt="image_fingerprint_flow.jpg" class="align-center" src="/images/Python/fingerprinting-images-for-near-duplicate-detection/image_fingerprint_flow.jpg" width="1300px"/>
 <p>大概五年前吧，我那时还在为一家约会网站做开发工作。他们是早期创业公司，但他们也开始拥有了一些稳定用户量。不像其他约会网站，这家公司向来以洁身自好为主要市场形象。它不是一个供你鬼混的网站——是让你能找到忠实伴侣的地方。</p>
 <p>由于投入了数以百万计的风险资本（在US大萧条之前），他们关于真爱并找寻灵魂伴侣的在线广告势如破竹。Forbes(福布斯，美国著名财经杂志)采访了他们。全国性电视节目也对他们进行了专访。早期的成功促成了事业起步时让人垂涎的指数级增长现象——他们的用户数量以每月加倍的速度增长。对他们而言，一切都似乎顺风顺水。</p>
 <p>但他们有一个严重的问题——<strong>色情问题</strong>。</p>
@@ -270,7 +270,7 @@
 <span class="nv">$ </span>python search.py —dataset images —shelve db.shelve —query images/84eba74d-38ae-4bf6-b8bd-79ffa1dad23a.jpg
 </pre>
 <p>如果一切顺利你就可以看到下述结果：</p>
-<img alt="fingerprint_results_01.jpg" class="align-center" src="../images/Python/fingerprinting-images-for-near-duplicate-detection/fingerprint_results_01.jpg" width="1400px"/>
+<img alt="fingerprint_results_01.jpg" class="align-center" src="/images/Python/fingerprinting-images-for-near-duplicate-detection/fingerprint_results_01.jpg" width="1400px"/>
 <p>左边是输入图片。载入这张图片，计算它的图片指纹，在数据库中搜索指纹查看是否存在有相同指纹的图片。</p>
 <p>当然——正如右边所示，我们的数据集中有其他两张指纹相同的图片。尽管从截图中还不能十分明显的看出，这些图片，虽然有完全相同的视觉内容，也不是完全相同！这三张图片的高度宽度各不相同。</p>
 <p>尝试一下另外一个输入图片：</p>
@@ -278,13 +278,13 @@
 <span class="nv">$ </span>python search.py —dataset images —shelve db.shelve —query images/9d355a22-3d59-465e-ad14-138a4e3880bc.jpg
 </pre>
 <p>下面是结果：</p>
-<img alt="fingerprint_results_02.jpg" class="align-center" src="../images/Python/fingerprinting-images-for-near-duplicate-detection/fingerprint_results_02.jpg" width="1400px"/>
+<img alt="fingerprint_results_02.jpg" class="align-center" src="/images/Python/fingerprinting-images-for-near-duplicate-detection/fingerprint_results_02.jpg" width="1400px"/>
 <p>左边仍然是我们的输入图片。正如右边展示的，我们的图片指纹算法能够找出具有相同指纹的三张完全相同的图片。</p>
 <p>最后一个例子：</p>
 <pre class="code shell literal-block">
 <span class="nv">$ </span>python search.py —dataset images —shelve db.shelve —query images/5134e0c2-34d3-40b6-9473-98de8be16c67.jpg
 </pre>
-<img alt="fingerprint_results_03.jpg" class="align-center" src="../images/Python/fingerprinting-images-for-near-duplicate-detection/fingerprint_results_03.jpg" width="1400px"/>
+<img alt="fingerprint_results_03.jpg" class="align-center" src="/images/Python/fingerprinting-images-for-near-duplicate-detection/fingerprint_results_03.jpg" width="1400px"/>
 <p>这一次左边的输入图片是一个摩托车。拿到这张摩托车图片，计算它的图片指纹，然后在指纹数据库中查找该指纹。正如我们在右边看到的，我们也能判断出数据库中有三张图片具有相同指纹。</p>
 </div>
 <div class="section" id="id10">
@@ -330,9 +330,9 @@
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-06-06 22:32</div>
                     <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="../python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-value"><a href="/python/index.html">Python</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/python.html">Python</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/python.html">Python</a><sup>5</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -360,7 +360,7 @@
                 <p>
                     ©
                             2015
-                    <a class="niu2-footer-link" href="..">whypro</a>
+                    <a class="niu2-footer-link" href="">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -375,9 +375,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>
