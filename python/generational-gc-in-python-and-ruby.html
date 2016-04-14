@@ -62,7 +62,7 @@
                            <ul class="dropdown-menu">
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (9)</a></li>
+                                      (10)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (4)</a></li>
@@ -92,7 +92,7 @@
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <html><body><p>上周，我根据之前在RuPy上做的一个名为“Visualizing Garbage Collection in Ruby and Python.”的报告写了这篇文章的<a class="reference external" href="../python/visualizing-garbage-collection-in-ruby-and-python.html">上半部分</a>。在上篇中，我解释了标准Ruby(也被称为Matz的Ruby解释器或是MRI)是如何使用名为标记回收(Mark and Sweep)的垃圾回收算法，这个算法是为1960年原版本的Lisp所开发。同样，我也介绍了Python使用一种有53年历史的GC算法，这种算法的思路非常不同，称之为引用计数。</p>
+                    <p>上周，我根据之前在RuPy上做的一个名为“Visualizing Garbage Collection in Ruby and Python.”的报告写了这篇文章的<a class="reference external" href="../python/visualizing-garbage-collection-in-ruby-and-python.html">上半部分</a>。在上篇中，我解释了标准Ruby(也被称为Matz的Ruby解释器或是MRI)是如何使用名为标记回收(Mark and Sweep)的垃圾回收算法，这个算法是为1960年原版本的Lisp所开发。同样，我也介绍了Python使用一种有53年历史的GC算法，这种算法的思路非常不同，称之为引用计数。</p>
 <p>事实证明，Python在引用计数之外，还用了另一个名为Generational Garbage Collection的算法。这意味着Python的垃圾回收器用不同的方式对待新创建的以及旧有的对象。并且在即将到来的2.1版本的MRI Ruby中也首次引入了Generational Garbage Collection 的垃圾回收机制(在另两个Ruby的实现：JRuby和Rubinius中，已经使用这种GC机制很多年了，我将在下周的RubyConf大会上将它是如何在这两种Ruby实现中工作的)。</p>
 <p>当然，这句话“用不同的方式对待新创建的以及旧有的对象”是有点模糊不清，比如如何定义新、旧对象？又比如对于Ruby和Python来说具体是如何采取不同的对待方式？今天，我们就来谈谈这两种语言GC机制的运行原理，回答上边那些疑问。但是在我们开始谈论Generational GC之前，我们先要花点时间谈论下Python的引用计数算法的一个严重的理论问题。</p>
 <div class="section" id="python">
@@ -187,7 +187,7 @@
 <div class="line"><em>译文：</em><a class="reference external" href="http://blog.jobbole.com/73300/">http://blog.jobbole.com/73300/</a></div>
 </div>
 </div>
-</body></html>
+
                 </div>
                 <div id="content-comments">
                     <div id="disqus_thread"></div>
@@ -234,7 +234,7 @@
                 </p>
                 <p>
                     ©
-                            2015
+                            2015-2016
                     <a class="niu2-footer-link" href="..">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>

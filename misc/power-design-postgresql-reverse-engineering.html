@@ -3,14 +3,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="树莓派, Arch Linux">
-        <meta name="description" content="将下面的 sdX 替换成你的 SD 卡的设备名。 使用 fdisk 为 SD 卡分区： fdisk /dev/sdX 根据 fdisk 的提示删除旧分区。然后创建一个新分区： 输入 o。这将清除驱动器上的所有分区。 输入 p 列出分区。列表中应该没有任何分区了。 输入 n，然后 p 设置为主分区，1 设置为驱动器第一个分区，按回车不更改起始扇区的默认值，输入 +100M 设置结束扇区。 输入 t，然后 c 将第一个分区设为 W95 FAT32 (LBA) 格式。 输入 n，然后 p ...">
-        <title>为树莓派制作 Arch Linux SD 卡 - HyStars</title>
+        <meta name="keywords" content="Power Designer, PostgreSQL, 逆向工程">
+        <meta name="description" content="首先说说系统环境，Windows 7 64 位系统，PowerDesigner 16.5，远程 PostgreSQL 9.4 数据库，JDK 为 64 位的 Java 8。 笔者依次点击： Database->Configure Connections...->Connection Profiles->Add Datasource 输入以下配置： Connection type: JDBC DBMS type: PostgreSQL JDBC driver class: org.postgresql.Driver JDBC connection URL: jdbc:postgresql://<your_host>:5432/<your_database> 但是点击 Test ...">
+        <title>Power Designer 连接 PostgreSQL 逆向工程若干问题解决笔记 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
         <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="../shu-mei-pai/sd-card-creation-for-rpi.html" />
+        <link rel="canonical" href="../misc/power-design-postgresql-reverse-engineering.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
             <script src="../theme/js/html5shiv.js"></script>
@@ -88,66 +88,69 @@
 
         <div id="body-content">
             <div class="col-md-8 col-md-offset-2">
-                <h1 id="content-heading">为树莓派制作 Arch Linux SD 卡</h1>
+                <h1 id="content-heading">Power Designer 连接 PostgreSQL 逆向工程若干问题解决笔记</h1>
             </div>
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
-                    <p>将下面的 <strong>sdX</strong> 替换成你的 SD 卡的设备名。</p>
-<ol class="arabic">
-<li><p class="first">使用 fdisk 为 SD 卡分区：</p>
+                    <p>首先说说系统环境，Windows 7 64 位系统，PowerDesigner 16.5，远程 PostgreSQL 9.4 数据库，JDK 为 64 位的 Java 8。</p>
+<p>笔者依次点击：
+Database-&gt;Configure Connections...-&gt;Connection Profiles-&gt;Add Datasource</p>
+<p>输入以下配置：</p>
 <pre class="literal-block">
-fdisk /dev/sdX
+Connection type: JDBC
+DBMS type: PostgreSQL
+JDBC driver class: org.postgresql.Driver
+JDBC connection URL: jdbc:postgresql://&lt;your_host&gt;:5432/&lt;your_database&gt;
 </pre>
-</li>
-<li><p class="first">根据 fdisk 的提示删除旧分区。然后创建一个新分区：</p>
-<blockquote>
-<ol class="arabic simple">
-<li>输入 <strong>o</strong>。这将清除驱动器上的所有分区。</li>
-<li>输入 <strong>p</strong> 列出分区。列表中应该没有任何分区了。</li>
-<li>输入 <strong>n</strong>，然后 <strong>p</strong> 设置为主分区，<strong>1</strong> 设置为驱动器第一个分区，按<strong>回车</strong>不更改起始扇区的默认值，输入 <strong>+100M</strong> 设置结束扇区。</li>
-<li>输入 <strong>t</strong>，然后 <strong>c</strong> 将第一个分区设为 W95 FAT32 (LBA) 格式。</li>
-<li>输入 <strong>n</strong>，然后 <strong>p</strong> 设置为主分区，<strong>2</strong> 设置为驱动器第二个分区，按<strong>回车</strong>不更改起始扇区和结束扇区的默认值。</li>
-<li>输入 <strong>w</strong> 保存分区表退出。</li>
-</ol>
-</blockquote>
-</li>
-<li><p class="first">创建并挂载 FAT 文件系统：</p>
-<pre class="literal-block">
-mkfs.vfat /dev/sdX1
-mkdir boot
-mount /dev/sdX1 boot
-</pre>
-</li>
-<li><p class="first">创建并挂载 ext4 文件系统：</p>
-<pre class="literal-block">
-mkfs.ext4 /dev/sdX2
-mkdir root
-mount /dev/sdX2 root
-</pre>
-</li>
-<li><p class="first">下载并解压 root 文件系统（用 root 身份，而不是 sudo）：</p>
-<pre class="literal-block">
-wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
-sync
-</pre>
-</li>
-<li><p class="first">将 boot 文件移动至第一个分区：</p>
-<pre class="literal-block">
-mv root/boot/* boot
-</pre>
-</li>
-<li><p class="first">卸载这两个分区：</p>
-<pre class="literal-block">
-umount boot root
-</pre>
-</li>
-<li><p class="first">将 SD 卡插入树莓派，连接至以太网，提供 5V 电源。</p>
-</li>
-<li><p class="first">使用串口终端或者 SSH 访问路由器提供的树莓派 IP 地址，默认 root 密码为 'root'。</p>
-</li>
-</ol>
-<p><em>该文为译文，原文地址：</em><a class="reference external" href="http://archlinuxarm.org/platforms/armv6/raspberry-pi">http://archlinuxarm.org/platforms/armv6/raspberry-pi</a></p>
+<p>但是点击 Test connection 时出现了问题。</p>
+<div class="section" id="could-not-initialize-javavm">
+<h2 id="e5012e">Could not Initialize JavaVM!</h2>
+<div class="section" id="id1">
+<h3 id="9ab31c">原因分析</h3>
+<p>这个原因很简单，笔者安装的是 64 位的 JDK 和 JRE，而 Power Designer 是 32 位的，其 JDBC 无法在 64 位的 Java 虚拟机上运行。</p>
+</div>
+<div class="section" id="id2">
+<h3 id="4b8621">解决</h3>
+<p>从 Oracle 官网上下载 32 位的 JDK，安装时不要自动配置环境变量，因为笔者系统里的其他程序还要运行在 64 位虚拟机上，能不能只让 Power Designer 在 32 位虚拟机上运行呢？下一步将完美解决这个问题。</p>
+</div>
+</div>
+<div class="section" id="non-sql-error-could-not-load-class-org-postgresql-driver">
+<h2 id="68f388">Non SQL Error : Could not load class org.postgresql.Driver</h2>
+<div class="section" id="id3">
+<h3 id="9ab31c_1">原因分析</h3>
+<p>原因是找不到 PostgreSQL 的 Java 驱动。</p>
+</div>
+<div class="section" id="id4">
+<h3 id="4b8621_1">解决</h3>
+<p>访问 <a class="reference external" href="http://jdbc.postgresql.org/download.html">http://jdbc.postgresql.org/download.html</a>，下载对应的 jar 包（笔者下载的是 postgresql-9.4.1208.jar）。</p>
+<p>将下载下来的 jar 包放入某个目录，笔者放在了 D:ToolsSybasePowerDesigner 16SQL Anywhere 12 drivers 这个目录，当然你可以放到任意目录。</p>
+<p>然后在 Power Designer 安装目录新建一个 PowerDesigner.bat 文件，输入以下内容：</p>
+<div class="highlight"><pre><span class="k">set</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">"C:\Program Files (x86)\Java\jdk1.8.0_77"</span>
+<span class="k">set</span> <span class="nv">CLASSPATH</span><span class="o">=</span><span class="s2">"%JAVA_HOME%\lib\jt.jar;%JAVA_HOME%\lib\tools.jar;D:\Tools\Sybase\PowerDesigner 16\SQL Anywhere 12 drivers\postgresql-9.4.1208.jar"</span>
+<span class="k">cd</span> <span class="s2">"D:\Tools\Sybase\PowerDesigner 16"</span>
+start <span class="n">/b</span> PdShell<span class="m">16</span>.exe
+exit
+</pre></div>
+<p>其中 JAVA_HOME 是上一步安装的 32 位 JDK 的目录，CLASSPATH 包含那个 postgresql 的 Java 驱动 jar 包。</p>
+<p>保存后，右键发送到桌面快捷方式即可，也可以给它换个图标，以后运行时双击这个快捷方式就可以了。</p>
+</div>
+</div>
+<div class="section" id="unable-to-list-the-columns-sqlstate-22003-short-t">
+<h2 id="1ec56e">Unable to list the columns. SQLSTATE = 22003不良的类型值 short : t</h2>
+<p>然而成功连接数据库后建模时出现了“不良的类型值问题”，解决方法如下：</p>
+<p>依次点击</p>
+<p>Database-&gt;Edit Current DBMS...-&gt;General Tab-&gt;PostgreSQL 9.x-&gt;Script-&gt;Objects</p>
+<p>或者</p>
+<p>Tools-&gt;Edit Current DBMS-&gt;PostgreSQL 9.x-&gt;Script-&gt;Objects</p>
+<p>将 Column-&gt;SqlListQuery 选项里 <tt class="docutils literal">SELECT</tt> 中的 <tt class="docutils literal">c.attnotnull</tt> 替换为 <tt class="docutils literal">cast(nullif(c.attnotnull, false) as varchar(1))</tt></p>
+<p>将 Key-&gt;SqlListQuery 选项里 <tt class="docutils literal">SELECT</tt> 中的 <tt class="docutils literal">x.indisprimary</tt> 替换为 <tt class="docutils literal">cast(nullif(x.indisprimary, false) as varchar(1))</tt></p>
+<p>保存即可。</p>
+<div class="line-block">
+<div class="line"><em>参考文章：</em></div>
+<div class="line"><a class="reference external" href="http://www.bixuda.com/2010/08/27/%E7%94%A8powerdesigner%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5postgresql%E6%95%B0%E6%8D%AE%E5%BA%93/">用PowerDesigner远程连接PostgreSQL数据库</a></div>
+<div class="line"><a class="reference external" href="http://www.cnblogs.com/ITbbs/p/4441693.html">PowerDesigner 16.5 反向PostgreSQL9.01 中 Unable to list the columns. SQLSTATE = 22003不良的类型值 short : t 解决方法</a></div>
+</div>
+</div>
 
                 </div>
                 <div id="content-comments">
@@ -161,12 +164,13 @@ umount boot root
             <div class="niu2-right-container col-md-2">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
-                    <div class="niu2-sidebar-value">2015-04-08 18:27</div>
-                    <div class="niu2-sidebar-label"><i class="icon-leaf"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="../shu-mei-pai/index.html">树莓派</a></div>
+                    <div class="niu2-sidebar-value">2016-04-13 19:56</div>
+                    <div class="niu2-sidebar-label"><i class="icon-coffee"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="../misc/index.html">其他</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/shu-mei-pai.html">树莓派</a><sup>5</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/arch-linux.html">Arch Linux</a><sup>3</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/power-designer.html">Power Designer</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/postgresql.html">PostgreSQL</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/ni-xiang-gong-cheng.html">逆向工程</a><sup>1</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -174,8 +178,8 @@ umount boot root
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>
                     <ol id="niu2-sidebar-toc-list">
-                        <li><a href="#content-heading">为树莓派制作 Arch Linux SD 卡</a></li>
-                        
+                        <li><a href="#content-heading">Power Designer 连接 PostgreSQL 逆向工程若干问题解决笔记</a></li>
+                        <li><a href='#e5012e'>Could not Initialize JavaVM!</a><ol><li><a href='#9ab31c'>原因分析</a></li><li><a href='#4b8621'>解决</a></li></ol></li><li><a href='#68f388'>Non SQL Error : Could not load class org.postgresql.Driver</a><ol><li><a href='#9ab31c_1'>原因分析</a></li><li><a href='#4b8621_1'>解决</a></li></ol></li><li><a href='#1ec56e'>Unable to list the columns. SQLSTATE = 22003不良的类型值 short : t</a></li>
                         <li><a href="#content-comments">评论</a></li>
                     </ol>
                 </div>
