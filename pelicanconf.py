@@ -56,9 +56,9 @@ PLUGIN_PATHS = ['plugins']
 PLUGINS = ['extract_headings', 'niux2_lazyload_helper']
 
 # extract_headings settings
-import md5
+import hashlib
 def my_slugify(value, sep):
-    m = md5.md5(value.encode('utf-8'))
+    m = hashlib.md5(value.encode('utf-8'))
     return m.digest().encode('hex')[:6]
 MY_SLUGIFY_FUNC = my_slugify
 MY_TOC_LIST_TYPE = 'ol'
