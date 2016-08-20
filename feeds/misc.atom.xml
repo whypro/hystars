@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>HyStars</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2015-07-22T10:16:00+08:00</updated><entry><title>连连看游戏消除算法</title><link href="/misc/lianliankan.html" rel="alternate"></link><updated>2015-07-22T10:16:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-07-21:misc/lianliankan.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>HyStars</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2016-04-13T19:56:00+08:00</updated><entry><title>Power Designer 连接 PostgreSQL 逆向工程若干问题解决笔记</title><link href="/misc/power-design-postgresql-reverse-engineering.html" rel="alternate"></link><updated>2016-04-13T19:56:00+08:00</updated><author><name>whypro</name></author><id>tag:,2016-04-13:misc/power-design-postgresql-reverse-engineering.html</id><summary type="html">&lt;p&gt;首先说说系统环境，Windows 7 64 位系统，PowerDesigner 16.5，远程 PostgreSQL 9.4 数据库，JDK 为 64 位的 Java 8。&lt;/p&gt;
+&lt;p&gt;笔者依次点击：
+Database-&amp;gt;Configure Connections...-&amp;gt;Connection Profiles-&amp;gt;Add Datasource&lt;/p&gt;
+&lt;p&gt;输入以下配置：&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Connection type: JDBC
+DBMS type: PostgreSQL
+JDBC driver class: org.postgresql.Driver
+JDBC connection URL: jdbc:postgresql://&amp;lt;your_host&amp;gt;:5432/&amp;lt;your_database&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;但是点击 Test connection 时出现了问题。&lt;/p&gt;
+&lt;div class="section" id="could-not-initialize-javavm"&gt;
+&lt;h2 id="e5012e"&gt;Could not Initialize JavaVM!&lt;/h2&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h3 id="9ab31c"&gt;原因分析&lt;/h3&gt;
+&lt;p&gt;这个原因很简单，笔者安装的是 64 位的 JDK 和 JRE，而 Power Designer 是 32 位的，其 JDBC 无法在 64 位的 Java 虚拟机上运行。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h3 id="4b8621"&gt;解决&lt;/h3&gt;
+&lt;p&gt;从 Oracle 官网上下载 32 位的 JDK，安装时不要自动配置环境变量，因为笔者系统里的其他程序还要运行在 64 位虚拟机上，能不能只让 Power Designer 在 32 位虚拟机上运行呢？下一步将完美解决这个问题。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="non-sql-error-could-not-load-class-org-postgresql-driver"&gt;
+&lt;h2 id="68f388"&gt;Non SQL Error : Could not load class org.postgresql.Driver&lt;/h2&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3 id="9ab31c_1"&gt;原因分析&lt;/h3&gt;
+&lt;p&gt;原因是找不到 PostgreSQL 的 Java 驱动。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3 id="4b8621_1"&gt;解决&lt;/h3&gt;
+&lt;p&gt;访问 &lt;a class="reference external" href="http://jdbc.postgresql.org/download.html"&gt;http://jdbc.postgresql.org/download.html&lt;/a&gt;，下载对应的 jar 包（笔者下载的是 postgresql-9.4.1208.jar）。&lt;/p&gt;
+&lt;p&gt;将下载下来的 jar 包放入某个目录，笔者放在了 D:ToolsSybasePowerDesigner 16SQL Anywhere 12 drivers 这个目录，当然你可以放到任意目录。&lt;/p&gt;
+&lt;p&gt;然后在 Power Designer 安装目录新建一个 PowerDesigner.bat 文件，输入以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;JAVA_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"C:\Program Files (x86)\Java\jdk1.8.0_77"&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;CLASSPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"%JAVA_HOME%\lib\jt.jar;%JAVA_HOME%\lib\tools.jar;D:\Tools\Sybase\PowerDesigner 16\SQL Anywhere 12 drivers\postgresql-9.4.1208.jar"&lt;/span&gt;
+&lt;span class="k"&gt;cd&lt;/span&gt; &lt;span class="s2"&gt;"D:\Tools\Sybase\PowerDesigner 16"&lt;/span&gt;
+start &lt;span class="n"&gt;/b&lt;/span&gt; PdShell&lt;span class="m"&gt;16&lt;/span&gt;.exe
+exit
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中 JAVA_HOME 是上一步安装的 32 位 JDK 的目录，CLASSPATH 包含那个 postgresql 的 Java 驱动 jar 包。&lt;/p&gt;
+&lt;p&gt;保存后，右键发送到桌面快捷方式即可，也可以给它换个图标，以后运行时双击这个快捷方式就可以了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="unable-to-list-the-columns-sqlstate-22003-short-t"&gt;
+&lt;h2 id="1ec56e"&gt;Unable to list the columns. SQLSTATE = 22003不良的类型值 short : t&lt;/h2&gt;
+&lt;p&gt;然而成功连接数据库后建模时出现了“不良的类型值问题”，解决方法如下：&lt;/p&gt;
+&lt;p&gt;依次点击&lt;/p&gt;
+&lt;p&gt;Database-&amp;gt;Edit Current DBMS...-&amp;gt;General Tab-&amp;gt;PostgreSQL 9.x-&amp;gt;Script-&amp;gt;Objects&lt;/p&gt;
+&lt;p&gt;或者&lt;/p&gt;
+&lt;p&gt;Tools-&amp;gt;Edit Current DBMS-&amp;gt;PostgreSQL 9.x-&amp;gt;Script-&amp;gt;Objects&lt;/p&gt;
+&lt;p&gt;将 Column-&amp;gt;SqlListQuery 选项里 &lt;tt class="docutils literal"&gt;SELECT&lt;/tt&gt; 中的 &lt;tt class="docutils literal"&gt;c.attnotnull&lt;/tt&gt; 替换为 &lt;tt class="docutils literal"&gt;cast(nullif(c.attnotnull, false) as varchar(1))&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;将 Key-&amp;gt;SqlListQuery 选项里 &lt;tt class="docutils literal"&gt;SELECT&lt;/tt&gt; 中的 &lt;tt class="docutils literal"&gt;x.indisprimary&lt;/tt&gt; 替换为 &lt;tt class="docutils literal"&gt;cast(nullif(x.indisprimary, false) as varchar(1))&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;保存即可。&lt;/p&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;em&gt;参考文章：&lt;/em&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="http://www.bixuda.com/2010/08/27/%E7%94%A8powerdesigner%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5postgresql%E6%95%B0%E6%8D%AE%E5%BA%93/"&gt;用PowerDesigner远程连接PostgreSQL数据库&lt;/a&gt;&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="http://www.cnblogs.com/ITbbs/p/4441693.html"&gt;PowerDesigner 16.5 反向PostgreSQL9.01 中 Unable to list the columns. SQLSTATE = 22003不良的类型值 short : t 解决方法&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="Power Designer"></category><category term="PostgreSQL"></category><category term="逆向工程"></category></entry><entry><title>连连看游戏消除算法</title><link href="/misc/lianliankan.html" rel="alternate"></link><updated>2015-07-22T10:16:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-07-21:misc/lianliankan.html</id><summary type="html">&lt;p&gt;今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。&lt;/p&gt;
 &lt;p&gt;连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则：&lt;/p&gt;
 &lt;div class="figure align-center"&gt;
 &lt;img alt="0.png" src="/images/misc/lianliankan/0.png" width="518px"/&gt;
@@ -210,7 +269,7 @@
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="连连看"></category><category term="游戏"></category><category term="算法"></category></entry><entry><title>云平台之 SaaS 随想</title><link href="/misc/saas-essay.html" rel="alternate"></link><updated>2015-05-03T17:49:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-05-03:misc/saas-essay.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;div class="section" id="id1"&gt;
+</summary><category term="连连看"></category><category term="游戏"></category><category term="算法"></category></entry><entry><title>云平台之 SaaS 随想</title><link href="/misc/saas-essay.html" rel="alternate"></link><updated>2015-05-03T17:49:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-05-03:misc/saas-essay.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2 id="0db8be"&gt;SaaS 平台&lt;/h2&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h3 id="d45f53"&gt;以应用为中心&lt;/h3&gt;
@@ -347,7 +406,7 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;em&gt;原文地址：&lt;/em&gt;&lt;a class="reference external" href="http://88250.b3log.org/saas-essay"&gt;http://88250.b3log.org/saas-essay&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="云平台"></category><category term="Docker"></category><category term="golang"></category><category term="PaaS"></category><category term="SaaS"></category><category term="云计算"></category><category term="Cloud"></category></entry><entry><title>非阻塞服务器需要注意的主要问题</title><link href="/misc/the-main-issue-with-non-blocking-servers.html" rel="alternate"></link><updated>2015-04-29T18:35:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-29:misc/the-main-issue-with-non-blocking-servers.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;非阻塞服务器有一个严重的问题，一些人甚至在没解决这个问题的背景下就开发自己的应用框架（比如 Python 的 &lt;a class="reference external" href="http://www.tornadoweb.org/en/stable/"&gt;Tornado&lt;/a&gt;）&lt;/p&gt;
+</summary><category term="云平台"></category><category term="Docker"></category><category term="golang"></category><category term="PaaS"></category><category term="SaaS"></category><category term="云计算"></category><category term="Cloud"></category></entry><entry><title>非阻塞服务器需要注意的主要问题</title><link href="/misc/the-main-issue-with-non-blocking-servers.html" rel="alternate"></link><updated>2015-04-29T18:35:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-29:misc/the-main-issue-with-non-blocking-servers.html</id><summary type="html">&lt;p&gt;非阻塞服务器有一个严重的问题，一些人甚至在没解决这个问题的背景下就开发自己的应用框架（比如 Python 的 &lt;a class="reference external" href="http://www.tornadoweb.org/en/stable/"&gt;Tornado&lt;/a&gt;）&lt;/p&gt;
 &lt;p&gt;当你使用非阻塞服务器的时候，你会获得出色的性能并且不需要担心可扩展性，然而同时你需要意识到一个问题：你的IO调用、网络系统调用也都是非阻塞的吗？很多人忽略了，他们使用的非阻塞服务器，其实是构建在阻塞库之上的。&lt;/p&gt;
 &lt;p&gt;在这篇文章里，我将深入对比多线程的服务器与非阻塞的服务器分别是如何工作的，以及你之所以需要在"使用的服务器"与"使用的库"在阻塞模式上保持一致的原因。&lt;/p&gt;
 &lt;div class="section" id="non-blocking-servers-perform-better"&gt;
@@ -403,7 +462,8 @@
 &lt;div class="line"&gt;&lt;em&gt;译文：&lt;/em&gt;&lt;a class="reference external" href="http://blog.csdn.net/chong232/article/details/6153161"&gt;http://blog.csdn.net/chong232/article/details/6153161&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="非阻塞"></category><category term="Tornado"></category><category term="Python"></category></entry><entry><title>通天塔导游</title><link href="/misc/tour-de-babel.html" rel="alternate"></link><updated>2015-04-23T10:42:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-23:misc/tour-de-babel.html</id><summary type="html">&lt;!-- --&gt;&lt;html&gt;&lt;body&gt;&lt;blockquote&gt;
+</summary><category term="非阻塞"></category><category term="Tornado"></category><category term="Python"></category></entry><entry><title>通天塔导游</title><link href="/misc/tour-de-babel.html" rel="alternate"></link><updated>2015-04-23T10:42:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-23:misc/tour-de-babel.html</id><summary type="html">&lt;!-- --&gt;
+&lt;blockquote&gt;
 &lt;p&gt;【译注】：圣经记载：在远古的时候，人类都使用一种语言，全世界的人决定一起造一座通天的塔，就是巴别塔，后来被上帝知道了，上帝就让人们使用不同的语言，这个塔就没能造起来。 巴别塔不建自毁，与其说上帝的分化将人类的语言复杂化，不如说是人类自身心灵和谐不再的分崩离析。之所以后来有了翻译，不仅是为了加强人类之间的交流，更寄达了一种愿望，希望能以此消除人际的隔阂，获求来自心灵的和谐及慰藉。真正的译者，把握血脉，抚平创痕，通传天籁，开启心门。&lt;/p&gt;
 &lt;img alt="通天塔" class="align-center" src="/images/misc/babel.jpg" width="1024px"/&gt;
 &lt;/blockquote&gt;
@@ -570,7 +630,7 @@
 &lt;p&gt;(发布于 2004 年 9 月，小小的更新在2006年3月28日)&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;原文地址：&lt;/em&gt;&lt;a class="reference external" href="https://code.google.com/p/windows-config/wiki/TourDeBabel"&gt;https://code.google.com/p/windows-config/wiki/TourDeBabel&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="编程语言"></category></entry><entry><title>主板维修——更换爆浆电容</title><link href="/misc/fix-mother-board.html" rel="alternate"></link><updated>2015-04-21T11:01:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-21:misc/fix-mother-board.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;家里的电脑买了七、八年了，最近显示器突然出现了偶尔无法正常工作，桌面黑屏，画面无法刷新的情况。&lt;/p&gt;
+</summary><category term="编程语言"></category></entry><entry><title>主板维修——更换爆浆电容</title><link href="/misc/fix-mother-board.html" rel="alternate"></link><updated>2015-04-21T11:01:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-21:misc/fix-mother-board.html</id><summary type="html">&lt;p&gt;家里的电脑买了七、八年了，最近显示器突然出现了偶尔无法正常工作，桌面黑屏，画面无法刷新的情况。&lt;/p&gt;
 &lt;p&gt;首先怀疑是显卡问题，但是该主板没有独立显卡，是集成显卡，所以问题也就转移到了主板了。&lt;/p&gt;
 &lt;div class="figure align-center"&gt;
 &lt;img alt="IMAG0001.jpg" src="/images/misc/fix-mother-board/IMAG0001.jpg" width="800px"/&gt;
@@ -629,7 +689,7 @@
 &lt;li&gt;&lt;p class="first"&gt;成功点亮，问题解决&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="主板"></category><category term="电容"></category><category term="维修"></category></entry><entry><title>加班无罪</title><link href="/misc/jia-ban-wu-zui.html" rel="alternate"></link><updated>2015-04-20T12:09:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-20:misc/jia-ban-wu-zui.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;div class="section" id="id2"&gt;
+</summary><category term="主板"></category><category term="电容"></category><category term="维修"></category></entry><entry><title>加班无罪</title><link href="/misc/jia-ban-wu-zui.html" rel="alternate"></link><updated>2015-04-20T12:09:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-20:misc/jia-ban-wu-zui.html</id><summary type="html">&lt;div class="section" id="id2"&gt;
 &lt;h2 id="df3688"&gt;前言&lt;/h2&gt;
 &lt;p&gt;加班在很多行业司空见惯，于是 “过劳死” 开始为更多的人关注，IT行业尤为严重，但是普通职员再关注也起不了多大的作用，老板让你加班，或者是潜规则让你加班。我们从几年前就开始不提倡加班，我们也基本没加班，但是最近做了一个项目，出现程序员加班，甚至我自己本人都投入了很多下班后的时间，让我又一次思考加班的问题。作为一个分公司经理，我鼓起勇气写下此文。&lt;/p&gt;
 &lt;/div&gt;
@@ -670,7 +730,7 @@
 &lt;p&gt;如果你觉得我文章写的很有道理，请推荐给你的老板。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;原文地址：&lt;/em&gt;&lt;a class="reference external" href="http://blog.jobbole.com/86160/"&gt;http://blog.jobbole.com/86160/&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="加班"></category></entry><entry><title>真相侠告诉你 2.1A 充电器给手机充电到底好不好</title><link href="/misc/zhen-xiang-xia-gao-su-ni-21a-chong-dian-qi-gei-shou-ji-chong-dian-dao-di-hao-bu-hao.html" rel="alternate"></link><updated>2015-04-14T22:44:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-14:misc/zhen-xiang-xia-gao-su-ni-21a-chong-dian-qi-gei-shou-ji-chong-dian-dao-di-hao-bu-hao.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;手机没电了，拿起基友的ipad充电器开始充电。&lt;/p&gt;
+</summary><category term="加班"></category></entry><entry><title>真相侠告诉你 2.1A 充电器给手机充电到底好不好</title><link href="/misc/zhen-xiang-xia-gao-su-ni-21a-chong-dian-qi-gei-shou-ji-chong-dian-dao-di-hao-bu-hao.html" rel="alternate"></link><updated>2015-04-14T22:44:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-14:misc/zhen-xiang-xia-gao-su-ni-21a-chong-dian-qi-gei-shou-ji-chong-dian-dao-di-hao-bu-hao.html</id><summary type="html">&lt;p&gt;手机没电了，拿起基友的ipad充电器开始充电。&lt;/p&gt;
 &lt;p&gt;基友甲：你他妈的要命不，这2.1A的给手机充电会炸的，没看前几天新闻啊！&lt;/p&gt;
 &lt;p&gt;基友乙：扯淡！对手机来说2.1A完全能承受，而且充电速度会大于一般的手机充电器。&lt;/p&gt;
 &lt;p&gt;我想很多人都有这样的疑问吧。&lt;/p&gt;
@@ -694,7 +754,7 @@
 &lt;img alt="30738110_1390227390006_1024x1024.jpg" class="align-center" src="/images/misc/ac_adapter/30738110_1390227390006_1024x1024.jpg" width="985px"/&gt;
 &lt;img alt="30738113_1390227394261_1024x1024.jpg" class="align-center" src="/images/misc/ac_adapter/30738113_1390227394261_1024x1024.jpg" width="985px"/&gt;
 &lt;p&gt;以后可以放心的用2.1A充电器给手机充电咯！&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="手机"></category></entry><entry><title>使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</title><link href="/misc/linux-test-drive-speed.html" rel="alternate"></link><updated>2015-04-13T21:18:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-13:misc/linux-test-drive-speed.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;div class="section" id="id1"&gt;
+</summary><category term="手机"></category></entry><entry><title>使用 dd 命令测试 USB 和 SSD 硬盘的读写速度</title><link href="/misc/linux-test-drive-speed.html" rel="alternate"></link><updated>2015-04-13T21:18:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-13:misc/linux-test-drive-speed.html</id><summary type="html">&lt;div class="section" id="id1"&gt;
 &lt;h2 id="974cdb"&gt;磁盘驱动器速度&lt;/h2&gt;
 &lt;p&gt;磁盘驱动器的速度是以一个单位时间内读写数据量的多少来衡量的。dd 命令是一个简单的命令行工具，它可用对磁盘进行任意数据块的读取和写入，同时可以度量读取写入的速度。&lt;/p&gt;
 &lt;p&gt;在这篇文章中，我们将会使用 dd 命令来测试 USB 和 SSD 磁盘的读取和写入速度。&lt;/p&gt;
@@ -812,7 +872,7 @@ dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;./la
 &lt;div class="line"&gt;&lt;em&gt;译文：&lt;/em&gt;&lt;a class="reference external" href="http://lctt.github.io/"&gt;LCTT&lt;/a&gt; &lt;a class="reference external" href="http://linux.cn/article-3696-1.html"&gt;http://linux.cn/article-3696-1.html&lt;/a&gt; &lt;em&gt;译者：runningwater&lt;/em&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="Linux"></category></entry><entry><title>Arch Linux 配置备忘</title><link href="/misc/arch-linux-pei-zhi-bei-wang.html" rel="alternate"></link><updated>2015-04-12T22:25:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-11:misc/arch-linux-pei-zhi-bei-wang.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;ol class="arabic"&gt;
+</summary><category term="Linux"></category></entry><entry><title>Arch Linux 配置备忘</title><link href="/misc/arch-linux-pei-zhi-bei-wang.html" rel="alternate"></link><updated>2015-04-12T22:25:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-11:misc/arch-linux-pei-zhi-bei-wang.html</id><summary type="html">&lt;ol class="arabic"&gt;
 &lt;li&gt;&lt;p class="first"&gt;增加用户&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 useradd whypro
@@ -872,4 +932,4 @@ vi /etc/motd
 &lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="Arch Linux"></category></entry></feed>
+</summary><category term="Arch Linux"></category></entry></feed>

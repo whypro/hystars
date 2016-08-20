@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>HyStars</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2015-06-06T23:06:00+08:00</updated><entry><title>利用图片指纹检测高相似度图片</title><link href="/python/fingerprinting-images-for-near-duplicate-detection.html" rel="alternate"></link><updated>2015-06-06T23:06:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-06-06:python/fingerprinting-images-for-near-duplicate-detection.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;img alt="image_fingerprint_flow.jpg" class="align-center" src="/images/Python/fingerprinting-images-for-near-duplicate-detection/image_fingerprint_flow.jpg" width="1300px"/&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>HyStars</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2015-06-06T23:06:00+08:00</updated><entry><title>利用图片指纹检测高相似度图片</title><link href="/python/fingerprinting-images-for-near-duplicate-detection.html" rel="alternate"></link><updated>2015-06-06T23:06:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-06-06:python/fingerprinting-images-for-near-duplicate-detection.html</id><summary type="html">&lt;img alt="image_fingerprint_flow.jpg" class="align-center" src="/images/Python/fingerprinting-images-for-near-duplicate-detection/image_fingerprint_flow.jpg" width="1300px"/&gt;
 &lt;p&gt;大概五年前吧，我那时还在为一家约会网站做开发工作。他们是早期创业公司，但他们也开始拥有了一些稳定用户量。不像其他约会网站，这家公司向来以洁身自好为主要市场形象。它不是一个供你鬼混的网站——是让你能找到忠实伴侣的地方。&lt;/p&gt;
 &lt;p&gt;由于投入了数以百万计的风险资本（在US大萧条之前），他们关于真爱并找寻灵魂伴侣的在线广告势如破竹。Forbes(福布斯，美国著名财经杂志)采访了他们。全国性电视节目也对他们进行了专访。早期的成功促成了事业起步时让人垂涎的指数级增长现象——他们的用户数量以每月加倍的速度增长。对他们而言，一切都似乎顺风顺水。&lt;/p&gt;
 &lt;p&gt;但他们有一个严重的问题——&lt;strong&gt;色情问题&lt;/strong&gt;。&lt;/p&gt;
@@ -224,7 +224,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="Python"></category></entry><entry><title>对比Ruby和Python的垃圾回收（2）：代式垃圾回收机制</title><link href="/python/generational-gc-in-python-and-ruby.html" rel="alternate"></link><updated>2015-04-29T18:50:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-20:python/generational-gc-in-python-and-ruby.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;上周，我根据之前在RuPy上做的一个名为“Visualizing Garbage Collection in Ruby and Python.”的报告写了这篇文章的&lt;a class="reference external" href="/python/visualizing-garbage-collection-in-ruby-and-python.html"&gt;上半部分&lt;/a&gt;。在上篇中，我解释了标准Ruby(也被称为Matz的Ruby解释器或是MRI)是如何使用名为标记回收(Mark and Sweep)的垃圾回收算法，这个算法是为1960年原版本的Lisp所开发。同样，我也介绍了Python使用一种有53年历史的GC算法，这种算法的思路非常不同，称之为引用计数。&lt;/p&gt;
+</summary><category term="Python"></category></entry><entry><title>对比Ruby和Python的垃圾回收（2）：代式垃圾回收机制</title><link href="/python/generational-gc-in-python-and-ruby.html" rel="alternate"></link><updated>2015-04-29T18:50:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-20:python/generational-gc-in-python-and-ruby.html</id><summary type="html">&lt;p&gt;上周，我根据之前在RuPy上做的一个名为“Visualizing Garbage Collection in Ruby and Python.”的报告写了这篇文章的&lt;a class="reference external" href="/python/visualizing-garbage-collection-in-ruby-and-python.html"&gt;上半部分&lt;/a&gt;。在上篇中，我解释了标准Ruby(也被称为Matz的Ruby解释器或是MRI)是如何使用名为标记回收(Mark and Sweep)的垃圾回收算法，这个算法是为1960年原版本的Lisp所开发。同样，我也介绍了Python使用一种有53年历史的GC算法，这种算法的思路非常不同，称之为引用计数。&lt;/p&gt;
 &lt;p&gt;事实证明，Python在引用计数之外，还用了另一个名为Generational Garbage Collection的算法。这意味着Python的垃圾回收器用不同的方式对待新创建的以及旧有的对象。并且在即将到来的2.1版本的MRI Ruby中也首次引入了Generational Garbage Collection 的垃圾回收机制(在另两个Ruby的实现：JRuby和Rubinius中，已经使用这种GC机制很多年了，我将在下周的RubyConf大会上将它是如何在这两种Ruby实现中工作的)。&lt;/p&gt;
 &lt;p&gt;当然，这句话“用不同的方式对待新创建的以及旧有的对象”是有点模糊不清，比如如何定义新、旧对象？又比如对于Ruby和Python来说具体是如何采取不同的对待方式？今天，我们就来谈谈这两种语言GC机制的运行原理，回答上边那些疑问。但是在我们开始谈论Generational GC之前，我们先要花点时间谈论下Python的引用计数算法的一个严重的理论问题。&lt;/p&gt;
 &lt;div class="section" id="python"&gt;
@@ -319,7 +319,7 @@
 &lt;div class="line"&gt;&lt;em&gt;译文：&lt;/em&gt;&lt;a class="reference external" href="http://blog.jobbole.com/73300/"&gt;http://blog.jobbole.com/73300/&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="Python"></category><category term="Ruby"></category><category term="垃圾回收"></category></entry><entry><title>对比Ruby和Python的垃圾回收（1）</title><link href="/python/visualizing-garbage-collection-in-ruby-and-python.html" rel="alternate"></link><updated>2015-04-29T18:50:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-20:python/visualizing-garbage-collection-in-ruby-and-python.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;注：这篇文章基于我在布达佩斯的RuPy大会上所作的演讲。我觉得与其直接将幻灯片发布出来，不如在我还有印象的时候将它写成博客来的更有意义。同样，我会在将来发布RuPy大会的视频链接。我计划将在RubyConf大会上发表类似的演讲，除了有关于Python的部分，并且将对比MRI、JRuby和Rubinius的垃圾回收器是怎样工作的。&lt;/p&gt;
+</summary><category term="Python"></category><category term="Ruby"></category><category term="垃圾回收"></category></entry><entry><title>对比Ruby和Python的垃圾回收（1）</title><link href="/python/visualizing-garbage-collection-in-ruby-and-python.html" rel="alternate"></link><updated>2015-04-29T18:50:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-20:python/visualizing-garbage-collection-in-ruby-and-python.html</id><summary type="html">&lt;p&gt;注：这篇文章基于我在布达佩斯的RuPy大会上所作的演讲。我觉得与其直接将幻灯片发布出来，不如在我还有印象的时候将它写成博客来的更有意义。同样，我会在将来发布RuPy大会的视频链接。我计划将在RubyConf大会上发表类似的演讲，除了有关于Python的部分，并且将对比MRI、JRuby和Rubinius的垃圾回收器是怎样工作的。&lt;/p&gt;
 &lt;p&gt;如果想要对Ruby垃圾回收器以及内部原理有更加深入的了解，你可以在我即将出版的新书《Ruby Under a Microscope》中找到答案。&lt;/p&gt;
 &lt;div class="figure align-center"&gt;
 &lt;img alt="circuitory-sysvsdtem-polish" src="/images/Python/garbage_collection/95160acf42af5a9730778d70eed7904b.png" width="350px"/&gt;
@@ -484,7 +484,7 @@
 &lt;div class="line"&gt;&lt;em&gt;译文：&lt;/em&gt;&lt;a class="reference external" href="http://python.jobbole.com/60900/"&gt;http://python.jobbole.com/60900/&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="Python"></category><category term="Ruby"></category><category term="垃圾回收"></category></entry><entry><title>使用 Python 进行并发编程</title><link href="/python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" rel="alternate"></link><updated>2015-04-09T00:50:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-08:python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html</id><summary type="html">&lt;html&gt;&lt;body&gt;&lt;p&gt;让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。&lt;/p&gt;
+</summary><category term="Python"></category><category term="Ruby"></category><category term="垃圾回收"></category></entry><entry><title>使用 Python 进行并发编程</title><link href="/python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" rel="alternate"></link><updated>2015-04-09T00:50:00+08:00</updated><author><name>whypro</name></author><id>tag:,2015-04-08:python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html</id><summary type="html">&lt;p&gt;让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2 id="397717"&gt;并发方式&lt;/h2&gt;
 &lt;div class="section" id="id2"&gt;
@@ -835,10 +835,10 @@
 &lt;/div&gt;&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;eventlet （伪线程）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;hypot&lt;/span&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;eventlet （伪线程）&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first"&gt;代码如下&lt;/p&gt;
+&lt;div class="last"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;hypot&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;eventlet&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
@@ -858,7 +858,9 @@
 
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;calcPi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;ul&gt;
+&lt;/div&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;dl class="first docutils"&gt;
 &lt;dt&gt;SCOOP&lt;/dt&gt;
 &lt;dd&gt;&lt;p class="first"&gt;SCOOP中的Future接口符合 &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-3148/"&gt;PEP-3148&lt;/a&gt; 的定义，也就是在Python3中提供的 &lt;a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html"&gt;Future&lt;/a&gt; 接口。&lt;/p&gt;
@@ -981,4 +983,4 @@
 &lt;p&gt;Python提供了不同的并发方式，对应于不同的场景，我们需要选择不同的方式进行并发。选择合适的方式，不但要对该方法的原理有所了解，还应该做一些测试和试验，数据才是你做选择的最好参考。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;原文地址：&lt;/em&gt;&lt;a class="reference external" href="http://my.oschina.net/taogang/blog/389293"&gt;http://my.oschina.net/taogang/blog/389293&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;</summary><category term="Python"></category><category term="并发"></category></entry></feed>
+</summary><category term="Python"></category><category term="并发"></category></entry></feed>
