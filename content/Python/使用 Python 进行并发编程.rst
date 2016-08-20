@@ -363,28 +363,29 @@ Python下有许多开源的框架来支持分布式的并发，提供有效的�
         print calcPi(3000,4000)
 
 * eventlet （伪线程）
+    代码如下
 
-.. code-block :: python
+    .. code-block :: python
 
-    from math import hypot
-    from random import random
-    import eventlet
-    import time
+        from math import hypot
+        from random import random
+        import eventlet
+        import time
 
-    def test(tries):
-        return sum(hypot(random(), random()) < 1 for _ in range(tries))
+        def test(tries):
+            return sum(hypot(random(), random()) < 1 for _ in range(tries))
 
-    def calcPi(nbFutures, tries):
-        ts = time.time()
-        pool = eventlet.GreenPool()
-        result = pool.imap(test, [tries] * nbFutures)
+        def calcPi(nbFutures, tries):
+            ts = time.time()
+            pool = eventlet.GreenPool()
+            result = pool.imap(test, [tries] * nbFutures)
 
-        ret = 4. * sum(result) / float(nbFutures * tries)
-        span = time.time() - ts
-        print "time spend ", span
-        return ret
+            ret = 4. * sum(result) / float(nbFutures * tries)
+            span = time.time() - ts
+            print "time spend ", span
+            return ret
 
-    print calcPi(3000,4000)
+        print calcPi(3000,4000)
 
 * SCOOP
     SCOOP中的Future接口符合 `PEP-3148 <https://www.python.org/dev/peps/pep-3148/>`_ 的定义，也就是在Python3中提供的 `Future <https://docs.python.org/3/library/concurrent.futures.html>`_ 接口。
