@@ -6,14 +6,14 @@
         <meta name="description" content="Slug: usage-of-setjmp setjmp 是 C 语言解决 exception 的标准方案。我个人认为，setjmp/longjmp 这组 api 的名字没有取好，导致了许多误解。名字体现的是其行为：跳转，却没能反映其功能：exception 的抛出和捕获。 longjmp 从名字上看，叫做长距离跳转。实际上它能做的事情比名字上看起来的要少得多。跳转并非从静止状态的代码段的某个点跳转到另一个位置（类似在汇编层次的 jmp 指令做的那样），而是在运行态中向前跳转。C 语言的运行控制模型，是一个基于栈结构的指令执行序列。表示出来就是 call/return ：调用一个函数，然后用 return 指令从一个函数返回。setjmp/longjmp 实际上是完成的另一种调用返回的模型。setjmp 相当于 call，longjmp 则是 return。 重要的区别在于：setjmp ...">
         <title>setjmp 的正确使用 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="/linux/setjmp-de-zheng-que-shi-yong.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../linux/setjmp-de-zheng-que-shi-yong.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="/theme/js/html5shiv.js"></script>
-            <script src="/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -35,22 +35,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="../about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/resume.html" title="resume">
+                            <li><a href="../resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="../tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="../archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -59,22 +59,22 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="/git/index.html">
+                               <li><a href="../git/index.html">
                                    <i class="icon-folder-close"></i>Git
                                       (1)</a></li>
-                               <li><a href="/linux/index.html">
+                               <li><a href="../linux/index.html">
                                    <i class="icon-folder-close"></i>Linux
                                       (4)</a></li>
-                               <li><a href="/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (12)</a></li>
-                               <li><a href="/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
-                               <li><a href="/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -134,9 +134,9 @@
             <div class="niu2-right-container col-md-2">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
-                    <div class="niu2-sidebar-value">2016-09-09 00:05</div>
+                    <div class="niu2-sidebar-value">2016-09-09 00:30</div>
                     <div class="niu2-sidebar-label"><i class="icon-open-folder"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="/linux/index.html">Linux</a></div>
+                    <div class="niu2-sidebar-value"><a href="../linux/index.html">Linux</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
@@ -166,7 +166,7 @@
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="">whypro</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -181,9 +181,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>

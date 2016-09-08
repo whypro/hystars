@@ -6,14 +6,14 @@
         <meta name="description" content="Slug: makefile-brief-guide Makefile 简介 在软件开发中，make通常被视为一种软件构建工具。该工具主要经由读取一种名为“makefile”或“Makefile”的文件来实现软件的自动化建构。它会通过一种被称之为“target”概念来检查相关文件之间的依赖关系，这种依赖关系的检查系统非常简单，主要通过对比文件的修改时间来实现。在大多数情况下，我们主要用它来编译源代码，生成结果代码，然后把结果代码连接起来生成可执行文件或者库文件。 优点与缺点 与大多数古老的Unix工具一样，make也分别有着人数众多的拥护者和反对者。它在适应现代大型软件项目方面有着许许多多的问题。但是，依然有很多人坚定地认为（包括我）它能应付绝大多数常见的情况，而且使用非常的简单，功能强大，表达清楚。无论如何，make如今仍然被用来编译很多完整的操作系统，而且它的那些“更为现代”的替代品们在基本操作上与它没有太大差别。 当然，随着现代的集成开发环境（IDE）的诞生，特别是非Unix的平台上，很多程序员不再手动管理依靠关系检查，甚至不用去管哪些文件是这个项目的一部分，而是把这些任务交给了他们的开发环境去做。类似的，很多现代的编程语言有自己专属的、能高效配置依赖关系的方法（譬如Ant）。 主要版本 make程序经历过各方多次的改写与重写 ...">
         <title>Makefile 简易教程 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="/linux/makefile-jian-yi-jiao-cheng.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../linux/makefile-jian-yi-jiao-cheng.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="/theme/js/html5shiv.js"></script>
-            <script src="/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -35,22 +35,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="../about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/resume.html" title="resume">
+                            <li><a href="../resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="../tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="../archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -59,22 +59,22 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="/git/index.html">
+                               <li><a href="../git/index.html">
                                    <i class="icon-folder-close"></i>Git
                                       (1)</a></li>
-                               <li><a href="/linux/index.html">
+                               <li><a href="../linux/index.html">
                                    <i class="icon-folder-close"></i>Linux
                                       (4)</a></li>
-                               <li><a href="/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (12)</a></li>
-                               <li><a href="/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
-                               <li><a href="/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -227,9 +227,9 @@
             <div class="niu2-right-container col-md-2">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
-                    <div class="niu2-sidebar-value">2016-09-09 00:05</div>
+                    <div class="niu2-sidebar-value">2016-09-09 00:30</div>
                     <div class="niu2-sidebar-label"><i class="icon-open-folder"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="/linux/index.html">Linux</a></div>
+                    <div class="niu2-sidebar-value"><a href="../linux/index.html">Linux</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
@@ -259,7 +259,7 @@
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="">whypro</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -274,9 +274,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>

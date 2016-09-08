@@ -7,14 +7,14 @@
         <meta name="description" content="入手树莓派将近一个月了，很折腾，许多资源不好找，也很乱。简单整理一下自己用到的东西，方便以后自己或别人继续折腾。 操作系统下载 树莓派官方 Raspbian 系统下载：http://www.raspberrypi.org/downloads 或直接下载 http://downloads.raspberrypi.org/raspbian_latest.torrent 最新版的 BT 种子。 还有一个选择是由国人制作的超级精简版，更低内存占用：http://pan.baidu.com/share/link?shareid=167943&uk=1412008571 系统安装 所谓“安装系统”其实不如说是“恢复”下载到的系统镜像到内存卡上，这个过程也没什么难度，就是看内存卡的速度，慢慢等而已。需要注意的是，市面上部分 4G 的内存卡 ...">
         <title>树莓派 Raspberry-Pi 折腾系列：系统安装及一些必要的配置 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="/shu-mei-pai/shu-mei-pai-raspberry-pi-zhe-teng-xi-lie-xi-tong-an-zhuang-ji-yi-xie-bi-yao-de-pei-zhi.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../shu-mei-pai/shu-mei-pai-raspberry-pi-zhe-teng-xi-lie-xi-tong-an-zhuang-ji-yi-xie-bi-yao-de-pei-zhi.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="/theme/js/html5shiv.js"></script>
-            <script src="/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -36,22 +36,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="../about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/resume.html" title="resume">
+                            <li><a href="../resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="../tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="../archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -60,22 +60,22 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="/git/index.html">
+                               <li><a href="../git/index.html">
                                    <i class="icon-folder-close"></i>Git
                                       (1)</a></li>
-                               <li><a href="/linux/index.html">
+                               <li><a href="../linux/index.html">
                                    <i class="icon-folder-close"></i>Linux
                                       (4)</a></li>
-                               <li><a href="/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (12)</a></li>
-                               <li><a href="/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
-                               <li><a href="/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -99,7 +99,7 @@
             <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
                 <div id="niu2-main-content">
                     <p>入手树莓派将近一个月了，很折腾，许多资源不好找，也很乱。简单整理一下自己用到的东西，方便以后自己或别人继续折腾。</p>
-<img alt="raspberry-pi-0.jpg" class="align-center" src="/images/RPi/setup/raspberry-pi-0.jpg" width="440px"/>
+<img alt="raspberry-pi-0.jpg" class="align-center" src="../images/RPi/setup/raspberry-pi-0.jpg" width="440px"/>
 <ol class="arabic simple" start="0">
 <li>操作系统下载</li>
 </ol>
@@ -111,13 +111,13 @@
 </ol>
 <p>所谓“安装系统”其实不如说是“恢复”下载到的系统镜像到内存卡上，这个过程也没什么难度，就是看内存卡的速度，慢慢等而已。需要注意的是，市面上部分 4G 的内存卡，实际大小才 3.6G 多，会提示空间不足，所以还是直接购买 8G 吧，也差不了几块钱。</p>
 <p>在 Windows 下可以使用 <strong>Win32 Disk Imager</strong> 进行镜像恢复，非常方便，也是树莓派官方推荐的方法。官方下载地址：<a class="reference external" href="http://sourceforge.net/projects/win32diskimager/">http://sourceforge.net/projects/win32diskimager/</a></p>
-<img alt="raspberry-pi-1.gif" class="align-center" src="/images/RPi/setup/raspberry-pi-1.gif" width="431px"/>
+<img alt="raspberry-pi-1.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-1.gif" width="431px"/>
 <ol class="arabic simple" start="2">
 <li>通过 SSH 远程访问</li>
 </ol>
 <p>老实说，我一直把树莓派定位为“<em>一个扔在某个角落就可以自己跑得很欢的小电脑</em>”，加上那仅有的两个 USB 口，一个插了 USB 无限网卡，另一个再拖个键盘或鼠标啥的，实在很不方便，那么最好还是能远程访问吧。</p>
 <p>好在树莓派默认是有开启 SSH 的，但是我们系统刚安装，IP 还没设置，怎么找到它的 IP 地址呢？这时候就推荐使用另一个神器 <strong>PortScan</strong> 来找出我们的机器：</p>
-<img alt="raspberry-pi-2.gif" class="align-center" src="/images/RPi/setup/raspberry-pi-2.gif" width="574px"/>
+<img alt="raspberry-pi-2.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-2.gif" width="574px"/>
 <p>打开 PortScan 选择扫描范围，可以很方便的找出局域网中的其它机器，一般家庭中也没太多机器，找出树莓派是很容易的，如果是在公司，有很多机器的话，那么可以忽略那些有机器名的，然后剩下的一个一个尝试吧…</p>
 <p>PortScan 下载地址：<a class="reference external" href="http://abel.oss.aliyuncs.com/file/PortScan.zip">http://abel.oss.aliyuncs.com/file/PortScan.zip</a></p>
 <ol class="arabic simple" start="3">
@@ -137,7 +137,7 @@ sudo passwd --unlock root
 <li>扩展可用空间</li>
 </ol>
 <p>第一次用 root 登录，会自动弹出树莓派的高级设置面板（以后也可以通过 <strong>raspi-config</strong> 命令进入）：</p>
-<img alt="raspberry-pi-3.gif" class="align-center" src="/images/RPi/setup/raspberry-pi-3.gif" width="675px"/>
+<img alt="raspberry-pi-3.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-3.gif" width="675px"/>
 <p>选择第一项 <strong>Expand Filesystem</strong> 扩展 SD 卡上可用的空间，不然以后会有很多大软件，不能安装（提示空间不足，例如 mysql）。</p>
 <p>扩展之后可以通过 <strong>df -h</strong> 命令看到效果~</p>
 <ol class="arabic simple" start="5">
@@ -151,7 +151,7 @@ sudo passwd --unlock root
 nano /etc/apt/sources.list
 </pre>
 <p>进入编辑界面，删除原有的内容，粘贴中科大提供的内容，结果如下：</p>
-<img alt="raspberry-pi-4.gif" class="align-center" src="/images/RPi/setup/raspberry-pi-4.gif" width="675px"/>
+<img alt="raspberry-pi-4.gif" class="align-center" src="../images/RPi/setup/raspberry-pi-4.gif" width="675px"/>
 <p>然后使用 <strong>Ctrl+O</strong> 保存文件，<strong>Ctrl+X</strong> 退出编辑器。</p>
 <p>然后执行 <strong>apt-get update</strong> 命令更新软件列表。</p>
 <ol class="arabic simple" start="6">
@@ -200,9 +200,9 @@ network 192.168.1.1   # 网络地址
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-08 22:48</div>
                     <div class="niu2-sidebar-label"><i class="icon-leaf"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="/shu-mei-pai/index.html">树莓派</a></div>
+                    <div class="niu2-sidebar-value"><a href="../shu-mei-pai/index.html">树莓派</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/shu-mei-pai.html">树莓派</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/shu-mei-pai.html">树莓派</a><sup>5</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -231,7 +231,7 @@ network 192.168.1.1   # 网络地址
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="">whypro</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -246,9 +246,9 @@ network 192.168.1.1   # 网络地址
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>

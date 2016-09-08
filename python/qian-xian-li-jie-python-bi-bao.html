@@ -6,14 +6,14 @@
         <meta name="description" content="Slug: qian-xian-li-jie-python-bi-bao 闭包这个概念在 JavaScript 中讨论和使用得比较多，不过在 Python 中却不是那么显而易见，之所以说“不是那么”，是因为即使用到了，也没用注意到而已，比如定义一个 Decorator 时，就已经用到闭包了。网上对闭包的各种解释，感觉非常晦涩，在这里谈谈我的浅显认识：要形成闭包，首先得有一个嵌套的函数，即函数中定义了另一个函数，闭包则是一个集合，它包括了外部函数的局部变量，这些局部变量在外部函数返回后也继续存在，并能被内部函数引用。 举个例子 这是个经常使用到的例子，定义一个函数 generate_power_func，它返回另一个函数，现在闭包形成的条件已经达到。 def generate_power_func(n): print "id(n): %X" % id(n) def nth_power(x): return x**n print "id(nth_power ...">
         <title>浅显理解 Python 闭包 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="/python/qian-xian-li-jie-python-bi-bao.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../python/qian-xian-li-jie-python-bi-bao.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="/theme/js/html5shiv.js"></script>
-            <script src="/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -35,22 +35,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="../about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/resume.html" title="resume">
+                            <li><a href="../resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="../tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="../archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -59,22 +59,22 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="/git/index.html">
+                               <li><a href="../git/index.html">
                                    <i class="icon-folder-close"></i>Git
                                       (1)</a></li>
-                               <li><a href="/linux/index.html">
+                               <li><a href="../linux/index.html">
                                    <i class="icon-folder-close"></i>Linux
                                       (4)</a></li>
-                               <li><a href="/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (12)</a></li>
-                               <li><a href="/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
-                               <li><a href="/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -154,9 +154,9 @@
             <div class="niu2-right-container col-md-2">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
-                    <div class="niu2-sidebar-value">2016-09-08 23:54</div>
+                    <div class="niu2-sidebar-value">2016-09-09 00:30</div>
                     <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="/python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-value"><a href="../python/index.html">Python</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
@@ -186,7 +186,7 @@
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="">whypro</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -201,9 +201,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>

@@ -6,14 +6,14 @@
         <meta name="description" content="Slug: mmap-detail 共享内存可以说是最有用的进程间通信方式，也是最快的 IPC 形式, 因为进程可以直接读写内存，而不需要任何数据的拷贝。对于像管道和消息队列等通信方式，则需要在内核和用户空间进行四次的数据拷贝，而共享内存则只拷贝两次数据: 一次从输入文件到共享内存区，另一次从共享内存区到输出文件。实际上，进程之间在共享内存时，并不总是读写少量数据后就解除映射，有新的通信时，再重新建立共享内存区域。而是保持共享区域，直到通信完毕为止，这样，数据内容一直保存在共享内存中，并没有写回文件。共享内存中的内容往往是在解除映射时才写回文件的。因此，采用共享内存的通信方式效率是非常高的。 一、传统文件访问 UNIX访问文件的传统方法是用 open 打开它们, 如果有多个进程访问同一个文件，则每一个进程在自己的地址空间都包含有该文件的副本，这不必要地浪费了存储空间。下图说明了两个进程同时读一个文件的同一页的情形。系统要将该页从磁盘读到高速缓冲区中，每个进程再执行一个存储器内的复制操作将数据从高速缓冲区读到自己的地址空间。 二、共享存储映射 现在考虑另一种处理方法：进程 A 和进程 B 都将该页映射到自己的地址空间，当进程 A 第一次访问该页中的数据时，它生成一个缺页中断。内核此时读入这一页到内存并更新页表使之指向它 ...">
         <title>mmap 详解 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="/linux/mmap-xiang-jie.html" />
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="../linux/mmap-xiang-jie.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="/theme/js/html5shiv.js"></script>
-            <script src="/theme/js/respond.min.js"></script>
+            <script src="../theme/js/html5shiv.js"></script>
+            <script src="../theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -35,22 +35,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="">
+                        <a class="navbar-brand" href="..">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="/about.html" title="about me">
+                            <li><a href="../about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="/resume.html" title="resume">
+                            <li><a href="../resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="/tag/" title="tags">
+                            <li><a href="../tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="/archives.html" title="archives">
+                            <li><a href="../archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -59,22 +59,22 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="/git/index.html">
+                               <li><a href="../git/index.html">
                                    <i class="icon-folder-close"></i>Git
                                       (1)</a></li>
-                               <li><a href="/linux/index.html">
+                               <li><a href="../linux/index.html">
                                    <i class="icon-folder-close"></i>Linux
                                       (4)</a></li>
-                               <li><a href="/misc/index.html">
+                               <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
                                       (12)</a></li>
-                               <li><a href="/python/index.html">
+                               <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
-                               <li><a href="/she-ying/index.html">
+                               <li><a href="../she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="/shu-mei-pai/index.html">
+                               <li><a href="../shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -104,10 +104,10 @@
 <p>共享内存可以说是最有用的进程间通信方式，也是最快的 IPC 形式, 因为进程可以直接读写内存，而不需要任何数据的拷贝。对于像管道和消息队列等通信方式，则需要在内核和用户空间进行四次的数据拷贝，而共享内存则只拷贝两次数据: 一次从输入文件到共享内存区，另一次从共享内存区到输出文件。实际上，进程之间在共享内存时，并不总是读写少量数据后就解除映射，有新的通信时，再重新建立共享内存区域。而是保持共享区域，直到通信完毕为止，这样，数据内容一直保存在共享内存中，并没有写回文件。共享内存中的内容往往是在解除映射时才写回文件的。因此，采用共享内存的通信方式效率是非常高的。</p>
 <h3 id="544555">一、传统文件访问</h3>
 <p>UNIX访问文件的传统方法是用 <code>open</code> 打开它们, 如果有多个进程访问同一个文件，则每一个进程在自己的地址空间都包含有该文件的副本，这不必要地浪费了存储空间。下图说明了两个进程同时读一个文件的同一页的情形。系统要将该页从磁盘读到高速缓冲区中，每个进程再执行一个存储器内的复制操作将数据从高速缓冲区读到自己的地址空间。</p>
-<p><img alt="" src="/images/Linux/mmap-detail/91b3885b-1b16-3a35-90dd-e059090121b8.jpg" width="771px"/></p>
+<p><img alt="" src="../images/Linux/mmap-detail/91b3885b-1b16-3a35-90dd-e059090121b8.jpg" width="771px"/></p>
 <h3 id="67068b">二、共享存储映射</h3>
 <p>现在考虑另一种处理方法：进程 A 和进程 B 都将该页映射到自己的地址空间，当进程 A 第一次访问该页中的数据时，它生成一个缺页中断。内核此时读入这一页到内存并更新页表使之指向它。以后，当进程 B 访问同一页面而出现缺页中断时，该页已经在内存，内核只需要将进程 B 的页表登记项指向次页即可。如下图所示：</p>
-<p><img alt="" src="/images/Linux/mmap-detail/cf6dcb8a-5182-3ecc-bc2d-f1d556cb1a66.jpg" width="778px"/></p>
+<p><img alt="" src="../images/Linux/mmap-detail/cf6dcb8a-5182-3ecc-bc2d-f1d556cb1a66.jpg" width="778px"/></p>
 <h3 id="f533f5">三、mmap() 及其相关系统调用</h3>
 <p><code>mmap()</code> 系统调用使得进程之间通过映射同一个普通文件实现共享内存。普通文件被映射到进程地址空间后，进程可以向访
 问普通内存一样对文件进行访问，不必再调用 <code>read()</code>，<code>write()</code>等操作。</p>
@@ -115,7 +115,7 @@
 <div class="highlight"><pre><span></span>void* mmap(void* addr, size_t len, int prot, int flags, int fd, off_t offset)
 </pre></div>
 <p><code>mmap</code> 的作用是映射文件描述符 <code>fd</code> 指定文件的 <code>[off, off+len]</code> 区域至调用进程的 <code>[addr, addr+len]</code> 的内存区域, 如下图所示:</p>
-<p><img alt="" src="/images/Linux/mmap-detail/fe463a08-18a5-3a75-ab51-6c4c425cb4db.jpg" width="694px"/></p>
+<p><img alt="" src="../images/Linux/mmap-detail/fe463a08-18a5-3a75-ab51-6c4c425cb4db.jpg" width="694px"/></p>
 <p>参数 <code>fd</code> 为即将映射到进程空间的文件描述字，一般由 <code>open()</code> 返回，同时，<code>fd</code> 可以指定为 -1，此时须指定 <code>flags</code> 参数中的 <code>MAP_ANON</code>，表明进行的是匿名映射（不涉及具体的文件名，避免了文件的创建及打开，很显然只能用于具有亲缘关系的进程间通信）。
 <code>len</code> 是映射到调用进程地址空间的字节数，它从被映射文件开头 <code>offset</code> 个字节开始算起。
 <code>prot</code> 参数指定共享内存的访问权限。可取如下几个值的或：<code>PROT_READ</code>（可读），<code>PROT_WRITE</code>（可写），<code>PROT_EXEC</code>（可执行），<code>PROT_NONE</code>（不可访问）。
@@ -329,7 +329,7 @@ ddddddddd
 </pre></div>
 <h3 id="270bdc">七、对 mmap() 返回地址的访问</h3>
 <p>linux 采用的是页式管理机制。对于用 <code>mmap()</code> 映射普通文件来说，进程会在自己的地址空间新增一块空间，空间大小由 <code>mmap()</code> 的 <code>len</code> 参数指定，注意，进程并不一定能够对全部新增空间都能进行有效访问。进程能够访问的有效地址大小取决于文件被映射部分的大小。简单的说，能够容纳文件被映射部分大小的最少页面个数决定了进程从 <code>mmap()</code> 返回的地址开始，能够有效访问的地址空间大小。超过这个空间大小，内核会根据超过的严重程度返回发送不同的信号给进程。可用如下图示说明：</p>
-<p><img alt="" src="/images/Linux/mmap-detail/1be9f93e-d964-3b32-b0ff-611329940295.gif" width="719px"/></p>
+<p><img alt="" src="../images/Linux/mmap-detail/1be9f93e-d964-3b32-b0ff-611329940295.gif" width="719px"/></p>
 <p>总结一下就是，文件大小，<code>mmap</code> 的参数 <code>len</code> 都不能决定进程能访问的大小，而是容纳文件被映射部分的最小页面数决定进程能访问的大小。下面看一个实例：</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
@@ -380,9 +380,9 @@ ddddddddd
             <div class="niu2-right-container col-md-2">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
-                    <div class="niu2-sidebar-value">2016-09-09 00:04</div>
+                    <div class="niu2-sidebar-value">2016-09-09 00:30</div>
                     <div class="niu2-sidebar-label"><i class="icon-open-folder"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="/linux/index.html">Linux</a></div>
+                    <div class="niu2-sidebar-value"><a href="../linux/index.html">Linux</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
@@ -412,7 +412,7 @@ ddddddddd
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="">whypro</a>
+                    <a class="niu2-footer-link" href="..">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -427,9 +427,9 @@ ddddddddd
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>
