@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Slug: qian-xian-li-jie-python-bi-bao 闭包这个概念在 JavaScript 中讨论和使用得比较多，不过在 Python 中却不是那么显而易见，之所以说“不是那么”，是因为即使用到了，也没用注意到而已，比如定义一个 Decorator 时，就已经用到闭包了。网上对闭包的各种解释，感觉非常晦涩，在这里谈谈我的浅显认识：要形成闭包，首先得有一个嵌套的函数，即函数中定义了另一个函数，闭包则是一个集合，它包括了外部函数的局部变量，这些局部变量在外部函数返回后也继续存在，并能被内部函数引用。 举个例子 这是个经常使用到的例子，定义一个函数 generate_power_func，它返回另一个函数，现在闭包形成的条件已经达到。 def generate_power_func(n): print "id(n): %X" % id(n) def nth_power(x): return x**n print "id(nth_power ...">
+        <title>浅显理解 Python 闭包 - HyStars</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="/python/qian-xian-li-jie-python-bi-bao.html" />
+        <script type="text/javascript">window.onload=function(){};</script>
+        <!--[if lt IE 9]>
+            <script src="/theme/js/html5shiv.js"></script>
+            <script src="/theme/js/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?17e1c6a0010d7be7e49ae6d2c2e7b817";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </head>
+    <body> 
+        <div id="body-header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="">
+                            <i class="icon-home"></i>HyStars
+                        </a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/about.html" title="about me">
+                                <i class="icon-anchor"></i>关于</a>
+                            </li>
+                            <li><a href="/resume.html" title="resume">
+                                <i class="icon-pencil"></i>简历</a>
+                            </li>
+                            <li><a href="/tag/" title="tags">
+                                <i class="icon-tag"></i>标签</a>
+                            </li>
+                            <li><a href="/archives.html" title="archives">
+                                <i class="icon-archive"></i>存档</a>
+                            </li>
+                        <!-- category dropdown list -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-folder-open"></i>分类<b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="/git/index.html">
+                                   <i class="icon-folder-close"></i>Git
+                                      (1)</a></li>
+                               <li><a href="/linux/index.html">
+                                   <i class="icon-folder-close"></i>Linux
+                                      (4)</a></li>
+                               <li><a href="/misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (12)</a></li>
+                               <li><a href="/python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (5)</a></li>
+                               <li><a href="/she-ying/index.html">
+                                      <i class="icon-briefcase"></i>摄影
+                                      (2)</a></li>
+                               <li><a href="/shu-mei-pai/index.html">
+                                      <i class="icon-leaf"></i>树莓派
+                                      (5)</a></li>
+                           </ul>
+                        </li>
+                        <!--  self defined dropdown list -->
+                        </ul>
+                        
+                        <!-- right nav bar -->
+                        <ul class="nav navbar-nav navbar-right">
+                        <!-- google custom search -->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div id="body-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 id="content-heading">浅显理解 Python 闭包</h1>
+            </div>
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+                <div id="niu2-main-content">
+                    <!-- Tags: Python -->
+<p>Slug: qian-xian-li-jie-python-bi-bao
+<!-- Authors: Alexis Metaireau, Conan Doyle -->
+<!-- Summary: Short version for index and feeds --></p>
+<p>闭包这个概念在 JavaScript 中讨论和使用得比较多，不过在 Python 中却不是那么显而易见，之所以说“不是那么”，是因为即使用到了，也没用注意到而已，比如定义一个 Decorator 时，就已经用到闭包了。网上对闭包的各种解释，感觉非常晦涩，在这里谈谈我的浅显认识：要形成闭包，首先得有一个嵌套的函数，即函数中定义了另一个函数，闭包则是一个集合，它包括了外部函数的局部变量，这些局部变量在外部函数返回后也继续存在，并能被内部函数引用。</p>
+<h2 id="e7233a">举个例子</h2>
+<p>这是个经常使用到的例子，定义一个函数 <code>generate_power_func</code>，它返回另一个函数，现在闭包形成的条件已经达到。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_power_func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">"id(n): </span><span class="si">%X</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">nth_power</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span>
+    <span class="k">print</span> <span class="s2">"id(nth_power): </span><span class="si">%X</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">id</span><span class="p">(</span><span class="n">nth_power</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nth_power</span>
+</pre></div>
+<p>对于内部函数 <code>nth_power</code>，它能引用到外部函数的局部变量 <code>n</code>，而且即使 <code>generate_power_func</code> 已经返回。把这种现象就称为闭包。具体使用一下。</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span> <span class="o">=</span> <span class="n">generate_power_func</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">id(n): 246F770</span>
+<span class="go">id(nth_power): 2C090C8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">raised_to_4</span><span class="p">)</span>
+<span class="go">'&lt;function nth_power at 0x2c090c8&gt;'</span>
+</pre></div>
+<p>从结果可以看出，当 <code>generate_power_func(4)</code> 执行后, 创建和返回了 <code>nth_power</code> 这个函数对象，内存地址是 <code>0x2C090C8</code>,并且发现 <code>raised_to_4</code> 和它的内存地址相同，即 <code>raised_to_4</code> 只是这个函数对象的一个引用。先在全局命名空间中删除 <code>generate_power_func</code>，再试试会出现什么结果。</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">generate_power_func</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">16</span>
+</pre></div>
+<p>啊哈，居然没出现错误， <code>nth_power</code> 是怎么知道 <code>n</code> 的值是 <code>4</code>，而且现在 <code>generate_power_func</code> 甚至都不在这个命名空间了。对，这就是闭包的作用，外部函数的局部变量可以被内部函数引用，即使外部函数已经返回了。</p>
+<h2 id="726729"><strong>closure</strong> 属性和 cell 对象</h2>
+<p>现在知道闭包是怎么一回事了，那就到看看闭包到底是怎么回事的时候了。Python 中函数也是对象，所以函数也有很多属性，和闭包相关的就是 <code>__closure__</code> 属性。<code>__closure__</code> 属性定义的是一个包含 <code>cell</code> 对象的元组，其中元组中的每一个 <code>cell</code> 对象用来保存作用域中变量的值。</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span><span class="o">.</span><span class="n">__closure__</span>
+<span class="go">(&lt;cell at 0x2bf4ec0: int object at 0x246f770&gt;,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">raised_to_4</span><span class="o">.</span><span class="n">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;type 'cell'&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span><span class="o">.</span><span class="n">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell_contents</span>
+<span class="go">4</span>
+</pre></div>
+<p>就如刚才所说，在 <code>raised_to_4</code> 的 <code>__closure__</code> 属性中有外部函数变量 <code>n</code> 的引用，通过内存地址可以发现，引用的都是同一个 <code>n</code>。如果没用形成闭包，则 <code>__closure__</code> 属性为 <code>None</code>。对于 Python 具体是如何实现闭包的，可以查看 <a href="http://www.cnblogs.com/ChrisChen3121/p/3208119.html">Python闭包详解</a>，它通过分析 Python 字节码来讲述闭包的实现。</p>
+<h2 id="1b40a7">最后总结</h2>
+<p>闭包特性有着非常多的作用，不过都是需要时才会不经意的用上，不要像使用设计模式一样去硬套这些法则。这篇文章按照自己的理解翻译至 <a href="http://www.shutupandship.com/2012/01/python-closures-explained.html">Python Closures Explained</a>，可能和原文有些不同之处，如有疑惑，请查看原文。附上一些参考资料。</p>
+<ol>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-closure/">闭包的概念、形式与应用</a>: 可以从其中了解闭包的应用</li>
+<li><a href="http://www.cnblogs.com/ChrisChen3121/p/3208119.html">Python闭包详解</a>：从字节码出发了解 Python 闭包的实现机制</li>
+<li><a href="http://coolshell.cn/articles/6731.html">理解Javascript的闭包</a>: 从 Javascript 的闭包中了解一些闭包特性，可以和 Python 作下对比</li>
+</ol>
+<p>原文地址：<a href="https://serholiu.com/python-closures">https://serholiu.com/python-closures</a></p>
+                </div>
+                <div id="content-comments">
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+
+            </div>
+            <div class="niu2-right-container col-md-2">
+                <div id="niu2-sidebar-meta" class="niu2-sidebar">
+                    <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
+                    <div class="niu2-sidebar-value">2016-09-08 23:54</div>
+                    <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
+                    <div class="niu2-sidebar-value"><a href="/python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
+                </div>
+
+                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                    <div class="niu2-sidebar-label">
+                        <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
+                    </div>
+                    <ol id="niu2-sidebar-toc-list">
+                        <li><a href="#content-heading">浅显理解 Python 闭包</a></li>
+                        <li><a href='#e7233a'>举个例子</a></li><li><a href='#726729'>closure 属性和 cell 对象</a></li><li><a href='#1b40a7'>最后总结</a></li>
+                        <li><a href="#content-comments">评论</a></li>
+                    </ol>
+                </div>
+            </div>
+            <div id="niu2-toc" data-style="fixed"></div>
+        </div>
+
+        <div class="niu2-footer">
+            <div id="body-footer" class="col-md-6 col-md-offset-2">
+                <hr/>
+                <p>
+                    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a>, 
+                    <a href="https://github.com/mawenbao/niu-x2-sidebar">theme</a> built with <a href="https://github.com/twbs/bootstrap">Bootstrap3</a>
+                    by <a href="https://blog.mawenbao.com">Ma Wenbao</a>, icons by 
+                    <a href="https://fortawesome.github.io/Font-Awesome">Font Awesome</a>.
+                </p>
+                <p>
+                    ©
+                            2015-2016
+                    <a class="niu2-footer-link" href="">whypro</a>
+                    /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
+                </p>
+                <p class="niu2-icons">
+                    <a class="niu2-footer-icon" href="mailto: whypro@live.com" title="my email address">
+                        <i class="icon-envelope-o icon-lg"></i>
+                    </a>
+                    <a class="niu2-footer-icon" href="http://github.com/whypro" title="my github page">
+                        <i class="icon-github-alt icon-lg"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div id="niu2-pygments" data-theme="github"></div>
+        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            onContentLoaded();
+        </script>
+    </body>
+</html>

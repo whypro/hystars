@@ -7,14 +7,14 @@
         <meta name="description" content="让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。 并发方式 线程（Thread） 多线程几乎是每一个程序猿在使用每一种语言时都会首先想到用于解决并发的工具（JS程序员请回避），使用多线程可以有效的利用CPU资源（Python例外）。然而多线程所带来的程序的复杂度也不可避免，尤其是对竞争资源的同步问题。 然而在python中由于使用了全局解释锁（GIL）的原因，代码并不能同时在多核上并发的运行，也就是说，Python的多线程不能并发，很多人会发现使用多线程来改进自己的Python代码后，程序的运行效率却下降了，这是多么蛋疼的一件事呀！如果想了解更多细节，推荐阅读这篇文章。实际上使用多线程的编程模型是很困难的，程序员很容易犯错，这并不是程序员的错误，因为并行思维是反人类的，我们大多数人的思维是串行（精神分裂不讨论），而且冯诺依曼设计的计算机架构也是以顺序执行为基础的。所以如果你总是不能把你的多线程程序搞定，恭喜你，你是个思维正常的程序猿：） Python提供两组线程的接口，一组是thread模块，提供基础的，低等级（Low Level）接口，使用Function作为线程的运行体。还有一组是threading模块，提供更容易使用的基于对象的接口（类似于Java），可以继承Thread对象来实现线程，还提供了其它一些线程相关的对象，例如Timer，Lock 使用thread模块的例子 import ...">
         <title>使用 Python 进行并发编程 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="../python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" />
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="/python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="../theme/js/html5shiv.js"></script>
-            <script src="../theme/js/respond.min.js"></script>
+            <script src="/theme/js/html5shiv.js"></script>
+            <script src="/theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -36,22 +36,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="..">
+                        <a class="navbar-brand" href="">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="../about.html" title="about me">
+                            <li><a href="/about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="../resume.html" title="resume">
+                            <li><a href="/resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="../tag/" title="tags">
+                            <li><a href="/tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="../archives.html" title="archives">
+                            <li><a href="/archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -60,16 +60,22 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="../misc/index.html">
-                                      <i class="icon-coffee"></i>其他
-                                      (10)</a></li>
-                               <li><a href="../python/index.html">
-                                      <i class="icon-code"></i>Python
+                               <li><a href="/git/index.html">
+                                   <i class="icon-folder-close"></i>Git
+                                      (1)</a></li>
+                               <li><a href="/linux/index.html">
+                                   <i class="icon-folder-close"></i>Linux
                                       (4)</a></li>
-                               <li><a href="../she-ying/index.html">
+                               <li><a href="/misc/index.html">
+                                      <i class="icon-coffee"></i>其他
+                                      (12)</a></li>
+                               <li><a href="/python/index.html">
+                                      <i class="icon-code"></i>Python
+                                      (5)</a></li>
+                               <li><a href="/she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="../shu-mei-pai/index.html">
+                               <li><a href="/shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -101,28 +107,28 @@
 <p>然而在python中由于使用了全局解释锁（GIL）的原因，代码并不能同时在多核上并发的运行，也就是说，Python的多线程不能并发，很多人会发现使用多线程来改进自己的Python代码后，程序的运行效率却下降了，这是多么蛋疼的一件事呀！如果想了解更多细节，推荐阅读<a class="reference external" href="http://www.jeffknupp.com/blog/2012/03/31/pythons-hardest-problem/">这篇文章</a>。实际上使用多线程的编程模型是很困难的，程序员很容易犯错，这并不是程序员的错误，因为并行思维是反人类的，我们大多数人的思维是串行（精神分裂不讨论），而且冯诺依曼设计的计算机架构也是以顺序执行为基础的。所以如果你总是不能把你的多线程程序搞定，恭喜你，你是个思维正常的程序猿：）</p>
 <p>Python提供两组线程的接口，一组是thread模块，提供基础的，低等级（Low Level）接口，使用Function作为线程的运行体。还有一组是threading模块，提供更容易使用的基于对象的接口（类似于Java），可以继承Thread对象来实现线程，还提供了其它一些线程相关的对象，例如Timer，Lock</p>
 <p>使用thread模块的例子</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">thread</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thread</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
     <span class="sd">"""thread worker function"""</span>
-    <span class="k">print</span> <span class="s">'Worker'</span>
+    <span class="k">print</span> <span class="s1">'Worker'</span>
 <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
 </pre></div>
 <p>使用threading模块的例子</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
     <span class="sd">"""thread worker function"""</span>
-    <span class="k">print</span> <span class="s">'Worker'</span>
+    <span class="k">print</span> <span class="s1">'Worker'</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 <p>或者Java Style</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">threading</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
 <span class="k">class</span> <span class="nc">worker</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
         <span class="sd">"""thread worker function"""</span>
-        <span class="k">print</span> <span class="s">'Worker'</span>
+        <span class="k">print</span> <span class="s1">'Worker'</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">worker</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -132,11 +138,11 @@
 <h3 id="a301c7">进程（Process）</h3>
 <p>由于前文提到的全局解释锁的问题，Python下比较好的并行方式是使用多进程，这样可以非常有效的使用CPU资源，并实现真正意义上的并发。当然，进程的开销比线程要大，也就是说如果你要创建数量惊人的并发进程的话，需要考虑一下你的机器是不是有一颗强大的心。</p>
 <p>Python的mutliprocess模块和threading具有类似的接口。</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
 
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
     <span class="sd">"""thread worker function"""</span>
-    <span class="k">print</span> <span class="s">'Worker'</span>
+    <span class="k">print</span> <span class="s1">'Worker'</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
@@ -236,7 +242,7 @@
 <dt><a class="reference external" href="https://github.com/python-greenlet/greenlet">greenlet</a></dt>
 <dd><p class="first">greenlet提供轻量级的 <a class="reference external" href="http://en.wikipedia.org/wiki/Coroutine">coroutines</a> 来支持进程内的并发。</p>
 <p>greenlet是Stackless的一个副产品，使用tasklet来支持一中被称之为微线程（mirco－thread）的技术，这里是一个使用greenlet的伪线程的例子</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">greenlet</span> <span class="kn">import</span> <span class="n">greenlet</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenlet</span> <span class="kn">import</span> <span class="n">greenlet</span>
 
 <span class="k">def</span> <span class="nf">test1</span><span class="p">():</span>
     <span class="k">print</span> <span class="mi">12</span>
@@ -266,10 +272,10 @@
 <li><dl class="first docutils">
 <dt><a class="reference external" href="http://eventlet.net/">eventlet</a></dt>
 <dd><p class="first">eventlet是一个提供网络调用并发的Python库，使用者可以以非阻塞的方式来调用阻塞的IO操作。</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">eventlet</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">eventlet</span>
 <span class="kn">from</span> <span class="nn">eventlet.green</span> <span class="kn">import</span> <span class="n">urllib2</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://www.google.com'</span><span class="p">,</span> <span class="s">'http://www.example.com'</span><span class="p">,</span> <span class="s">'http://www.python.org'</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> <span class="s1">'http://www.example.com'</span><span class="p">,</span> <span class="s1">'http://www.python.org'</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -277,7 +283,7 @@
 <span class="n">pool</span> <span class="o">=</span> <span class="n">eventlet</span><span class="o">.</span><span class="n">GreenPool</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="n">fetch</span><span class="p">,</span> <span class="n">urls</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"got body"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"got body"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
 </pre></div>
 <p>执行结果如下</p>
 <pre class="literal-block">
@@ -292,9 +298,9 @@
 <li><dl class="first docutils">
 <dt><a class="reference external" href="http://www.gevent.org/">gevent</a></dt>
 <dd><p class="first">gevent和eventlet类似，关于它们的差异大家可以参考<a class="reference external" href="http://blog.gevent.org/2010/02/27/why-gevent/">这篇文章</a></p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">gevent</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gevent</span>
 <span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">socket</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'www.google.com'</span><span class="p">,</span> <span class="s">'www.example.com'</span><span class="p">,</span> <span class="s">'www.python.org'</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'www.google.com'</span><span class="p">,</span> <span class="s1">'www.example.com'</span><span class="p">,</span> <span class="s1">'www.python.org'</span><span class="p">]</span>
 <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
 <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -322,10 +328,10 @@
 <div class="section" id="id5">
 <h3 id="f94eef">计算密集型</h3>
 <p>对应计算密集型的应用，我们选用著名的<a class="reference external" href="http://en.wikipedia.org/wiki/Monte_Carlo_method">蒙特卡洛算法</a>来计算PI值。基本原理如下</p>
-<img alt="Monte-Carlo-method.png" class="align-center" src="../images/Python/concurrency/Monte-Carlo-method.png" width="220px"/>
+<img alt="Monte-Carlo-method.png" class="align-center" src="/images/Python/concurrency/Monte-Carlo-method.png" width="220px"/>
 <p>蒙特卡洛算法利用统计学原理来模拟计算圆周率，在一个正方形中，一个随机的点落在1/4圆的区域（红色点）的概率与其面积成正比。也就该概率 p ＝ Pi ＊ R＊R ／4  ： R＊ R ， 其中R是正方形的边长，圆的半径。也就是说该概率是圆周率的1/4, 利用这个结论，只要我们模拟出点落在四分之一圆上的概率就可以知道圆周率了，为了得到这个概率，我们可以通过大量的实验，也就是生成大量的点，看看这个点在哪个区域，然后统计出结果。</p>
 <p>基本算法如下：</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">tries</span><span class="p">):</span>
@@ -338,7 +344,7 @@
 <li><dl class="first docutils">
 <dt>非并发</dt>
 <dd><p class="first">我们先在单线程，但进程运行，看看性能如何</p>
-<div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">import</span> <span class="nn">eventlet</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -352,7 +358,7 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -364,7 +370,7 @@
 <dt>多线程 thread</dt>
 <dd><p class="first">为了使用线程池，我们用multiprocessing的dummy包，它是对多线程的一个封装。注意这里代码虽然一个字的没有提到线程，但它千真万确是多线程。</p>
 <p>通过测试我们开（jing）心（ya）的发现，果然不出所料，当线程池为1是，它的运行结果和没有并发时一样，当我们把线程池数字设置为5时，耗时几乎是没有并发的2倍，我的测试数据从5秒到9秒。所以对于计算密集型的任务，还是放弃多线程吧。</p>
-<div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing.dummy</span> <span class="kn">import</span> <span class="n">Pool</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing.dummy</span> <span class="kn">import</span> <span class="n">Pool</span>
 
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
@@ -379,12 +385,12 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -392,9 +398,9 @@
 <li><dl class="first docutils">
 <dt>多进程 multiprocess</dt>
 <dd><p class="first">理论上对于计算密集型的任务，使用多进程并发比较合适，在以下的例子中，进程池的规模设置为5，修改进程池的大小可以看到对结果的影响，当进程池设置为1时，和多线程的结果所需的时间类似，因为这时候并不存在并发；当设置为2时，响应时间有了明显的改进，是之前没有并发的一半；然而继续扩大进程池对性能影响并不大，甚至有所下降，也许我的Apple Air的CPU只有两个核？</p>
-<img alt="apple-air-info.png" class="align-center" src="../images/Python/concurrency/apple-air-info.png" width="194px"/>
+<img alt="apple-air-info.png" class="align-center" src="/images/Python/concurrency/apple-air-info.png" width="194px"/>
 <p>当心，如果你设置一个非常大的进程池，你会遇到 Resource temporarily unavailable的错误，系统并不能支持创建太多的进程，毕竟资源是有限的。</p>
-<div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
 
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
@@ -409,11 +415,11 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -421,7 +427,7 @@
 <li><dl class="first docutils">
 <dt>gevent （伪线程）</dt>
 <dd><p class="first">不论是gevent还是eventlet，因为不存在实际的并发，响应时间和没有并发区别不大，这个和测试结果一致。</p>
-<div class="last"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">gevent</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gevent</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -435,7 +441,7 @@
     <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -446,7 +452,7 @@
 <li><dl class="first docutils">
 <dt>eventlet （伪线程）</dt>
 <dd><p class="first">代码如下</p>
-<div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">import</span> <span class="nn">eventlet</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -461,7 +467,7 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -473,7 +479,7 @@
 <dt>SCOOP</dt>
 <dd><p class="first">SCOOP中的Future接口符合 <a class="reference external" href="https://www.python.org/dev/peps/pep-3148/">PEP-3148</a> 的定义，也就是在Python3中提供的 <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">Future</a> 接口。</p>
 <p>在缺省的SCOOP配置环境下（单机，4个Worker），并发的性能有提高，但是不如两个进程池配置的多进程。</p>
-<div class="last"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">from</span> <span class="nn">scoop</span> <span class="kn">import</span> <span class="n">futures</span>
 
@@ -487,11 +493,11 @@
     <span class="n">expr</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -499,20 +505,20 @@
 <li><dl class="first docutils">
 <dt>Celery</dt>
 <dd><p class="first">任务代码</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
 
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">'tasks'</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">'amqp'</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s">'amqp://guest@localhost//'</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s">'db+sqlite:///results.sqlite'</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">'tasks'</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">'amqp'</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">'amqp://guest@localhost//'</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s1">'db+sqlite:///results.sqlite'</span>
 
 <span class="nd">@app.task</span>
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">tries</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">hypot</span><span class="p">(</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tries</span><span class="p">))</span>
 </pre></div>
 <p>客户端代码</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">group</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">group</span>
 <span class="kn">from</span> <span class="nn">tasks</span> <span class="kn">import</span> <span class="n">test</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
@@ -523,7 +529,7 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
@@ -535,7 +541,7 @@
 <li><dl class="first docutils">
 <dt>asyncoro</dt>
 <dd><p class="first">Asyncoro的测试结果和非并发保持一致。</p>
-<div class="last"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">asyncoro</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncoro</span>
 
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
@@ -550,7 +556,7 @@
     <span class="n">coros</span> <span class="o">=</span> <span class="p">[</span> <span class="n">asyncoro</span><span class="o">.</span><span class="n">Coro</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">]</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">coros</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
@@ -564,11 +570,11 @@
 <h3 id="d38fe0">IO密集型</h3>
 <p>IO密集型的任务是另一种常见的用例，例如网络WEB服务器就是一个例子，每秒钟能处理多少个请求时WEB服务器的重要指标。</p>
 <p>我们就以网页读取作为最简单的例子</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">'http://www.google.com'</span><span class="p">,</span> <span class="s">'http://www.example.com'</span><span class="p">,</span> <span class="s">'http://www.python.org'</span><span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> <span class="s1">'http://www.example.com'</span><span class="p">,</span> <span class="s1">'http://www.python.org'</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -578,7 +584,7 @@
     <span class="nb">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">urls</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
 
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
 
 <span class="n">testIO</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -606,10 +612,10 @@
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-08 23:45</div>
                     <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="../python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-value"><a href="/python/index.html">Python</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/python.html">Python</a><sup>5</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/bing-fa.html">并发</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/python.html">Python</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="/tag/bing-fa.html">并发</a><sup>1</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -638,7 +644,7 @@
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="..">whypro</a>
+                    <a class="niu2-footer-link" href="">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -653,9 +659,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="/theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>
