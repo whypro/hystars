@@ -1,6 +1,6 @@
 Title: 浅显理解 Python 闭包
-Date: 2016-09-08 23:54:22
-Modified: 2016-09-09 00:16:45
+Date: 2016-09-09 00:30:15
+Modified: 2016-09-09 00:31:11
 Category: Python
 <!-- Tags: Python -->
 Slug: qian-xian-li-jie-python-bi-bao

@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 AUTHOR = 'whypro'
 SITENAME = 'HyStars'
-SITEURL = ''
+SITEURL = '.'
 
 PATH = 'content'
 
