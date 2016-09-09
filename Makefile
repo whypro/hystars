@@ -27,6 +27,9 @@ DROPBOX_DIR=~/Dropbox/Public/
 
 GITHUB_PAGES_BRANCH=gh-pages
 
+SCRIPT_DIR=$(BASEDIR)/scripts
+MD_CONVERT_SCRIPT=md_convert.py
+
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
 	PELICANOPTS += -D
@@ -50,6 +53,7 @@ help:
 	@echo '   make s3_upload                   upload the web site via S3         '
 	@echo '   make cf_upload                   upload the web site via Cloud Files'
 	@echo '   make github                      upload the web site via gh-pages   '
+	@echo '   make convert                     convert blog raw files             '
 	@echo '                                                                       '
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html'
 	@echo '                                                                       '
@@ -107,4 +111,7 @@ github: publish
 	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
 	git push origin $(GITHUB_PAGES_BRANCH)
 
-.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github
+convert:
+	@cd $(SCRIPT_DIR) && $(PY) $(MD_CONVERT_SCRIPT)
+
+.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github convert
