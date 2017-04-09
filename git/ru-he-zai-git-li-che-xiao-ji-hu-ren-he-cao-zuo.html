@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Slug: how-to-undo-almost-anything-with-git 任何版本控制系统的一个最有的用特性就是“撤销 (undo)”你的错误操作的能力。在 Git 里，“撤销” 蕴含了不少略有差别的功能。 当你进行一次新的提交的时候，Git 会保存你代码库在那个特定时间点的快照；之后，你可以利用 Git 返回到你的项目的一个早期版本。 在本篇博文里，我会讲解某些你需要“撤销”已做出的修改的常见场景，以及利用 Git 进行这些操作的最佳方法。 撤销一个“已公开”的改变 场景： 你已经执行了 git push, 把你的修改发送到了 GitHub，现在你意识到这些 commit 的其中一个是有问题的，你需要撤销那一个 commit. 方法： git revert <SHA> 原理： git revert 会产生一个新的 commit，它和指定 SHA ...">
+        <meta name="description" content="Slug: how-to-undo-almost-anything-with-git 任何版本控制系统的一个最有的用特性就是“撤销 (undo)”你的错误操作的能力。在 Git 里，“撤销” 蕴含了不少略有差别的功能。 当你进行一次新的提交的时候，Git 会保存你代码库在那个特定时间点的快照；之后，你可以利用 Git 返回到你的项目的一个早期版本。 在本篇博文里，我会讲解某些你需要“撤销”已做出的修改的常见场景，以及利用 Git 进行这些操作的最佳方法。 撤销一个“已公开”的改变 场景： 你已经执行了 git push, 把你的修改发送到了 GitHub，现在你意识到这些 commit 的其中一个是有问题的，你需要撤销那一个 commit. 方法： git revert <SHA> 原理： git revert 会产生一个新的 commit，它和指定 SHA …">
         <title>如何在 Git 里撤销（几乎）任何操作 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -67,7 +67,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -95,7 +95,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">如何在 Git 里撤销（几乎）任何操作</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <!-- Tags: pelican, publishing -->
 <p>Slug: how-to-undo-almost-anything-with-git
@@ -184,7 +184,7 @@
 <p><strong>方法：</strong> <code>git rm --cached application.log</code></p>
 <p><strong>原理：</strong> 虽然 <code>.gitignore</code> 会阻止 Git 追踪文件的修改，甚至不关注文件是否存在，但这只是针对那些以前从来没有追踪过的文件。一旦有个文件被加入并提交了，Git 就会持续关注该文件的改变。类似地，如果你利用 <code>git add -f</code> 来强制或覆盖了 <code>.gitignore</code>， Git 还会持续追踪改变的情况。之后你就不必用 <code>-f</code> 来添加这个文件了。</p>
 <p>如果你希望从 Git 的追踪对象中删除那个本应忽略的文件， <code>git rm --cached</code> 会从追踪对象中删除它，但让文件在磁盘上保持原封不动。因为现在它已经被忽略了，你在  <code>git status</code> 里就不会再看见这个文件，也不会再偶然提交该文件的修改了。</p>
-<hr/>
+<hr>
 <p>这就是如何在 Git 里撤销任何操作的方法。要了解更多关于本文中用到的 Git 命令，请查看下面的有关文档：</p>
 <ul>
 <li><a href="http://git-scm.com/docs/git-checkout">checkout</a></li>
@@ -195,19 +195,29 @@
 <li><a href="http://git-scm.com/docs/git-revert">revert</a></li>
 <li><a href="http://git-scm.com/docs/git-rm">rm</a></li>
 </ul>
-<hr/>
-<p>原文地址：<a href="https://github.com/blog/2019-how-to-undo-almost-anything-with-git">https://github.com/blog/2019-how-to-undo-almost-anything-with-git</a><br/>
-译文地址：<a href="http://blog.jobbole.com/87700/">http://blog.jobbole.com/87700/</a></p>
+<hr>
+<p>原文地址：<a href="https://github.com/blog/2019-how-to-undo-almost-anything-with-git">https://github.com/blog/2019-how-to-undo-almost-anything-with-git</a><br>
+译文地址：<a href="http://blog.jobbole.com/87700/">http://blog.jobbole.com/87700/</a></br></p></hr></hr>
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './git/ru-he-zai-git-li-che-xiao-ji-hu-ren-he-cao-zuo.html';
+                            this.page.identifier = 'ru-he-zai-git-li-che-xiao-ji-hu-ren-he-cao-zuo';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2016-09-09 00:30</div>
@@ -216,7 +226,7 @@
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

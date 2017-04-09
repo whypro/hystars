@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Slug: qian-xian-li-jie-python-bi-bao 闭包这个概念在 JavaScript 中讨论和使用得比较多，不过在 Python 中却不是那么显而易见，之所以说“不是那么”，是因为即使用到了，也没用注意到而已，比如定义一个 Decorator 时，就已经用到闭包了。网上对闭包的各种解释，感觉非常晦涩，在这里谈谈我的浅显认识：要形成闭包，首先得有一个嵌套的函数，即函数中定义了另一个函数，闭包则是一个集合，它包括了外部函数的局部变量，这些局部变量在外部函数返回后也继续存在，并能被内部函数引用。 举个例子 这是个经常使用到的例子，定义一个函数 generate_power_func，它返回另一个函数，现在闭包形成的条件已经达到。 def generate_power_func(n): print "id(n): %X" % id(n) def nth_power(x): return x**n print "id(nth_power ...">
+        <meta name="description" content="Slug: qian-xian-li-jie-python-bi-bao 闭包这个概念在 JavaScript 中讨论和使用得比较多，不过在 Python 中却不是那么显而易见，之所以说“不是那么”，是因为即使用到了，也没用注意到而已，比如定义一个 Decorator 时，就已经用到闭包了。网上对闭包的各种解释，感觉非常晦涩，在这里谈谈我的浅显认识：要形成闭包，首先得有一个嵌套的函数，即函数中定义了另一个函数，闭包则是一个集合，它包括了外部函数的局部变量，这些局部变量在外部函数返回后也继续存在，并能被内部函数引用。 举个例子 这是个经常使用到的例子，定义一个函数 generate_power_func，它返回另一个函数，现在闭包形成的条件已经达到。 def generate_power_func(n): print "id(n): %X" % id(n) def nth_power(x): return x**n print "id(nth_power …">
         <title>浅显理解 Python 闭包 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -67,7 +67,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -95,7 +95,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">浅显理解 Python 闭包</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <!-- Tags: Python -->
 <p>Slug: qian-xian-li-jie-python-bi-bao
@@ -126,11 +126,11 @@
 <p>啊哈，居然没出现错误， <code>nth_power</code> 是怎么知道 <code>n</code> 的值是 <code>4</code>，而且现在 <code>generate_power_func</code> 甚至都不在这个命名空间了。对，这就是闭包的作用，外部函数的局部变量可以被内部函数引用，即使外部函数已经返回了。</p>
 <h2 id="726729"><strong>closure</strong> 属性和 cell 对象</h2>
 <p>现在知道闭包是怎么一回事了，那就到看看闭包到底是怎么回事的时候了。Python 中函数也是对象，所以函数也有很多属性，和闭包相关的就是 <code>__closure__</code> 属性。<code>__closure__</code> 属性定义的是一个包含 <code>cell</code> 对象的元组，其中元组中的每一个 <code>cell</code> 对象用来保存作用域中变量的值。</p>
-<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span><span class="o">.</span><span class="n">__closure__</span>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span><span class="o">.</span><span class="vm">__closure__</span>
 <span class="go">(&lt;cell at 0x2bf4ec0: int object at 0x246f770&gt;,)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">raised_to_4</span><span class="o">.</span><span class="n">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">raised_to_4</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">&lt;type 'cell'&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span><span class="o">.</span><span class="n">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell_contents</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">raised_to_4</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell_contents</span>
 <span class="go">4</span>
 </pre></div>
 <p>就如刚才所说，在 <code>raised_to_4</code> 的 <code>__closure__</code> 属性中有外部函数变量 <code>n</code> 的引用，通过内存地址可以发现，引用的都是同一个 <code>n</code>。如果没用形成闭包，则 <code>__closure__</code> 属性为 <code>None</code>。对于 Python 具体是如何实现闭包的，可以查看 <a href="http://www.cnblogs.com/ChrisChen3121/p/3208119.html">Python闭包详解</a>，它通过分析 Python 字节码来讲述闭包的实现。</p>
@@ -144,14 +144,24 @@
 <p>原文地址：<a href="https://serholiu.com/python-closures">https://serholiu.com/python-closures</a></p>
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './python/qian-xian-li-jie-python-bi-bao.html';
+                            this.page.identifier = 'qian-xian-li-jie-python-bi-bao';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2016-09-09 00:30</div>
@@ -160,7 +170,7 @@
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

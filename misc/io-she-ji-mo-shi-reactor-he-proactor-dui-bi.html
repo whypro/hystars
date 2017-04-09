@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Slug: io-design-pattern-reactor-and-proactor 平时接触的开源产品如Redis、ACE，事件模型都使用的Reactor模式；而同样做事件处理的Proactor，由于操作系统的原因，相关的开源产品也少；这里学习下其模型结构，重点对比下两者的异同点； 反应器Reactor Reactor模式结构 Reactor包含如下角色： Handle 句柄；用来标识socket连接或是打开文件； Synchronous Event Demultiplexer：同步事件多路分解器：由操作系统内核实现的一个函数；用于阻塞等待发生在句柄集合上的一个或多个事件；（如select/epoll；） Event Handler：事件处理接口 Concrete Event HandlerA：实现应用程序所提供的特定事件处理逻辑； Reactor：反应器，定义一个接口，实现以下功能： 供应用程序注册和删除关注的事件句柄； 运行事件循环； 有就绪事件到来时，分发事件到之前注册的回调函数上处理； “反应”器名字中”反应“的由来： “反应”即“倒置”，“控制逆转” 具体事件处理程序不调用反应器，而是由反应器分配一个具体事件处理程序，具体事件处理程序对某个指定的事件发生做出反应 ...">
+        <meta name="description" content="Slug: io-design-pattern-reactor-and-proactor 平时接触的开源产品如Redis、ACE，事件模型都使用的Reactor模式；而同样做事件处理的Proactor，由于操作系统的原因，相关的开源产品也少；这里学习下其模型结构，重点对比下两者的异同点； 反应器Reactor Reactor模式结构 Reactor包含如下角色： Handle 句柄；用来标识socket连接或是打开文件； Synchronous Event Demultiplexer：同步事件多路分解器：由操作系统内核实现的一个函数；用于阻塞等待发生在句柄集合上的一个或多个事件；（如select/epoll；） Event Handler：事件处理接口 Concrete Event HandlerA：实现应用程序所提供的特定事件处理逻辑； Reactor：反应器，定义一个接口，实现以下功能： 供应用程序注册和删除关注的事件句柄； 运行事件循环； 有就绪事件到来时，分发事件到之前注册的回调函数上处理； “反应”器名字中”反应“的由来： “反应”即“倒置”，“控制逆转” 具体事件处理程序不调用反应器，而是由反应器分配一个具体事件处理程序，具体事件处理程序对某个指定的事件发生做出反应 …">
         <title>IO 设计模式：Reactor 和 Proactor 对比 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -67,7 +67,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -95,7 +95,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">IO 设计模式：Reactor 和 Proactor 对比</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <!-- Tags: pelican, publishing -->
 <p>Slug: io-design-pattern-reactor-and-proactor
@@ -184,14 +184,24 @@
 <p>原文地址：<a href="https://segmentfault.com/a/1190000002715832">https://segmentfault.com/a/1190000002715832</a></p>
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './misc/io-she-ji-mo-shi-reactor-he-proactor-dui-bi.html';
+                            this.page.identifier = 'io-she-ji-mo-shi-reactor-he-proactor-dui-bi';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2016-09-09 00:30</div>
@@ -200,7 +210,7 @@
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

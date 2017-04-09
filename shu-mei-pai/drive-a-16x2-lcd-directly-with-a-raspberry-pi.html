@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="树莓派">
-        <meta name="description" content="不管什么项目，如果加上一个液晶显示屏的话肯定都会看起来更棒。这篇文章将详解如何用树莓派的六个通用端口（GPIO）来连接一个廉价的HDD44780的小型LCD。当然也有用I2C或是UART来连接LCD的， 但是使用GPIO是最直接的方法。 这种方法的几个优势： 使得廉价的LCD得以应用 不需要I2C的驱动器 不会占用树莓派仅有的USB口 以下是用Python代码控制显示的时间日期以及IP地址。如果你的树莓派运行在Headless模式下（Headless模式是系统的一种配置模式。在该模式下系统缺少了显示设备、键盘或鼠标），能有个小的显示屏显示IP地址可是很有吸引力的。 以下是完成本次教程的必要硬件 一个标准的16×2的LCD Adafruit Pi Cobbler （树莓派GPIO的扩展设备，这里是以Cobbler为例，当然也可以用树莓派的breakout） 面包板 连接线 一个树莓派 本教程只适用于16×1, 16×2, 20×2, 20×4 的LCD 连接Cobbler到LCD上 LCD 任何一个拥有16个引脚的LCD基本上都是用HD44780控制器来控制的。 这种类型的LCD的引脚都拥有相同的输入输出功能，所以比较容易使用。LCD采用的是并行接口，这就意味着树莓派需要提供多个引脚来控制它。本篇教程中我们会用到树莓派的4个数据引脚（4位模式）和两个控制引脚。 数据引脚可以直接传输数据到LCD上， 这里我们只让LCD处于写模式 ...">
+        <meta name="description" content="不管什么项目，如果加上一个液晶显示屏的话肯定都会看起来更棒。这篇文章将详解如何用树莓派的六个通用端口（GPIO）来连接一个廉价的HDD44780的小型LCD。当然也有用I2C或是UART来连接LCD的， 但是使用GPIO是最直接的方法。 这种方法的几个优势： 使得廉价的LCD得以应用 不需要I2C的驱动器 不会占用树莓派仅有的USB口 以下是用Python代码控制显示的时间日期以及IP地址。如果你的树莓派运行在Headless模式下（Headless模式是系统的一种配置模式。在该模式下系统缺少了显示设备、键盘或鼠标），能有个小的显示屏显示IP地址可是很有吸引力的。 以下是完成本次教程的必要硬件 一个标准的16×2的LCD Adafruit Pi Cobbler （树莓派GPIO的扩展设备，这里是以Cobbler为例，当然也可以用树莓派的breakout） 面包板 连接线 一个树莓派 本教程只适用于16×1, 16×2, 20×2, 20×4 的LCD 连接Cobbler到LCD上 LCD 任何一个拥有16个引脚的LCD基本上都是用HD44780控制器来控制的。 这种类型的LCD的引脚都拥有相同的输入输出功能，所以比较容易使用。LCD采用的是并行接口，这就意味着树莓派需要提供多个引脚来控制它。本篇教程中我们会用到树莓派的4个数据引脚（4位模式）和两个控制引脚。 数据引脚可以直接传输数据到LCD上， 这里我们只让LCD处于写模式 …">
         <title>用树莓派驱动一个 16×2 的 LCD - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -68,7 +68,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -96,7 +96,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">用树莓派驱动一个 16×2 的 LCD</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <img alt="fa37675fb05216924dc2e6dbe19ec89b.jpg" class="align-center" src="../images/RPi/LCD_1602/fa37675fb05216924dc2e6dbe19ec89b.jpg" width="800px"/>
 <p>不管什么项目，如果加上一个液晶显示屏的话肯定都会看起来更棒。这篇文章将详解如何用树莓派的六个通用端口（GPIO）来连接一个廉价的HDD44780的小型LCD。当然也有用I2C或是UART来连接LCD的， 但是使用GPIO是最直接的方法。</p>
@@ -308,7 +308,7 @@ sudo ./Adafruit_CharLCD_IPclock_example.py
 <span class="k">case</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> in
     start<span class="o">)</span>
         <span class="nb">echo</span> <span class="s2">"Starting LCD"</span>
-        /home/pi/Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/Adafruit_CharLCD_IPclock_example.py  2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+        /home/pi/Adafruit-Raspberry-Pi-Python-Code/Adafruit_CharLCD/Adafruit_CharLCD_IPclock_example.py  <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
     <span class="p">;;</span>
     stop<span class="o">)</span>
         <span class="nb">echo</span> <span class="s2">"Stopping LCD"</span>
@@ -317,10 +317,10 @@ sudo ./Adafruit_CharLCD_IPclock_example.py
     <span class="p">;;</span>
     *<span class="o">)</span>
         <span class="nb">echo</span> <span class="s2">"Usage: /etc/init.d/lcd {start|stop}"</span>
-        <span class="nb">exit</span> 1
+        <span class="nb">exit</span> <span class="m">1</span>
     <span class="p">;;</span>
 <span class="k">esac</span>
-<span class="nb">exit</span> 0
+<span class="nb">exit</span> <span class="m">0</span>
 </pre></div>
 <p>你需要相应的将路径修改为你实际保存该脚本的路径才行。</p>
 <p>修改初始化脚本的执行权限：</p>
@@ -349,14 +349,24 @@ sudo dpkg-reconfigure tzdata
 
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './shu-mei-pai/drive-a-16x2-lcd-directly-with-a-raspberry-pi.html';
+                            this.page.identifier = 'drive-a-16x2-lcd-directly-with-a-raspberry-pi';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-12 15:07</div>
@@ -366,7 +376,7 @@ sudo dpkg-reconfigure tzdata
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/shu-mei-pai.html">树莓派</a><sup>5</sup></div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

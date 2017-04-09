@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="云平台, Docker, golang, PaaS, SaaS, 云计算, Cloud">
-        <meta name="description" content="SaaS 平台 以应用为中心 “平台”本来就比较泛，再加上“SaaS”的话就更飘渺了。 我们先从一个简单的场景来看： 开发者开发应用后在市场上线 用户购买应用使用 开发者通过市场反馈调整运维，为后续版本计划提供依据 新版本上线，用户升级使用 这是以应用为中心的一个闭环（市场-开发-运维-市场），实现了应用的整个生命周期，我们可以把平台看成是这个场景的支撑，场景中的所有活动都是在平台上完成的，整个场景就是一个 SaaS 生态系统。 组成元素 在这个 SaaS 生态系统中，我们可以简单总结出以下几个必须的组成元素： 开发者：个人/组织，要做的事情是开发应用、运维应用 运行环境：应用程序实际运行的环境，要解决的是如何接入/部署应用 运维控制：应用运行情况监控，要解决的是动态监控 用户：使用应用的个人/组织，要做的事情是（购买）使用应用 社区：开发者社区、用户社区，供开发者 ...">
+        <meta name="description" content="SaaS 平台 以应用为中心 “平台”本来就比较泛，再加上“SaaS”的话就更飘渺了。 我们先从一个简单的场景来看： 开发者开发应用后在市场上线 用户购买应用使用 开发者通过市场反馈调整运维，为后续版本计划提供依据 新版本上线，用户升级使用 这是以应用为中心的一个闭环（市场-开发-运维-市场），实现了应用的整个生命周期，我们可以把平台看成是这个场景的支撑，场景中的所有活动都是在平台上完成的，整个场景就是一个 SaaS 生态系统。 组成元素 在这个 SaaS 生态系统中，我们可以简单总结出以下几个必须的组成元素： 开发者：个人/组织，要做的事情是开发应用、运维应用 运行环境：应用程序实际运行的环境，要解决的是如何接入/部署应用 运维控制：应用运行情况监控，要解决的是动态监控 用户：使用应用的个人/组织，要做的事情是（购买）使用应用 社区：开发者社区、用户社区，供开发者 …">
         <title>云平台之 SaaS 随想 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -68,7 +68,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -96,7 +96,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">云平台之 SaaS 随想</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <div class="section" id="id1">
 <h2 id="0db8be">SaaS 平台</h2>
@@ -238,14 +238,24 @@
 
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './misc/saas-essay.html';
+                            this.page.identifier = 'saas-essay';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-05-03 17:49</div>
@@ -261,7 +271,7 @@
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/cloud.html">Cloud</a><sup>1</sup></div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

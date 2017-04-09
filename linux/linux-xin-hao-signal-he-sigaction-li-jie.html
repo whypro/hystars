@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Slug: linux-signal-and-sigaction 今天看到UNP时发现之前对signal到理解实在浅显，今天拿来单独学习讨论下。 signal signal，此函数相对简单一些，给定一个信号，给出信号处理函数则可，当然，函数简单，其功能也相对简单许多，简单给出个函数例子如下： #include <signal.h> #include <stdio.h> #include <unistd.h> void ouch(int sig) { printf("I got signal %d\n", sig); // (void) signal(SIGINT, SIG_DFL); //(void) signal(SIGINT, ouch); } int main() { (void) signal(SIGINT, ouch); while(1) { printf ...">
+        <meta name="description" content="Slug: linux-signal-and-sigaction 今天看到UNP时发现之前对signal到理解实在浅显，今天拿来单独学习讨论下。 signal signal，此函数相对简单一些，给定一个信号，给出信号处理函数则可，当然，函数简单，其功能也相对简单许多，简单给出个函数例子如下： #include <signal.h> #include <stdio.h> #include <unistd.h> void ouch(int sig) { printf("I got signal %d\n", sig); // (void) signal(SIGINT, SIG_DFL); //(void) signal(SIGINT, ouch); } int main() { (void) signal(SIGINT, ouch); while(1) { printf …">
         <title>Linux 信号 signal 和 sigaction 理解 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -67,7 +67,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -95,7 +95,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">Linux 信号 signal 和 sigaction 理解</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <!-- Tags: pelican, publishing -->
 <p>Slug: linux-signal-and-sigaction
@@ -254,14 +254,24 @@
 <p>原文地址：<a href="http://blog.csdn.net/beginning1126/article/details/8680757">http://blog.csdn.net/beginning1126/article/details/8680757</a></p>
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './linux/linux-xin-hao-signal-he-sigaction-li-jie.html';
+                            this.page.identifier = 'linux-xin-hao-signal-he-sigaction-li-jie';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2016-09-09 00:30</div>
@@ -270,7 +280,7 @@
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

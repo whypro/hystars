@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="连连看, 游戏, 算法">
-        <meta name="description" content="今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。 连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则： 图 A 中出现在同一直线上无障碍的圈圈可以消除；图 B 中两个圈圈可以通过一次转弯消除；图 C 和图 D 中，两个圈圈可以通过两次转弯消除。 已知以下接口，表示位置(x, y)上有无障碍物： int isBlocked(int x, int y); return 0; // 无障碍物（位置(x,y)为空） return 1; // 有障碍物（位置(x,y)上有方块或圈圈） 请写一个函数来判断给定的任意两个圈圈是否可消除（x1, y1与x2, y2为两个圈圈的位置）： int remove(int ...">
+        <meta name="description" content="今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。 连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则： 图 A 中出现在同一直线上无障碍的圈圈可以消除；图 B 中两个圈圈可以通过一次转弯消除；图 C 和图 D 中，两个圈圈可以通过两次转弯消除。 已知以下接口，表示位置(x, y)上有无障碍物： int isBlocked(int x, int y); return 0; // 无障碍物（位置(x,y)为空） return 1; // 有障碍物（位置(x,y)上有方块或圈圈） 请写一个函数来判断给定的任意两个圈圈是否可消除（x1, y1与x2, y2为两个圈圈的位置）： int remove(int …">
         <title>连连看游戏消除算法 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -68,7 +68,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -96,7 +96,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">连连看游戏消除算法</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <p>今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。</p>
 <p>连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则：</p>
@@ -312,14 +312,24 @@
 
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './misc/lianliankan.html';
+                            this.page.identifier = 'lianliankan';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-07-21 20:29</div>
@@ -331,7 +341,7 @@
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/suan-fa.html">算法</a><sup>1</sup></div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

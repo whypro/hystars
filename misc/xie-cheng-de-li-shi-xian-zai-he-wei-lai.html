@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Slug: xie-cheng-de-li-shi-xian-zai-he-wei-lai 本文原发于《程序员》2014年11月刊，发表时略有修改。 计算机科学是一门应用科学，几乎所有概念都是为了理解或解决实际问题而生的。协程 (Coroutine) 的出现也不例外。协程的概念，最早可以追溯到写作 COBOL 语言编译器中的技术难题。 从磁带到协程 COBOL 是最早的高级语言之一。编译器则是高级语言必不可少的一部分。现如今，我们对编译器了解，已经到了可以把核心内容浓缩成一本教科书的程度。然而在六十年代，如何写作高效的语言编译器是那个时代绕不过的现实问题。比如，1960 年夏天，D. E. Knuth 就是利用开车横穿美国去加州理工读研究生的时间，对着 Burroughs 205 机器指令集手写 COBOL 编译器。最早提出“协程”概念的 Melvin Conway 的出发点，也是如何写一个只扫描一遍程序 (one-pass) 的 COBOL 编译器。众多的“高手 ...">
+        <meta name="description" content="Slug: xie-cheng-de-li-shi-xian-zai-he-wei-lai 本文原发于《程序员》2014年11月刊，发表时略有修改。 计算机科学是一门应用科学，几乎所有概念都是为了理解或解决实际问题而生的。协程 (Coroutine) 的出现也不例外。协程的概念，最早可以追溯到写作 COBOL 语言编译器中的技术难题。 从磁带到协程 COBOL 是最早的高级语言之一。编译器则是高级语言必不可少的一部分。现如今，我们对编译器了解，已经到了可以把核心内容浓缩成一本教科书的程度。然而在六十年代，如何写作高效的语言编译器是那个时代绕不过的现实问题。比如，1960 年夏天，D. E. Knuth 就是利用开车横穿美国去加州理工读研究生的时间，对着 Burroughs 205 机器指令集手写 COBOL 编译器。最早提出“协程”概念的 Melvin Conway 的出发点，也是如何写一个只扫描一遍程序 (one-pass) 的 COBOL 编译器。众多的“高手 …">
         <title>协程的历史，现在和未来 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -67,7 +67,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -95,7 +95,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">协程的历史，现在和未来</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <!-- Tags: pelican, publishing -->
 <p>Slug: xie-cheng-de-li-shi-xian-zai-he-wei-lai
@@ -129,14 +129,24 @@
 <p>原文地址：<a href="http://blog.youxu.info/2014/12/04/coroutine/">http://blog.youxu.info/2014/12/04/coroutine/</a></p>
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './misc/xie-cheng-de-li-shi-xian-zai-he-wei-lai.html';
+                            this.page.identifier = 'xie-cheng-de-li-shi-xian-zai-he-wei-lai';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2016-09-09 00:30</div>
@@ -145,7 +155,7 @@
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

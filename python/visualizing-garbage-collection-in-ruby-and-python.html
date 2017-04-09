@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="Python, Ruby, 垃圾回收">
-        <meta name="description" content="注：这篇文章基于我在布达佩斯的RuPy大会上所作的演讲。我觉得与其直接将幻灯片发布出来，不如在我还有印象的时候将它写成博客来的更有意义。同样，我会在将来发布RuPy大会的视频链接。我计划将在RubyConf大会上发表类似的演讲，除了有关于Python的部分，并且将对比MRI、JRuby和Rubinius的垃圾回收器是怎样工作的。 如果想要对Ruby垃圾回收器以及内部原理有更加深入的了解，你可以在我即将出版的新书《Ruby Under a Microscope》中找到答案。 如果算法和业务逻辑是一个人的大脑，那么垃圾回收机制是人体的哪个器官呢？ 在”Ruby Python”大会上，我想对比Ruby和Python内部的垃圾回收机制是一件很有意思的事情。在开始之前，我们为什么要讨论垃圾回收机制呢？毕竟这是一个最迷人的，最令人激动的主题，不是吗？你们有多少人对垃圾回收机制感到兴奋？(许多大会参与者竟然举起了双手！) 最近，在Ruby社区中有一篇帖子，关于怎样通过修改Ruby GC的设置来提高单元测试的速度。这棒极了！通过减少GC垃圾回收的处理来提高测试的速度，这是一件好事，但是不怎的，GC不会真正的让我感到兴奋。就如咋一看就感觉令人厌烦，枯燥的技术帖子。 事实上，垃圾回收是一个令人着迷的主题：垃圾回收算法不仅是计算机科学历史一个重要的部分，更是前沿研究的一个主题。例如，MRI Ruby解释器使用的”Mark ...">
+        <meta name="description" content="注：这篇文章基于我在布达佩斯的RuPy大会上所作的演讲。我觉得与其直接将幻灯片发布出来，不如在我还有印象的时候将它写成博客来的更有意义。同样，我会在将来发布RuPy大会的视频链接。我计划将在RubyConf大会上发表类似的演讲，除了有关于Python的部分，并且将对比MRI、JRuby和Rubinius的垃圾回收器是怎样工作的。 如果想要对Ruby垃圾回收器以及内部原理有更加深入的了解，你可以在我即将出版的新书《Ruby Under a Microscope》中找到答案。 如果算法和业务逻辑是一个人的大脑，那么垃圾回收机制是人体的哪个器官呢？ 在”Ruby Python”大会上，我想对比Ruby和Python内部的垃圾回收机制是一件很有意思的事情。在开始之前，我们为什么要讨论垃圾回收机制呢？毕竟这是一个最迷人的，最令人激动的主题，不是吗？你们有多少人对垃圾回收机制感到兴奋？(许多大会参与者竟然举起了双手！) 最近，在Ruby社区中有一篇帖子，关于怎样通过修改Ruby GC的设置来提高单元测试的速度。这棒极了！通过减少GC垃圾回收的处理来提高测试的速度，这是一件好事，但是不怎的，GC不会真正的让我感到兴奋。就如咋一看就感觉令人厌烦，枯燥的技术帖子。 事实上，垃圾回收是一个令人着迷的主题：垃圾回收算法不仅是计算机科学历史一个重要的部分，更是前沿研究的一个主题。例如，MRI Ruby解释器使用的”Mark …">
         <title>对比Ruby和Python的垃圾回收（1） - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -68,7 +68,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -96,7 +96,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">对比Ruby和Python的垃圾回收（1）</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <p>注：这篇文章基于我在布达佩斯的RuPy大会上所作的演讲。我觉得与其直接将幻灯片发布出来，不如在我还有印象的时候将它写成博客来的更有意义。同样，我会在将来发布RuPy大会的视频链接。我计划将在RubyConf大会上发表类似的演讲，除了有关于Python的部分，并且将对比MRI、JRuby和Rubinius的垃圾回收器是怎样工作的。</p>
 <p>如果想要对Ruby垃圾回收器以及内部原理有更加深入的了解，你可以在我即将出版的新书《Ruby Under a Microscope》中找到答案。</p>
@@ -266,14 +266,24 @@
 
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './python/visualizing-garbage-collection-in-ruby-and-python.html';
+                            this.page.identifier = 'visualizing-garbage-collection-in-ruby-and-python';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-20 21:27</div>
@@ -285,7 +295,7 @@
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/la-ji-hui-shou.html">垃圾回收</a><sup>2</sup></div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

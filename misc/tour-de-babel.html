@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="编程语言">
-        <meta name="description" content="【译注】：圣经记载：在远古的时候，人类都使用一种语言，全世界的人决定一起造一座通天的塔，就是巴别塔，后来被上帝知道了，上帝就让人们使用不同的语言，这个塔就没能造起来。 巴别塔不建自毁，与其说上帝的分化将人类的语言复杂化，不如说是人类自身心灵和谐不再的分崩离析。之所以后来有了翻译，不仅是为了加强人类之间的交流，更寄达了一种愿望，希望能以此消除人际的隔阂，获求来自心灵的和谐及慰藉。真正的译者，把握血脉，抚平创痕，通传天籁，开启心门。 这是我写的旋风式的编程语言简介 —— 我本来为亚马逊开发者杂志本月的期刊写的，但是发现我写的东西没法见人。 首先，我偶尔一不小心口出脏话，或者对上帝不恭的话，所以在很官方很正式的亚马逊上发表是不合适的； 所以我就把它塞到我的博客里了，我的博客反正没人看的。除了你以外。是的，只有你会看，你好啊。 其次，这是一项进行中的工程，现在只是东打一耙西搞一下，还没有精加工过的。又一个把它写到博客里的很大的理由。不需要很好，或很完整。就是我今天想说的一些话。请随便！ 我的旋风式简介会讲C、C++、Lisp、Java、Perl (我们在亚马逊用到的所有语言 ...">
+        <meta name="description" content="【译注】：圣经记载：在远古的时候，人类都使用一种语言，全世界的人决定一起造一座通天的塔，就是巴别塔，后来被上帝知道了，上帝就让人们使用不同的语言，这个塔就没能造起来。 巴别塔不建自毁，与其说上帝的分化将人类的语言复杂化，不如说是人类自身心灵和谐不再的分崩离析。之所以后来有了翻译，不仅是为了加强人类之间的交流，更寄达了一种愿望，希望能以此消除人际的隔阂，获求来自心灵的和谐及慰藉。真正的译者，把握血脉，抚平创痕，通传天籁，开启心门。 这是我写的旋风式的编程语言简介 —— 我本来为亚马逊开发者杂志本月的期刊写的，但是发现我写的东西没法见人。 首先，我偶尔一不小心口出脏话，或者对上帝不恭的话，所以在很官方很正式的亚马逊上发表是不合适的； 所以我就把它塞到我的博客里了，我的博客反正没人看的。除了你以外。是的，只有你会看，你好啊。 其次，这是一项进行中的工程，现在只是东打一耙西搞一下，还没有精加工过的。又一个把它写到博客里的很大的理由。不需要很好，或很完整。就是我今天想说的一些话。请随便！ 我的旋风式简介会讲C、C++、Lisp、Java、Perl (我们在亚马逊用到的所有语言 …">
         <title>通天塔导游 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -68,7 +68,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -96,7 +96,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">通天塔导游</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <!-- -->
 <blockquote>
@@ -269,14 +269,24 @@
 
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './misc/tour-de-babel.html';
+                            this.page.identifier = 'tour-de-babel';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-23 09:37</div>
@@ -286,7 +296,7 @@
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/bian-cheng-yu-yan.html">编程语言</a><sup>1</sup></div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>

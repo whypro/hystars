@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="Python, 并发">
-        <meta name="description" content="让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。 并发方式 线程（Thread） 多线程几乎是每一个程序猿在使用每一种语言时都会首先想到用于解决并发的工具（JS程序员请回避），使用多线程可以有效的利用CPU资源（Python例外）。然而多线程所带来的程序的复杂度也不可避免，尤其是对竞争资源的同步问题。 然而在python中由于使用了全局解释锁（GIL）的原因，代码并不能同时在多核上并发的运行，也就是说，Python的多线程不能并发，很多人会发现使用多线程来改进自己的Python代码后，程序的运行效率却下降了，这是多么蛋疼的一件事呀！如果想了解更多细节，推荐阅读这篇文章。实际上使用多线程的编程模型是很困难的，程序员很容易犯错，这并不是程序员的错误，因为并行思维是反人类的，我们大多数人的思维是串行（精神分裂不讨论），而且冯诺依曼设计的计算机架构也是以顺序执行为基础的。所以如果你总是不能把你的多线程程序搞定，恭喜你，你是个思维正常的程序猿：） Python提供两组线程的接口，一组是thread模块，提供基础的，低等级（Low Level）接口，使用Function作为线程的运行体。还有一组是threading模块，提供更容易使用的基于对象的接口（类似于Java），可以继承Thread对象来实现线程，还提供了其它一些线程相关的对象，例如Timer，Lock 使用thread模块的例子 import ...">
+        <meta name="description" content="让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。 并发方式 线程（Thread） 多线程几乎是每一个程序猿在使用每一种语言时都会首先想到用于解决并发的工具（JS程序员请回避），使用多线程可以有效的利用CPU资源（Python例外）。然而多线程所带来的程序的复杂度也不可避免，尤其是对竞争资源的同步问题。 然而在python中由于使用了全局解释锁（GIL）的原因，代码并不能同时在多核上并发的运行，也就是说，Python的多线程不能并发，很多人会发现使用多线程来改进自己的Python代码后，程序的运行效率却下降了，这是多么蛋疼的一件事呀！如果想了解更多细节，推荐阅读这篇文章。实际上使用多线程的编程模型是很困难的，程序员很容易犯错，这并不是程序员的错误，因为并行思维是反人类的，我们大多数人的思维是串行（精神分裂不讨论），而且冯诺依曼设计的计算机架构也是以顺序执行为基础的。所以如果你总是不能把你的多线程程序搞定，恭喜你，你是个思维正常的程序猿：） Python提供两组线程的接口，一组是thread模块，提供基础的，低等级（Low Level）接口，使用Function作为线程的运行体。还有一组是threading模块，提供更容易使用的基于对象的接口（类似于Java），可以继承Thread对象来实现线程，还提供了其它一些线程相关的对象，例如Timer，Lock 使用thread模块的例子 import …">
         <title>使用 Python 进行并发编程 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
@@ -68,7 +68,7 @@
                                       (4)</a></li>
                                <li><a href="../misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (12)</a></li>
+                                      (13)</a></li>
                                <li><a href="../python/index.html">
                                       <i class="icon-code"></i>Python
                                       (5)</a></li>
@@ -96,7 +96,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1 id="content-heading">使用 Python 进行并发编程</h1>
             </div>
-            <div id="niu2-left-container" class="col-md-6 col-md-offset-2 with-right-border">
+            <div id="niu2-left-container" class="col-md-6 col-md-offset-2">
                 <div id="niu2-main-content">
                     <p>让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。</p>
 <div class="section" id="id1">
@@ -124,7 +124,7 @@
 <p>或者Java Style</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
 <span class="k">class</span> <span class="nc">worker</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
         <span class="sd">"""thread worker function"""</span>
@@ -199,35 +199,30 @@
 </ul>
 <p>在远程主机上执行并发和本地的多进程并没有非常大的差异，都需要解决进程间通信的问题。当然对远程进程的管理和协调比起本地要复杂。</p>
 <p>Python下有许多开源的框架来支持分布式的并发，提供有效的管理手段包括：</p>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt><a class="reference external" href="http://www.celeryproject.org/">Celery</a></dt>
-<dd><p class="first last">Celery是一个非常成熟的Python分布式框架，可以在分布式的系统中，异步的执行任务，并提供有效的管理和调度功能。参考<a class="reference external" href="http://my.oschina.net/taogang/blog/386077">这里</a></p>
-</dd>
+<dd>Celery是一个非常成熟的Python分布式框架，可以在分布式的系统中，异步的执行任务，并提供有效的管理和调度功能。参考<a class="reference external" href="http://my.oschina.net/taogang/blog/386077">这里</a></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference external" href="https://github.com/soravux/scoop/">SCOOP</a></dt>
-<dd><p class="first last">SCOOP （Scalable COncurrent Operations in Python）提供简单易用的分布式调用接口，使用Future接口来进行并发。</p>
-</dd>
+<dd>SCOOP （Scalable COncurrent Operations in Python）提供简单易用的分布式调用接口，使用Future接口来进行并发。</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference external" href="https://github.com/pgiri/dispy">Dispy</a></dt>
-<dd><p class="first last">相比起Celery和SCOOP，Dispy提供更为轻量级的分布式并行服务</p>
-</dd>
+<dd>相比起Celery和SCOOP，Dispy提供更为轻量级的分布式并行服务</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference external" href="http://www.parallelpython.com/">PP</a></dt>
-<dd><p class="first last">PP （Parallel Python）是另外一个轻量级的Python并行服务， 参考<a class="reference external" href="http://my.oschina.net/taogang/blog/386512">这里</a></p>
-</dd>
+<dd>PP （Parallel Python）是另外一个轻量级的Python并行服务， 参考<a class="reference external" href="http://my.oschina.net/taogang/blog/386512">这里</a></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference external" href="http://asyncoro.sourceforge.net/">Asyncoro</a></dt>
-<dd><p class="first last">Asyncoro是另一个利用Generator实现分布式并发的Python框架，</p>
-</dd>
+<dd>Asyncoro是另一个利用Generator实现分布式并发的Python框架，</dd>
 </dl>
 </li>
 </ul>
@@ -388,7 +383,7 @@
     <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
@@ -418,7 +413,7 @@
     <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
@@ -496,7 +491,7 @@
     <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
@@ -600,14 +595,24 @@
 
                 </div>
                 <div id="content-comments">
+                    <!-- Disqus -->
                     <div id="disqus_thread"></div>
-                    <script type="text/javascript">var disqus_shortname="hystars";(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)})();</script>
-                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-                </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = './python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html';
+                            this.page.identifier = 'shi-yong-python-jin-xing-bing-fa-bian-cheng';
+                        };
+                        (function() {  // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//hystars.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>                </div>
 
             </div>
-            <div class="niu2-right-container col-md-2">
+            <div class="niu2-right-container col-md-2 with-left-border">
                 <div id="niu2-sidebar-meta" class="niu2-sidebar">
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-08 23:45</div>
@@ -618,7 +623,7 @@
                     <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/bing-fa.html">并发</a><sup>1</sup></div>
                 </div>
 
-                <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
+                <div id="niu2-sidebar-toc" class="niu2-sidebar with-left-border" data-status="closed">
                     <div class="niu2-sidebar-label">
                         <i id="niu2-sidebar-toc-ctrl" class="icon-open-tocs"></i>目录
                     </div>
