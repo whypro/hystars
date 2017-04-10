@@ -139,6 +139,7 @@ function initToolbar() {
             if (!rightContainers.is(':hidden')) {
                 markVerticalPosition();
                 rightContainers.fadeOut('fast');
+                leftContainer.removeClass('with-right-border');
                 leftContainer.animate({width: '67%'}, leftCSlideDuration, complete=function() {
                     restoreVerticalPosition(function() {
                         enableSidebarCtrlButton();
@@ -159,6 +160,7 @@ function initToolbar() {
                     // We have to detach fixed sidebar before doing the fadein animation,
                     // otherwise Chrome39 will behave weird(showing duplicate sidebar toc).
                     sidebarElems.detach();
+                    leftContainer.addClass('with-right-border');
                     window.gEnableTocStatusUpdate = false;
                     rightContainers.fadeIn('fast', complete=function() {
                         sidebarElems.appendTo(sidebarParent);
@@ -269,6 +271,10 @@ function setSidebarTocWidth() {
     getSidebarToc().attr('style', 'max-width:' + tocMaxWidth + 'px');
 }
 
+function resetSidebarToc() {
+    var sidebarToc = $('#niu2-sidebar-toc');
+}
+
 function toggleSidebarTocFixed() {
     if (window.gTocStyle != 'fixed') {
         return;
@@ -280,16 +286,16 @@ function toggleSidebarTocFixed() {
     }
     var vtop = $(window).scrollTop();
     var vpos = sidebarMeta.offset().top + sidebarMeta.height() - 55;
-    if (!sidebarToc.is(':hidden') && vtop > vpos && 'niu2-sidebar with-left-border' == sidebarToc.attr('class')) {
+    if (!sidebarToc.is(':hidden') && vtop > vpos && 'niu2-sidebar' == sidebarToc.attr('class')) {
         var sidebarParent = sidebarToc.parent();
         // @TODO: check Chrome39+
         // We have to detach sidebar toc before setting its position to fixed,
         // otherwise Chrome39 will behave weird(showing duplicate sidebar toc).
         sidebarToc.detach();
-        sidebarToc.attr('class', 'niu2-sidebar with-left-border niu2-sidebar-toc-fixed');
+        sidebarToc.attr('class', 'niu2-sidebar niu2-sidebar-toc-fixed');
         sidebarToc.appendTo(sidebarParent);
-    } else if (vtop <= vpos && 'niu2-sidebar with-left-border' != sidebarToc.attr('class')) {
-        sidebarToc.attr('class', 'niu2-sidebar with-left-border');
+    } else if (vtop <= vpos && 'niu2-sidebar' != sidebarToc.attr('class')) {
+        sidebarToc.attr('class', 'niu2-sidebar');
     }
 }
 
