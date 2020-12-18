@@ -4,17 +4,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="Python, 并发">
-        <meta name="description" content="让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。 并发方式 线程（Thread） 多线程几乎是每一个程序猿在使用每一种语言时都会首先想到用于解决并发的工具（JS程序员请回避），使用多线程可以有效的利用CPU资源（Python例外）。然而多线程所带来的程序的复杂度也不可避免，尤其是对竞争资源的同步问题。 然而在python中由于使用了全局解释锁（GIL）的原因，代码并不能同时在多核上并发的运行，也就是说，Python的多线程不能并发，很多人会发现使用多线程来改进自己的Python代码后，程序的运行效率却下降了，这是多么蛋疼的一件事呀！如果想了解更多细节，推荐阅读这篇文章。实际上使用多线程的编程模型是很困难的，程序员很容易犯错，这并不是程序员的错误，因为并行思维是反人类的，我们大多数人的思维是串行（精神分裂不讨论），而且冯诺依曼设计的计算机架构也是以顺序执行为基础的。所以如果你总是不能把你的多线程程序搞定，恭喜你，你是个思维正常的程序猿：） Python提供两组线程的接口，一组是thread模块，提供基础的，低等级（Low Level）接口，使用Function作为线程的运行体。还有一组是threading模块，提供更容易使用的基于对象的接口（类似于Java），可以继承Thread对象来实现线程，还提供了其它一些线程相关的对象，例如Timer，Lock 使用thread模块的例子 import …">
+        <meta name="description" content="让计算机程序并发的运行是一个经常被讨论的话题，今天我想讨论一下Python下的各种并发方式。 并发方式 线程（Thread） 多线程几乎是每一个程序猿在使用每一种语言时都会首先想到用于解决并发的工具（JS程序员请回避），使用多线程可以有效的利用CPU资源（Python例外）。然而多线程所带来的程序的复杂度也不可避免，尤其是对竞争资源的同步问题。 然而在python中由于使用了全局解释锁（GIL）的原因，代码并不能同时在多核上并发的运行，也就是说，Python的多线程不能并发，很多人会发现使用多线程来改进自己的Python代码后，程序的运行效率却下降了，这是多么蛋疼的一件事呀！如果想了解更多细节，推荐阅读这篇文章。实际上使用多线程的编程模型是很困难的，程序员很容易犯错，这并不是程序员的错误，因为并行思维是反人类的，我们大多数人的思维是串行（精神分裂不讨论），而且冯诺依曼设计的计算机架构也是以顺序执行为基础的。所以如果你总是不能把你的多线程程序搞定，恭喜你，你是个思维正常的程序猿：） Python提供两组线程的接口，一组是thread模块，提供基础的，低等级（Low Level）接口，使用Function作为线程的运行体。还有一组是threading模块，提供更容易使用的基于对象的接口（类似于Java），可以继承Thread对象来实现线程，还提供了其它一些线程相关的对象，例如Timer，Lock 使用thread模块的例子 import ...">
         <title>使用 Python 进行并发编程 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="../python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" />
+        <link rel="stylesheet" href="https://whypro.github.io/hystars/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://whypro.github.io/hystars/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://whypro.github.io/hystars/theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="https://whypro.github.io/hystars/python/shi-yong-python-jin-xing-bing-fa-bian-cheng.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="../theme/js/html5shiv.js"></script>
-            <script src="../theme/js/respond.min.js"></script>
+            <script src="https://whypro.github.io/hystars/theme/js/html5shiv.js"></script>
+            <script src="https://whypro.github.io/hystars/theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -36,22 +36,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="..">
+                        <a class="navbar-brand" href="https://whypro.github.io/hystars">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="../about.html" title="about me">
+                            <li><a href="https://whypro.github.io/hystars/about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="../resume.html" title="resume">
+                            <li><a href="https://whypro.github.io/hystars/resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="../tag/" title="tags">
+                            <li><a href="https://whypro.github.io/hystars/tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="../archives.html" title="archives">
+                            <li><a href="https://whypro.github.io/hystars/archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -60,22 +60,16 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="../git/index.html">
-                                   <i class="icon-folder-close"></i>Git
-                                      (1)</a></li>
-                               <li><a href="../linux/index.html">
-                                   <i class="icon-folder-close"></i>Linux
-                                      (4)</a></li>
-                               <li><a href="../misc/index.html">
+                               <li><a href="https://whypro.github.io/hystars/misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (13)</a></li>
-                               <li><a href="../python/index.html">
+                                      (10)</a></li>
+                               <li><a href="https://whypro.github.io/hystars/python/index.html">
                                       <i class="icon-code"></i>Python
-                                      (5)</a></li>
-                               <li><a href="../she-ying/index.html">
+                                      (4)</a></li>
+                               <li><a href="https://whypro.github.io/hystars/she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="../shu-mei-pai/index.html">
+                               <li><a href="https://whypro.github.io/hystars/shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -110,14 +104,14 @@
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">thread</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
     <span class="sd">"""thread worker function"""</span>
-    <span class="k">print</span> <span class="s1">'Worker'</span>
+    <span class="nb">print</span> <span class="s1">'Worker'</span>
 <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
 </pre></div>
 <p>使用threading模块的例子</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
     <span class="sd">"""thread worker function"""</span>
-    <span class="k">print</span> <span class="s1">'Worker'</span>
+    <span class="nb">print</span> <span class="s1">'Worker'</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
@@ -128,7 +122,7 @@
         <span class="k">pass</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
         <span class="sd">"""thread worker function"""</span>
-        <span class="k">print</span> <span class="s1">'Worker'</span>
+        <span class="nb">print</span> <span class="s1">'Worker'</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">worker</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -142,7 +136,7 @@
 
 <span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
     <span class="sd">"""thread worker function"""</span>
-    <span class="k">print</span> <span class="s1">'Worker'</span>
+    <span class="nb">print</span> <span class="s1">'Worker'</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
@@ -240,14 +234,14 @@
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenlet</span> <span class="kn">import</span> <span class="n">greenlet</span>
 
 <span class="k">def</span> <span class="nf">test1</span><span class="p">():</span>
-    <span class="k">print</span> <span class="mi">12</span>
+    <span class="nb">print</span> <span class="mi">12</span>
     <span class="n">gr2</span><span class="o">.</span><span class="n">switch</span><span class="p">()</span>
-    <span class="k">print</span> <span class="mi">34</span>
+    <span class="nb">print</span> <span class="mi">34</span>
 
 <span class="k">def</span> <span class="nf">test2</span><span class="p">():</span>
-    <span class="k">print</span> <span class="mi">56</span>
+    <span class="nb">print</span> <span class="mi">56</span>
     <span class="n">gr1</span><span class="o">.</span><span class="n">switch</span><span class="p">()</span>
-    <span class="k">print</span> <span class="mi">78</span>
+    <span class="nb">print</span> <span class="mi">78</span>
 
 <span class="n">gr1</span> <span class="o">=</span> <span class="n">greenlet</span><span class="p">(</span><span class="n">test1</span><span class="p">)</span>
 <span class="n">gr2</span> <span class="o">=</span> <span class="n">greenlet</span><span class="p">(</span><span class="n">test2</span><span class="p">)</span>
@@ -278,7 +272,7 @@
 <span class="n">pool</span> <span class="o">=</span> <span class="n">eventlet</span><span class="o">.</span><span class="n">GreenPool</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="n">fetch</span><span class="p">,</span> <span class="n">urls</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"got body"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"got body"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
 </pre></div>
 <p>执行结果如下</p>
 <pre class="literal-block">
@@ -299,7 +293,7 @@
 <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
 <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="k">print</span> <span class="p">[</span><span class="n">job</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">]</span>
+<span class="nb">print</span> <span class="p">[</span><span class="n">job</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">]</span>
 </pre></div>
 <p>执行结果如下：</p>
 <pre class="last literal-block">
@@ -323,7 +317,7 @@
 <div class="section" id="id5">
 <h3 id="f94eef">计算密集型</h3>
 <p>对应计算密集型的应用，我们选用著名的<a class="reference external" href="http://en.wikipedia.org/wiki/Monte_Carlo_method">蒙特卡洛算法</a>来计算PI值。基本原理如下</p>
-<img alt="Monte-Carlo-method.png" class="align-center" src="../images/Python/concurrency/Monte-Carlo-method.png" width="220px"/>
+<img alt="Monte-Carlo-method.png" class="align-center" src="https://whypro.github.io/hystars/images/Python/concurrency/Monte-Carlo-method.png" width="220px"/>
 <p>蒙特卡洛算法利用统计学原理来模拟计算圆周率，在一个正方形中，一个随机的点落在1/4圆的区域（红色点）的概率与其面积成正比。也就该概率 p ＝ Pi ＊ R＊R ／4  ： R＊ R ， 其中R是正方形的边长，圆的半径。也就是说该概率是圆周率的1/4, 利用这个结论，只要我们模拟出点落在四分之一圆上的概率就可以知道圆周率了，为了得到这个概率，我们可以通过大量的实验，也就是生成大量的点，看看这个点在哪个区域，然后统计出结果。</p>
 <p>基本算法如下：</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
@@ -353,10 +347,10 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -380,12 +374,12 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"pi = </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -393,7 +387,7 @@
 <li><dl class="first docutils">
 <dt>多进程 multiprocess</dt>
 <dd><p class="first">理论上对于计算密集型的任务，使用多进程并发比较合适，在以下的例子中，进程池的规模设置为5，修改进程池的大小可以看到对结果的影响，当进程池设置为1时，和多线程的结果所需的时间类似，因为这时候并不存在并发；当设置为2时，响应时间有了明显的改进，是之前没有并发的一半；然而继续扩大进程池对性能影响并不大，甚至有所下降，也许我的Apple Air的CPU只有两个核？</p>
-<img alt="apple-air-info.png" class="align-center" src="../images/Python/concurrency/apple-air-info.png" width="194px"/>
+<img alt="apple-air-info.png" class="align-center" src="https://whypro.github.io/hystars/images/Python/concurrency/apple-air-info.png" width="194px"/>
 <p>当心，如果你设置一个非常大的进程池，你会遇到 Resource temporarily unavailable的错误，系统并不能支持创建太多的进程，毕竟资源是有限的。</p>
 <div class="last"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
 
@@ -410,11 +404,11 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"pi = </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -436,10 +430,10 @@
     <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -462,10 +456,10 @@
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -488,11 +482,11 @@
     <span class="n">expr</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"pi = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"pi = </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)))</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -508,7 +502,7 @@
 <span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">'tasks'</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">'amqp'</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">'amqp://guest@localhost//'</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s1">'db+sqlite:///results.sqlite'</span>
 
-<span class="nd">@app.task</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">tries</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">hypot</span><span class="p">(</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tries</span><span class="p">))</span>
 </pre></div>
@@ -520,14 +514,14 @@
 
 <span class="k">def</span> <span class="nf">calcPi</span><span class="p">(</span><span class="n">nbFutures</span><span class="p">,</span> <span class="n">tries</span><span class="p">):</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">tries</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nbFutures</span><span class="p">))()</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">group</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">tries</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">nbFutures</span><span class="p">))()</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
 </pre></div>
 <p class="last">使用Celery做并发的测试结果出乎意料（环境是单机，4frefork的并发，消息broker是rabbitMQ），是所有测试用例里最糟糕的，响应时间是没有并发的5～6倍。这也许是因为控制协调的开销太大。对于这样的计算任务，Celery也许不是一个好的选择。</p>
 </dd>
@@ -551,10 +545,10 @@
     <span class="n">coros</span> <span class="o">=</span> <span class="p">[</span> <span class="n">asyncoro</span><span class="o">.</span><span class="n">Coro</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tries</span><span class="p">]</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">]</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="mf">4.</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">job</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">coros</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbFutures</span> <span class="o">*</span> <span class="n">tries</span><span class="p">)</span>
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
     <span class="k">return</span> <span class="n">ret</span>
 
-<span class="k">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">calcPi</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">)</span>
 </pre></div>
 </div></dd>
 </dl>
@@ -579,7 +573,7 @@
     <span class="nb">map</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">urls</span> <span class="o">*</span> <span class="n">nbFutures</span><span class="p">)</span>
 
     <span class="n">span</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">ts</span>
-    <span class="k">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
+    <span class="nb">print</span> <span class="s2">"time spend "</span><span class="p">,</span> <span class="n">span</span>
 
 <span class="n">testIO</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -607,10 +601,10 @@
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-04-08 23:45</div>
                     <div class="niu2-sidebar-label"><i class="icon-code"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="../python/index.html">Python</a></div>
+                    <div class="niu2-sidebar-value"><a href="https://whypro.github.io/hystars/python/index.html">Python</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/python.html">Python</a><sup>5</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/bing-fa.html">并发</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="https://whypro.github.io/hystars/tag/python.html">Python</a><sup>5</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="https://whypro.github.io/hystars/tag/bing-fa.html">并发</a><sup>1</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -639,7 +633,7 @@
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="..">whypro</a>
+                    <a class="niu2-footer-link" href="https://whypro.github.io/hystars">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -654,9 +648,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://whypro.github.io/hystars/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="https://whypro.github.io/hystars/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="https://whypro.github.io/hystars/theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>

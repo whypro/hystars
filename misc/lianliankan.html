@@ -4,17 +4,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="连连看, 游戏, 算法">
-        <meta name="description" content="今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。 连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则： 图 A 中出现在同一直线上无障碍的圈圈可以消除；图 B 中两个圈圈可以通过一次转弯消除；图 C 和图 D 中，两个圈圈可以通过两次转弯消除。 已知以下接口，表示位置(x, y)上有无障碍物： int isBlocked(int x, int y); return 0; // 无障碍物（位置(x,y)为空） return 1; // 有障碍物（位置(x,y)上有方块或圈圈） 请写一个函数来判断给定的任意两个圈圈是否可消除（x1, y1与x2, y2为两个圈圈的位置）： int remove(int …">
+        <meta name="description" content="今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。 连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则： 图 A 中出现在同一直线上无障碍的圈圈可以消除；图 B 中两个圈圈可以通过一次转弯消除；图 C 和图 D 中，两个圈圈可以通过两次转弯消除。 已知以下接口，表示位置(x, y)上有无障碍物： int isBlocked(int x, int y); return 0; // 无障碍物（位置(x,y)为空） return 1; // 有障碍物（位置(x,y)上有方块或圈圈） 请写一个函数来判断给定的任意两个圈圈是否可消除（x1, y1与x2, y2为两个圈圈的位置）： int remove(int ...">
         <title>连连看游戏消除算法 - HyStars</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/font-icons/style.min.css" type="text/css" />
-        <link rel="stylesheet" href="../theme/css/niu2.min.css" type="text/css" />
-        <link rel="canonical" href="../misc/lianliankan.html" />
+        <link rel="stylesheet" href="https://whypro.github.io/hystars/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://whypro.github.io/hystars/theme/font-icons/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://whypro.github.io/hystars/theme/css/niu2.min.css" type="text/css" />
+        <link rel="canonical" href="https://whypro.github.io/hystars/misc/lianliankan.html" />
         <script type="text/javascript">window.onload=function(){};</script>
         <!--[if lt IE 9]>
-            <script src="../theme/js/html5shiv.js"></script>
-            <script src="../theme/js/respond.min.js"></script>
+            <script src="https://whypro.github.io/hystars/theme/js/html5shiv.js"></script>
+            <script src="https://whypro.github.io/hystars/theme/js/respond.min.js"></script>
         <![endif]-->
         <script>
             var _hmt = _hmt || [];
@@ -36,22 +36,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="..">
+                        <a class="navbar-brand" href="https://whypro.github.io/hystars">
                             <i class="icon-home"></i>HyStars
                         </a>
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li><a href="../about.html" title="about me">
+                            <li><a href="https://whypro.github.io/hystars/about.html" title="about me">
                                 <i class="icon-anchor"></i>关于</a>
                             </li>
-                            <li><a href="../resume.html" title="resume">
+                            <li><a href="https://whypro.github.io/hystars/resume.html" title="resume">
                                 <i class="icon-pencil"></i>简历</a>
                             </li>
-                            <li><a href="../tag/" title="tags">
+                            <li><a href="https://whypro.github.io/hystars/tag/" title="tags">
                                 <i class="icon-tag"></i>标签</a>
                             </li>
-                            <li><a href="../archives.html" title="archives">
+                            <li><a href="https://whypro.github.io/hystars/archives.html" title="archives">
                                 <i class="icon-archive"></i>存档</a>
                             </li>
                         <!-- category dropdown list -->
@@ -60,22 +60,16 @@
                                 <i class="icon-folder-open"></i>分类<b class="caret"></b>
                            </a>
                            <ul class="dropdown-menu">
-                               <li><a href="../git/index.html">
-                                   <i class="icon-folder-close"></i>Git
-                                      (1)</a></li>
-                               <li><a href="../linux/index.html">
-                                   <i class="icon-folder-close"></i>Linux
-                                      (4)</a></li>
-                               <li><a href="../misc/index.html">
+                               <li><a href="https://whypro.github.io/hystars/misc/index.html">
                                       <i class="icon-coffee"></i>其他
-                                      (13)</a></li>
-                               <li><a href="../python/index.html">
+                                      (10)</a></li>
+                               <li><a href="https://whypro.github.io/hystars/python/index.html">
                                       <i class="icon-code"></i>Python
-                                      (5)</a></li>
-                               <li><a href="../she-ying/index.html">
+                                      (4)</a></li>
+                               <li><a href="https://whypro.github.io/hystars/she-ying/index.html">
                                       <i class="icon-briefcase"></i>摄影
                                       (2)</a></li>
-                               <li><a href="../shu-mei-pai/index.html">
+                               <li><a href="https://whypro.github.io/hystars/shu-mei-pai/index.html">
                                       <i class="icon-leaf"></i>树莓派
                                       (5)</a></li>
                            </ul>
@@ -101,7 +95,7 @@
                     <p>今天在收到一道的面试题，觉得比较有意思，决定记录下来，整个题目与解答过程大概如下。</p>
 <p>连连看是一种很受大家欢迎的小游戏。下面四张图给出了最基本的消除规则：</p>
 <div class="figure align-center">
-<img alt="0.png" src="../images/misc/lianliankan/0.png" width="518px"/>
+<img alt="0.png" src="https://whypro.github.io/hystars/images/misc/lianliankan/0.png" width="518px"/>
 </div>
 <p>图 A 中出现在同一直线上无障碍的圈圈可以消除；图 B 中两个圈圈可以通过一次转弯消除；图 C 和图 D 中，两个圈圈可以通过两次转弯消除。</p>
 <p>已知以下接口，表示位置(x, y)上有无障碍物：</p>
@@ -116,7 +110,7 @@
 <h2 id="7e4a77">水平检测</h2>
 <p>水平检测用来判断两个点的纵坐标是否相等，同时判断两点间有没有障碍物。</p>
 <div class="figure align-center">
-<img alt="1.png" src="../images/misc/lianliankan/1.png" width="213px"/>
+<img alt="1.png" src="https://whypro.github.io/hystars/images/misc/lianliankan/1.png" width="213px"/>
 </div>
 <p>因此直接检测两点间是否有障碍物就可以了，代码如下：</p>
 <div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">bool</span> <span class="nf">horizon</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
@@ -150,7 +144,7 @@
 <h2 id="e27aee">垂直检测</h2>
 <p>垂直检测用来判断两个点的横坐标是否相等，同时判断两点间有没有障碍物。</p>
 <div class="figure align-center">
-<img alt="2.png" src="../images/misc/lianliankan/2.png" width="108px"/>
+<img alt="2.png" src="https://whypro.github.io/hystars/images/misc/lianliankan/2.png" width="108px"/>
 </div>
 <p>同样地，直接检测两点间是否有障碍物，代码如下：</p>
 <div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">int</span> <span class="nf">vertical</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span>
@@ -185,7 +179,7 @@
 <p>一个拐角检测可分解为水平检测和垂直检测，当两个同时满足时，便两点可通过一个拐角相连。即：</p>
 <p>一个拐角检测 = 水平检测 &amp;&amp; 垂直检测</p>
 <div class="figure align-center">
-<img alt="3.png" src="../images/misc/lianliankan/3.png" width="178px"/>
+<img alt="3.png" src="https://whypro.github.io/hystars/images/misc/lianliankan/3.png" width="178px"/>
 </div>
 <p>A 点至 B 点能否连接可转化为满足任意一点：</p>
 <ol class="arabic simple">
@@ -227,7 +221,7 @@
 <p>两个拐角检测可分解为一个拐角检测和水平检测或垂直检测。即：</p>
 <p>两个拐角检测 = 一个拐角检测 &amp;&amp; (水平检测 || 垂直检测)</p>
 <div class="figure align-center">
-<img alt="4.png" src="../images/misc/lianliankan/4.png" width="248px"/>
+<img alt="4.png" src="https://whypro.github.io/hystars/images/misc/lianliankan/4.png" width="248px"/>
 </div>
 <p>如图，水平、垂直分别穿过 A B 共有四条直线，扫描直线上所有不包含 A B 的点，看是否存在一点 C ，满足以下任意一项：</p>
 <ol class="arabic simple">
@@ -324,11 +318,11 @@
                     <div class="niu2-sidebar-label"><i class="icon-calendar"></i>发布时间:</div>
                     <div class="niu2-sidebar-value">2015-07-21 20:29</div>
                     <div class="niu2-sidebar-label"><i class="icon-coffee"></i>分类:</div>
-                    <div class="niu2-sidebar-value"><a href="../misc/index.html">其他</a></div>
+                    <div class="niu2-sidebar-value"><a href="https://whypro.github.io/hystars/misc/index.html">其他</a></div>
                     <div class="niu2-sidebar-label"><i class="icon-tag"></i>标签:</div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/lian-lian-kan.html">连连看</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/you-xi.html">游戏</a><sup>1</sup></div>
-                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="../tag/suan-fa.html">算法</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="https://whypro.github.io/hystars/tag/lian-lian-kan.html">连连看</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="https://whypro.github.io/hystars/tag/you-xi.html">游戏</a><sup>1</sup></div>
+                    <div class="niu2-sidebar-inter-value niu2-sidebar-tag"><a href="https://whypro.github.io/hystars/tag/suan-fa.html">算法</a><sup>1</sup></div>
                 </div>
 
                 <div id="niu2-sidebar-toc" class="niu2-sidebar" data-status="closed">
@@ -357,7 +351,7 @@
                 <p>
                     ©
                             2015-2016
-                    <a class="niu2-footer-link" href="..">whypro</a>
+                    <a class="niu2-footer-link" href="https://whypro.github.io/hystars">whypro</a>
                     /                         <a class="niu2-footer-link" href="about.html" title="about me">关于</a>
                 </p>
                 <p class="niu2-icons">
@@ -372,9 +366,9 @@
         </div>
 
         <div id="niu2-pygments" data-theme="github"></div>
-        <script type="text/javascript" src="../theme/js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="../theme/js/niu2.min.js"></script>
-        <script type="text/javascript" src="../theme/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://whypro.github.io/hystars/theme/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="https://whypro.github.io/hystars/theme/js/niu2.min.js"></script>
+        <script type="text/javascript" src="https://whypro.github.io/hystars/theme/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             onContentLoaded();
         </script>
